@@ -1,3 +1,5 @@
+//コメントです。
+
 #ifndef LiFE_ConstData_h
 #define LiFE_ConstData_h
 
