@@ -8,8 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+#import "DatabaseHelper.h"
+
+#import "VitalConnect.h"
+#import "SDK.h"
+
+#define kSDKSensorDataSourceGuidKey @"SDK_SENSOR_DATA_SOURCE_GUID"
+
+@interface AppDelegate : UIResponder <UIApplicationDelegate,VitalConnectBackendListener>
+{
+    BOOL isModuleBindingLostAlertAlreadyDisplayed;
+    BOOL isSDSNotFoundByCDSAlertAlreadyDisplayed;
+}
 
 @property (strong, nonatomic) UIWindow *window;
+
+@property (strong, nonatomic) VitalConnectManager *vitalConnectManager;
 
 @end
