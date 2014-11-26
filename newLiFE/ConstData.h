@@ -1,4 +1,3 @@
-//test
 
 #ifndef LiFE_ConstData_h
 #define LiFE_ConstData_h
@@ -126,19 +125,24 @@
 #define DRAW_OTHER 1
 
 //描画用RGB値
+//WEAKの色はアルファ値も設定して使用する
 #define RGB_ORANGE_WEAK [NSArray arrayWithObjects: @"1.0", @"0.921", @"0.803", nil]
+#define RGB_ORANGE_WASHY [NSArray arrayWithObjects: @"0.973", @"0.792", @"0.498", nil]
 #define RGB_ORANGE_LIGHT [NSArray arrayWithObjects: @"0.949", @"0.588", @"0.0", nil]
 #define RGB_ORANGE_DARK [NSArray arrayWithObjects: @"0.580", @"0.404", @"0.051", nil]
 #define RGB_GREEN_WEAK [NSArray arrayWithObjects: @"0.776", @"0.976", @"0.866", nil]
+#define RGB_GREEN_WASHY [NSArray arrayWithObjects: @"0.58", @"0.835", @"0.718", nil]
 #define RGB_GREEN_LIGHT [NSArray arrayWithObjects: @"0.165", @"0.675", @"0.435", nil]
 #define RGB_GREEN_DARK [NSArray arrayWithObjects: @"0.122", @"0.490", @"0.318", nil]
 #define RGB_RED_WEAK [NSArray arrayWithObjects: @"1.0", @"0.858", @"0.858", nil]
+#define RGB_RED_WASHY [NSArray arrayWithObjects: @"1.0", @"0.663", @"0.663", nil]
 #define RGB_RED_LIGHT [NSArray arrayWithObjects: @"1.0", @"0.161", @"0.161", nil]
 #define RGB_RED_DARK [NSArray arrayWithObjects: @"0.561", @"0.180", @"0.149", nil]
 #define RGB_PURPLE_LIGHT [NSArray arrayWithObjects: @"1.0", @"0.392", @"1.0", nil]
 #define RGB_PURPLE_DARK [NSArray arrayWithObjects: @"0.639", @"0.25", @"0.639", nil]
 #define RGB_AQUA_LIGHT [NSArray arrayWithObjects: @"0.172", @"0.882", @"0.882", nil]
 #define RGB_AQUA_DARK [NSArray arrayWithObjects: @"0.109", @"0.549", @"0.619", nil]
+#define RGB_BLUE_WASHY [NSArray arrayWithObjects: @"0.498", @"0.718", @"0.933", nil]
 #define RGB_BLUE_LIGHT [NSArray arrayWithObjects: @"0.0", @"0.435", @"0.866", nil]
 #define RGB_BLUE_DARK [NSArray arrayWithObjects: @"0.0", @"0.29", @"0.568", nil]
 #define RGB_GRAY [NSArray arrayWithObjects: @"0.607", @"0.607", @"0.607", nil]
@@ -178,5 +182,12 @@
 #define TIMELINE_COLOR_GREEN 1
 #define TIMELINE_COLOR_RED 2
 #define TIMELINE_COLOR_BLUE 3
+
+//タイムラインの種類
+#define TIMELINE_TYPE_STEP 0
+#define TIMELINE_TYPE_DIST 1
+#define TIMELINE_TYPE_CALORY 2
+#define TIMELINE_TYPE_RUN 3
+#define TIMELINE_TYPE_SLEEP 4
 
 #endif

@@ -14,6 +14,8 @@
 @interface TimeLineViewController : UIViewController<UIScrollViewDelegate, ECSlidingViewControllerDelegate, UITableViewDelegate, UITableViewDataSource>{
     NSMutableArray *timeLineListMe;
     NSMutableArray *timeLineListFriend;
+    
+    int myTimeLineOffset;
 }
 
 @property (weak, nonatomic) IBOutlet UIScrollView *pagingView;

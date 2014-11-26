@@ -63,11 +63,6 @@ NSString *CREATE_TIMELINE_TABLE =
 @"timeline_attainment INTEGER,"
 @"timeline_type INTEGER)";
 
-NSString *CREATE_TIMELINE_TYPE_TABLE =
-@"CREATE TABLE if not exists TIMELINE_TYPE ("
-@"timeline_type_value TEXT,"
-@"timeline_type_value_en TEXT)";
-
 //各種INSERT文
 NSString *INSERT_STEP =
 @"INSERT INTO STEP(step_date, step_value) values (?,?)";
@@ -89,9 +84,6 @@ NSString *INSERT_PHOTO =
 
 NSString *INSERT_TIMELINE =
 @"INSERT INTO TIMELINE(timeline_date, timeline_value, timeline_attainment, timeline_type) values (?,?,?,?)";
-
-NSString *INSERT_TIMELINE_TYPE =
-@"INSERT INTO TIMELINE(timeline_type_value, timeline_type_value_en) values (?,?)";
 
 //各種UPDATE文
 NSString *UPDATE_DATA_VITALCONNECT =
@@ -158,6 +150,13 @@ NSString *SELECT_SLEEP_FROM_DATE =
 NSString *SELECT_RUN_FROM_DATE =
 @"SELECT * FROM RUN WHERE run_date >= ? ORDER BY run_date";
 
+NSString *SELECT_TIMELINE_DATE =
+@"SELECT DISTINCT(timeline_date) FROM TIMELINE ORDER BY timeline_date desc LIMIT ? OFFSET ?";
+
+NSString *SELECT_TIMELINE_FROM_DATE =
+@"SELECT * FROM TIMELINE WHERE timeline_date = ?";
+
+
 -(void)initialize{
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *dbPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:DATABASE_FILE_NAME];
@@ -174,7 +173,6 @@ NSString *SELECT_RUN_FROM_DATE =
     [db executeUpdate:@"DROP TABLE if exists RUN_DETAIL"];
     [db executeUpdate:@"DROP TABLE if exists PHOTO"];
     [db executeUpdate:@"DROP TABLE if exists TIMELINE"];
-    [db executeUpdate:@"DROP TABLE if exists TIMELINE_TYPE"];
     
     //テーブルの作成
     [db executeUpdate:CREATE_STEP_TABLE];
@@ -184,15 +182,89 @@ NSString *SELECT_RUN_FROM_DATE =
     [db executeUpdate:CREATE_RUN_DETAIL_TABLE];
     [db executeUpdate:CREATE_PHOTO_TABLE];
     [db executeUpdate:CREATE_TIMELINE_TABLE];
-    [db executeUpdate:CREATE_TIMELINE_TYPE_TABLE];
     
-    //マスターの値を挿入
-    [db executeUpdate:INSERT_TIMELINE_TYPE, @"歩数", @"step"];
-    [db executeUpdate:INSERT_TIMELINE_TYPE, @"歩行距離", @"distance"];
-    [db executeUpdate:INSERT_TIMELINE_TYPE, @"消費カロリー", @"calory"];
-    [db executeUpdate:INSERT_TIMELINE_TYPE, @"ランニング", @"running"];
-    [db executeUpdate:INSERT_TIMELINE_TYPE, @"睡眠時間", @"sleep"];
-    
+    //タイムライン用テストデータ作成
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/10", @"10,901", [NSNumber numberWithInt:109], [NSNumber numberWithInt:TIMELINE_TYPE_STEP]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/10", @"5.4km", [NSNumber numberWithInt:88], [NSNumber numberWithInt:TIMELINE_TYPE_DIST]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/10", @"2,804", [NSNumber numberWithInt:189], [NSNumber numberWithInt:TIMELINE_TYPE_CALORY]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/10", @"3.25km", [NSNumber numberWithInt:106], [NSNumber numberWithInt:TIMELINE_TYPE_RUN]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/10", @"7:12", [NSNumber numberWithInt:96], [NSNumber numberWithInt:TIMELINE_TYPE_SLEEP]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/11", @"10,234", [NSNumber numberWithInt:102], [NSNumber numberWithInt:TIMELINE_TYPE_STEP]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/11", @"5.1km", [NSNumber numberWithInt:83], [NSNumber numberWithInt:TIMELINE_TYPE_DIST]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/11", @"1,234", [NSNumber numberWithInt:79], [NSNumber numberWithInt:TIMELINE_TYPE_CALORY]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/11", @"2.75km", [NSNumber numberWithInt:92], [NSNumber numberWithInt:TIMELINE_TYPE_RUN]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/11", @"7:50", [NSNumber numberWithInt:107], [NSNumber numberWithInt:TIMELINE_TYPE_SLEEP]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/12", @"10,901", [NSNumber numberWithInt:109], [NSNumber numberWithInt:TIMELINE_TYPE_STEP]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/12", @"5.4km", [NSNumber numberWithInt:88], [NSNumber numberWithInt:TIMELINE_TYPE_DIST]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/12", @"2,804", [NSNumber numberWithInt:189], [NSNumber numberWithInt:TIMELINE_TYPE_CALORY]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/12", @"3.25km", [NSNumber numberWithInt:106], [NSNumber numberWithInt:TIMELINE_TYPE_RUN]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/12", @"7:12", [NSNumber numberWithInt:96], [NSNumber numberWithInt:TIMELINE_TYPE_SLEEP]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/13", @"10,234", [NSNumber numberWithInt:102], [NSNumber numberWithInt:TIMELINE_TYPE_STEP]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/13", @"5.1km", [NSNumber numberWithInt:83], [NSNumber numberWithInt:TIMELINE_TYPE_DIST]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/13", @"1,234", [NSNumber numberWithInt:79], [NSNumber numberWithInt:TIMELINE_TYPE_CALORY]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/13", @"2.75km", [NSNumber numberWithInt:92], [NSNumber numberWithInt:TIMELINE_TYPE_RUN]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/13", @"7:50", [NSNumber numberWithInt:107], [NSNumber numberWithInt:TIMELINE_TYPE_SLEEP]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/14", @"10,901", [NSNumber numberWithInt:109], [NSNumber numberWithInt:TIMELINE_TYPE_STEP]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/14", @"5.4km", [NSNumber numberWithInt:88], [NSNumber numberWithInt:TIMELINE_TYPE_DIST]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/14", @"2,804", [NSNumber numberWithInt:189], [NSNumber numberWithInt:TIMELINE_TYPE_CALORY]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/14", @"3.25km", [NSNumber numberWithInt:106], [NSNumber numberWithInt:TIMELINE_TYPE_RUN]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/14", @"7:12", [NSNumber numberWithInt:96], [NSNumber numberWithInt:TIMELINE_TYPE_SLEEP]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/15", @"10,234", [NSNumber numberWithInt:102], [NSNumber numberWithInt:TIMELINE_TYPE_STEP]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/15", @"5.1km", [NSNumber numberWithInt:83], [NSNumber numberWithInt:TIMELINE_TYPE_DIST]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/15", @"1,234", [NSNumber numberWithInt:79], [NSNumber numberWithInt:TIMELINE_TYPE_CALORY]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/15", @"2.75km", [NSNumber numberWithInt:92], [NSNumber numberWithInt:TIMELINE_TYPE_RUN]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/15", @"7:50", [NSNumber numberWithInt:107], [NSNumber numberWithInt:TIMELINE_TYPE_SLEEP]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/16", @"10,901", [NSNumber numberWithInt:109], [NSNumber numberWithInt:TIMELINE_TYPE_STEP]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/16", @"5.4km", [NSNumber numberWithInt:88], [NSNumber numberWithInt:TIMELINE_TYPE_DIST]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/16", @"2,804", [NSNumber numberWithInt:189], [NSNumber numberWithInt:TIMELINE_TYPE_CALORY]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/16", @"3.25km", [NSNumber numberWithInt:106], [NSNumber numberWithInt:TIMELINE_TYPE_RUN]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/16", @"7:12", [NSNumber numberWithInt:96], [NSNumber numberWithInt:TIMELINE_TYPE_SLEEP]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/17", @"10,234", [NSNumber numberWithInt:102], [NSNumber numberWithInt:TIMELINE_TYPE_STEP]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/17", @"5.1km", [NSNumber numberWithInt:83], [NSNumber numberWithInt:TIMELINE_TYPE_DIST]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/17", @"1,234", [NSNumber numberWithInt:79], [NSNumber numberWithInt:TIMELINE_TYPE_CALORY]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/17", @"2.75km", [NSNumber numberWithInt:92], [NSNumber numberWithInt:TIMELINE_TYPE_RUN]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/17", @"7:50", [NSNumber numberWithInt:107], [NSNumber numberWithInt:TIMELINE_TYPE_SLEEP]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/18", @"10,901", [NSNumber numberWithInt:109], [NSNumber numberWithInt:TIMELINE_TYPE_STEP]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/18", @"5.4km", [NSNumber numberWithInt:88], [NSNumber numberWithInt:TIMELINE_TYPE_DIST]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/18", @"2,804", [NSNumber numberWithInt:189], [NSNumber numberWithInt:TIMELINE_TYPE_CALORY]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/18", @"3.25km", [NSNumber numberWithInt:106], [NSNumber numberWithInt:TIMELINE_TYPE_RUN]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/18", @"7:12", [NSNumber numberWithInt:96], [NSNumber numberWithInt:TIMELINE_TYPE_SLEEP]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/19", @"10,234", [NSNumber numberWithInt:102], [NSNumber numberWithInt:TIMELINE_TYPE_STEP]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/19", @"5.1km", [NSNumber numberWithInt:83], [NSNumber numberWithInt:TIMELINE_TYPE_DIST]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/19", @"1,234", [NSNumber numberWithInt:79], [NSNumber numberWithInt:TIMELINE_TYPE_CALORY]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/19", @"2.75km", [NSNumber numberWithInt:92], [NSNumber numberWithInt:TIMELINE_TYPE_RUN]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/19", @"7:50", [NSNumber numberWithInt:107], [NSNumber numberWithInt:TIMELINE_TYPE_SLEEP]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/20", @"10,901", [NSNumber numberWithInt:109], [NSNumber numberWithInt:TIMELINE_TYPE_STEP]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/20", @"5.4km", [NSNumber numberWithInt:88], [NSNumber numberWithInt:TIMELINE_TYPE_DIST]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/20", @"2,804", [NSNumber numberWithInt:189], [NSNumber numberWithInt:TIMELINE_TYPE_CALORY]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/20", @"3.25km", [NSNumber numberWithInt:106], [NSNumber numberWithInt:TIMELINE_TYPE_RUN]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/20", @"7:12", [NSNumber numberWithInt:96], [NSNumber numberWithInt:TIMELINE_TYPE_SLEEP]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/21", @"10,234", [NSNumber numberWithInt:102], [NSNumber numberWithInt:TIMELINE_TYPE_STEP]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/21", @"5.1km", [NSNumber numberWithInt:83], [NSNumber numberWithInt:TIMELINE_TYPE_DIST]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/21", @"1,234", [NSNumber numberWithInt:79], [NSNumber numberWithInt:TIMELINE_TYPE_CALORY]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/21", @"2.75km", [NSNumber numberWithInt:92], [NSNumber numberWithInt:TIMELINE_TYPE_RUN]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/21", @"7:50", [NSNumber numberWithInt:107], [NSNumber numberWithInt:TIMELINE_TYPE_SLEEP]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/22", @"10,901", [NSNumber numberWithInt:109], [NSNumber numberWithInt:TIMELINE_TYPE_STEP]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/22", @"5.4km", [NSNumber numberWithInt:88], [NSNumber numberWithInt:TIMELINE_TYPE_DIST]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/22", @"2,804", [NSNumber numberWithInt:189], [NSNumber numberWithInt:TIMELINE_TYPE_CALORY]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/22", @"3.25km", [NSNumber numberWithInt:106], [NSNumber numberWithInt:TIMELINE_TYPE_RUN]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/22", @"7:12", [NSNumber numberWithInt:96], [NSNumber numberWithInt:TIMELINE_TYPE_SLEEP]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/23", @"10,234", [NSNumber numberWithInt:102], [NSNumber numberWithInt:TIMELINE_TYPE_STEP]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/23", @"5.1km", [NSNumber numberWithInt:83], [NSNumber numberWithInt:TIMELINE_TYPE_DIST]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/23", @"1,234", [NSNumber numberWithInt:79], [NSNumber numberWithInt:TIMELINE_TYPE_CALORY]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/23", @"2.75km", [NSNumber numberWithInt:92], [NSNumber numberWithInt:TIMELINE_TYPE_RUN]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/23", @"7:50", [NSNumber numberWithInt:107], [NSNumber numberWithInt:TIMELINE_TYPE_SLEEP]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/24", @"10,901", [NSNumber numberWithInt:109], [NSNumber numberWithInt:TIMELINE_TYPE_STEP]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/24", @"5.4km", [NSNumber numberWithInt:88], [NSNumber numberWithInt:TIMELINE_TYPE_DIST]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/24", @"2,804", [NSNumber numberWithInt:189], [NSNumber numberWithInt:TIMELINE_TYPE_CALORY]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/24", @"3.25km", [NSNumber numberWithInt:106], [NSNumber numberWithInt:TIMELINE_TYPE_RUN]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/24", @"7:12", [NSNumber numberWithInt:96], [NSNumber numberWithInt:TIMELINE_TYPE_SLEEP]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/25", @"10,234", [NSNumber numberWithInt:102], [NSNumber numberWithInt:TIMELINE_TYPE_STEP]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/25", @"5.1km", [NSNumber numberWithInt:83], [NSNumber numberWithInt:TIMELINE_TYPE_DIST]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/25", @"1,234", [NSNumber numberWithInt:79], [NSNumber numberWithInt:TIMELINE_TYPE_CALORY]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/25", @"2.75km", [NSNumber numberWithInt:92], [NSNumber numberWithInt:TIMELINE_TYPE_RUN]];
+    [db executeUpdate:INSERT_TIMELINE, @"2014/11/25", @"7:50", [NSNumber numberWithInt:107], [NSNumber numberWithInt:TIMELINE_TYPE_SLEEP]];
+
     [db close];
 }
 
@@ -667,6 +739,26 @@ NSString *SELECT_RUN_FROM_DATE =
 -(NSMutableArray *)selectRunsFromDate:(NSString *)date{
     FMDatabase* db = [self openDB];
     FMResultSet *result = [db executeQuery:SELECT_RUN_FROM_DATE, date];
+    
+    NSMutableArray *array = [self convertToArray:result];
+    
+    [self closeDB:db];
+    return array;
+}
+
+-(NSMutableArray *)selectTimelineDate:(int)limit offset:(int)offset{
+    FMDatabase* db = [self openDB];
+    FMResultSet *result = [db executeQuery:SELECT_TIMELINE_DATE, [NSNumber numberWithInt:limit], [NSNumber numberWithInt:offset]];
+    
+    NSMutableArray *array = [self convertToArray:result];
+    
+    [self closeDB:db];
+    return array;
+}
+
+-(NSMutableArray *)selectTimelineFromDate:(NSString *)date{
+    FMDatabase* db = [self openDB];
+    FMResultSet *result = [db executeQuery:SELECT_TIMELINE_FROM_DATE, date];
     
     NSMutableArray *array = [self convertToArray:result];
     

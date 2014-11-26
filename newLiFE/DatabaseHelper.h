@@ -61,6 +61,9 @@
 -(NSMutableArray *)selectSleepsFromDate:(NSString *)date;
 -(NSMutableArray *)selectRunsFromDate:(NSString *)date;
 
+-(NSMutableArray *)selectTimelineDate:(int)limit offset:(int)offset;
+-(NSMutableArray *)selectTimelineFromDate:(NSString *)date;
+
 -(int)getCurrentStep:(NSString *)date;
 -(int)getDiffSteps:(int) subtStep start:(NSDate *)startDate end:(NSDate *)endDate;
 
