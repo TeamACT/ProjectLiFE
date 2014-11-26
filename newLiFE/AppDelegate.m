@@ -51,7 +51,7 @@ void uncaughtExceptionHandler(NSException *exception){
     // Override point for customization after application launch.
     //DB初期化
     DatabaseHelper *dbHelper = [[DatabaseHelper alloc] init];
-    [dbHelper initializeWithVersion:11];
+    [dbHelper initializeWithVersion:15];
     
     //ユーザー情報の初期化
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];  // 取得

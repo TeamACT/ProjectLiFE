@@ -22,6 +22,8 @@
 #define FRIEND_TIME_LINE 1
 #define PAGING_VIEW 2
 
+#define ME_LIMITED_DAYS 2
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -48,11 +50,27 @@
     self.myTimeLineTableView.tag = MY_TIME_LINE;
     UINib *nib = [UINib nibWithNibName:@"TimeLineMeTableViewCell" bundle:nil];
     [self.myTimeLineTableView registerNib:nib forCellReuseIdentifier:@"CellTimeLineMe"];
+    self.myTimeLineTableView.backgroundView = nil;
+    [self.myTimeLineTableView setBackgroundColor:[UIColor clearColor]];
     
     //自分のタイムラインデータ取得
-    DatabaseHelper *dbHelper = [[DatabaseHelper alloc] init];
-    //timeLineListMe = [dbHelper select]
+    timeLineListMe = [NSMutableArray array];
+    myTimeLineOffset = 0;
     
+    DatabaseHelper *dbHelper = [[DatabaseHelper alloc] init];
+    //まずは一度に取得する制限数分の日付を取得
+    NSMutableArray *dates = [dbHelper selectTimelineDate:ME_LIMITED_DAYS offset:myTimeLineOffset];
+    myTimeLineOffset += ME_LIMITED_DAYS;//offset値の更新
+    //該当日付のデータをまとめて取得
+    for(NSMutableDictionary *date in dates) {
+        NSMutableArray *meDataFromDate = [dbHelper selectTimelineFromDate:[date objectForKey:@"timeline_date"]];
+        
+        NSDictionary *meData = [NSDictionary dictionaryWithObjectsAndKeys:
+                                 [date objectForKey:@"timeline_date"], @"date",
+                                 meDataFromDate, @"data",nil];
+        
+        [timeLineListMe addObject:meData];
+    }
     
     self.friendTimeLineTableView.delegate = self;
     self.friendTimeLineTableView.dataSource = self;
@@ -80,13 +98,43 @@
 //スクロール処理
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     //テーブルビューもこの処理に入ってしまうためここで処理を区切る
-    if(scrollView.tag != PAGING_VIEW) return;
+    if(scrollView.tag == FRIEND_TIME_LINE) return;
     
-    //ページが切り替わった時にセグメントも更新する
-    CGFloat pageWidth = scrollView.frame.size.width;
-    if((NSInteger) fmod(scrollView.contentOffset.x, pageWidth) == 0) {
-        NSLog(@"%f", scrollView.contentOffset.x / pageWidth);
-        self.changeSegmented.selectedSegmentIndex = scrollView.contentOffset.x / pageWidth;
+    if(scrollView.tag == PAGING_VIEW) {
+        //ページが切り替わった時にセグメントも更新する
+        CGFloat pageWidth = scrollView.frame.size.width;
+        if((NSInteger) fmod(scrollView.contentOffset.x, pageWidth) == 0) {
+            NSLog(@"%f", scrollView.contentOffset.x / pageWidth);
+            self.changeSegmented.selectedSegmentIndex = scrollView.contentOffset.x / pageWidth;
+        }
+    } else if(scrollView.tag == MY_TIME_LINE) {
+        //自分のタイムラインのテーブルを一番下までスクロールしたら、追加でデータを読み込む
+        if(self.myTimeLineTableView.contentOffset.y >= (self.myTimeLineTableView.contentSize.height - self.myTimeLineTableView.bounds.size.height)) {
+            
+            DatabaseHelper *dbHelper = [[DatabaseHelper alloc] init];
+            //まずは一度に取得する制限数分の日付を取得
+            NSMutableArray *dates = [dbHelper selectTimelineDate:ME_LIMITED_DAYS offset:myTimeLineOffset];
+            //新しい日付がなければ更新をかけない
+            if([dates count] > 0) {
+                myTimeLineOffset += ME_LIMITED_DAYS;//offset値の更新
+                //該当日付のデータをまとめて取得
+                for(NSMutableDictionary *date in dates) {
+                    //表示用に日付をフォーマット
+                    
+                    
+                    //該当日付のデータを取得
+                    NSMutableArray *meDataFromDate = [dbHelper selectTimelineFromDate:[date objectForKey:@"timeline_date"]];
+                    
+                    //日付とその日に保存された各データをまとめる
+                    NSDictionary *meData = [NSDictionary dictionaryWithObjectsAndKeys:
+                                            [date objectForKey:@"timeline_date"], @"date",
+                                            meDataFromDate, @"data",nil];
+                    
+                    [timeLineListMe addObject:meData];
+                }
+                [self.myTimeLineTableView reloadData];
+            }
+        }
     }
 }
 
@@ -118,7 +166,15 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 1;
+    int section = 0;
+    
+    if(tableView.tag == MY_TIME_LINE) {
+        section = [timeLineListMe count];
+    } else {
+        section = 1;
+    }
+    
+    return section;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -126,7 +182,9 @@
     int row = 0;
     
     if(tableView.tag == MY_TIME_LINE) {
-        row = 3;
+        NSDictionary *meData = [timeLineListMe objectAtIndex:section];
+        NSMutableArray *meDataFromDate = [meData objectForKey:@"data"];
+        row = [meDataFromDate count];
     } else {
         row = 5;
     }
@@ -142,7 +200,40 @@
     if(tableView.tag == MY_TIME_LINE) {
         TimeLineMeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellTimeLineMe"];
         
-        //[cell setColor:];
+        //データの取得はまずセクションごとに日付でわけて、行数からデータを割り出す
+        NSDictionary *meData = [timeLineListMe objectAtIndex:[indexPath section]];
+        NSMutableArray *meDataFromDate = [meData objectForKey:@"data"];
+        NSDictionary *meDayData = [meDataFromDate objectAtIndex:[indexPath row]];
+        
+        int type = [[meDayData objectForKey:@"timeline_type"] intValue];
+        NSString *title = @"";
+        NSString *value = [meDayData objectForKey:@"timeline_value"];
+        int percent = [[meDayData objectForKey:@"timeline_attainment"] intValue];
+        
+        switch(type) {
+            case TIMELINE_TYPE_STEP:
+                [cell setColor:TIMELINE_COLOR_ORANGE];
+                title = @"歩数";
+                break;
+            case TIMELINE_TYPE_DIST:
+                [cell setColor:TIMELINE_COLOR_ORANGE];
+                title = @"歩行距離";
+                break;
+            case TIMELINE_TYPE_CALORY:
+                [cell setColor:TIMELINE_COLOR_GREEN];
+                title = @"カロリー";
+                break;
+            case TIMELINE_TYPE_RUN:
+                [cell setColor:TIMELINE_COLOR_RED];
+                title = @"ランニング";
+                break;
+            case TIMELINE_TYPE_SLEEP:
+                [cell setColor:TIMELINE_COLOR_BLUE];
+                title = @"睡眠時間";
+                break;
+        }
+        [cell setCellItems:title value:value sub:@"" percent:percent];
+        
         
         return cell;
 
@@ -161,6 +252,19 @@
         return cell;
     }
     
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    //各セクションのタイトルを設定
+    NSString *title = @"";
+    if(tableView.tag == MY_TIME_LINE) {
+        NSDictionary *meData = [timeLineListMe objectAtIndex:section];
+        NSString *meDate = [meData objectForKey:@"date"];
+        title = meDate;
+    } else {
+        title = @"";
+    }
+    return title;
 }
 
 - (IBAction)openDrawerMenu:(id)sender {
