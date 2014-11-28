@@ -223,8 +223,29 @@
         
         riseTime = [NSDate date];
         
+        //データの保存
         DatabaseHelper *dbHelper = [[DatabaseHelper alloc] init];
+        
+        //睡眠詳細の保存
         [dbHelper updateSleepDetail:bedTime endDateTime:riseTime];
+        
+        //タイムラインへの保存
+        //日付の設定（日付は睡眠開始の日）
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy/MM/dd"];
+        NSString *dateString = [formatter stringFromDate:bedTime];
+        //値を設定（ひとまず睡眠時間のみ）
+        NSTimeInterval sleepTime = [riseTime timeIntervalSinceDate:bedTime];//秒に変換
+        int sleepHour = sleepTime / (60 * 60);
+        int sleepMinute = (sleepTime - sleepHour * 60 * 60) / 60;
+        NSString *value = [NSString stringWithFormat:@"%d:%02d", sleepHour, sleepMinute];
+        //目標値から達成度を設定
+        NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+        int goalSleepTime = [ud integerForKey:@"GoalSleepTime"];
+        int percent = sleepTime / goalSleepTime * 100;
+        
+        [dbHelper insertTimeline:dateString value:value percent:percent type:TIMELINE_TYPE_SLEEP];
+        
         
         [tm invalidate];
         

@@ -26,7 +26,7 @@
 -(void)insertRun:(NSString *)date value:(NSString *)value;
 -(void)insertRunDetail:(int)runStep startDateTime:(NSDate *)startDateTime endDateTime:(NSDate *)endDateTime;
 -(void)insertPhoto:(NSString *)date path:(NSString *)path index:(NSString *)index;
--(void)insertTimeline:(NSString *)date value:(NSString *)value index:(NSString *)index;
+-(void)insertTimeline:(NSString *)date value:(NSString *)value percent:(int)percent type:(int)type;
 
 //各種UPDATE文
 -(void)updateVitalConnectData:(NSString *)value01 typeID:(NSString *)typeId date:(NSString *)date;

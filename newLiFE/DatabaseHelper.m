@@ -452,6 +452,14 @@ NSString *SELECT_TIMELINE_FROM_DATE =
     [self closeDB:db];
 }
 
+-(void)insertTimeline:(NSString *)date value:(NSString *)value percent:(int)percent type:(int)type{
+    FMDatabase* db = [self openDB];
+    
+    [db executeUpdate:INSERT_TIMELINE, date, value, [NSNumber numberWithInt:percent], [NSNumber numberWithInt:type]];
+    
+    [self closeDB:db];
+}
+
 /***** update *****/
 
 -(void)updateVitalConnectData:(NSString *)value01 typeID:(NSString *)typeId date:(NSString *)date{

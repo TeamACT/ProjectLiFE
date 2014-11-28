@@ -178,7 +178,8 @@
 		3CC61F6B1A24235900A57DE3 /* LiFE_Common_GoalButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC61F661A24235900A57DE3 /* LiFE_Common_GoalButton.png */; };
 		3CC61F6C1A24235900A57DE3 /* LiFE_Common_SettingButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC61F671A24235900A57DE3 /* LiFE_Common_SettingButton.png */; };
 		3CC61F6D1A24235900A57DE3 /* LiFE_Common_StartStopButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC61F681A24235900A57DE3 /* LiFE_Common_StartStopButton.png */; };
-		3CC61F6F1A25AB6C00A57DE3 /* LiFE_TimeLine_TabBGSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC61F6E1A25AB6C00A57DE3 /* LiFE_TimeLine_TabBGSelected.png */; };
+		3CC61F711A25AF2F00A57DE3 /* LiFE_TimeLine_TabBGSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC61F701A25AF2F00A57DE3 /* LiFE_TimeLine_TabBGSelected.png */; };
+		3CC61F731A25BB0C00A57DE3 /* libVitalConnectLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC61F721A25BB0C00A57DE3 /* libVitalConnectLibrary.a */; };
 		3CC66F0E1A1D7F3B0094997A /* LiFE_TimeLine_CellBackgroundBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC66F0A1A1D7F3B0094997A /* LiFE_TimeLine_CellBackgroundBlue.png */; };
 		3CC66F0F1A1D7F3B0094997A /* LiFE_TimeLine_CellBackgroundGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC66F0B1A1D7F3B0094997A /* LiFE_TimeLine_CellBackgroundGreen.png */; };
 		3CC66F101A1D7F3B0094997A /* LiFE_TimeLine_CellBackgroundRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC66F0C1A1D7F3B0094997A /* LiFE_TimeLine_CellBackgroundRed.png */; };
@@ -527,7 +528,8 @@
 		3CC61F661A24235900A57DE3 /* LiFE_Common_GoalButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_Common_GoalButton.png; sourceTree = "<group>"; };
 		3CC61F671A24235900A57DE3 /* LiFE_Common_SettingButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_Common_SettingButton.png; sourceTree = "<group>"; };
 		3CC61F681A24235900A57DE3 /* LiFE_Common_StartStopButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_Common_StartStopButton.png; sourceTree = "<group>"; };
-		3CC61F6E1A25AB6C00A57DE3 /* LiFE_TimeLine_TabBGSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_TimeLine_TabBGSelected.png; sourceTree = "<group>"; };
+		3CC61F701A25AF2F00A57DE3 /* LiFE_TimeLine_TabBGSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_TimeLine_TabBGSelected.png; sourceTree = "<group>"; };
+		3CC61F721A25BB0C00A57DE3 /* libVitalConnectLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libVitalConnectLibrary.a; sourceTree = "<group>"; };
 		3CC66F0A1A1D7F3B0094997A /* LiFE_TimeLine_CellBackgroundBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_TimeLine_CellBackgroundBlue.png; sourceTree = "<group>"; };
 		3CC66F0B1A1D7F3B0094997A /* LiFE_TimeLine_CellBackgroundGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_TimeLine_CellBackgroundGreen.png; sourceTree = "<group>"; };
 		3CC66F0C1A1D7F3B0094997A /* LiFE_TimeLine_CellBackgroundRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_TimeLine_CellBackgroundRed.png; sourceTree = "<group>"; };
@@ -881,6 +883,7 @@
 				53DF6AF21A01FA6900655CA6 /* librslib_ios.a in Frameworks */,
 				53DF6AF11A01FA5500655CA6 /* libjansson_ios.a in Frameworks */,
 				53DF6AF01A01FA3D00655CA6 /* libfw_bundle_ios.a in Frameworks */,
+				3CC61F731A25BB0C00A57DE3 /* libVitalConnectLibrary.a in Frameworks */,
 				53DF6AEF1A01FA1700655CA6 /* libsensor_stream_ios.a in Frameworks */,
 				53DF6AEE1A01FA0600655CA6 /* libVitalConnectLibrary.a in Frameworks */,
 				53DF6AF41A01FAC800655CA6 /* Accelerate.framework in Frameworks */,
@@ -1812,9 +1815,9 @@
 				3CCBF94D1A199C6000CD72C1 /* LiFE_Start_InstructionImage02.png */,
 				3CCBF94E1A199C6000CD72C1 /* LiFE_Start_InstructionImage03.png */,
 				3CCBF9581A19B2AA00CD72C1 /* LiFE_Start_LoginButton.png */,
+				3CC61F701A25AF2F00A57DE3 /* LiFE_TimeLine_TabBGSelected.png */,
 				3CCBF9561A19B1D500CD72C1 /* LiFE_Start_RegisterButton.png */,
 				53A6CD7619FE05B200501C90 /* LiFE_Common_NavigationBarBG.png */,
-				3CC61F6E1A25AB6C00A57DE3 /* LiFE_TimeLine_TabBGSelected.png */,
 				53A6CD7819FE05D800501C90 /* LiFE_TimeLine_TabBGNormal.png */,
 			);
 			name = image;
@@ -1826,6 +1829,7 @@
 				53DF6AE21A01F42500655CA6 /* libfw_bundle_ios.a */,
 				53DF6AE31A01F42500655CA6 /* libjansson_ios.a */,
 				53DF6AE41A01F42500655CA6 /* librslib_ios.a */,
+				3CC61F721A25BB0C00A57DE3 /* libVitalConnectLibrary.a */,
 				53DF6AE51A01F42500655CA6 /* libsensor_stream_ios.a */,
 				53DF6AE61A01F42500655CA6 /* libVitalConnectLibrary.a */,
 				53DF6AE71A01F42500655CA6 /* VitalConnect.h */,
@@ -2010,7 +2014,7 @@
 				3CC66F161A1D7F6B0094997A /* TimeLineMeTableViewCell.xib in Resources */,
 				3CC61F621A24234F00A57DE3 /* LiFE_Sleep_BackGround.png in Resources */,
 				3CC61EF61A24230C00A57DE3 /* LiFE_Avatar_ManWalking_large001.png in Resources */,
-				3CC61F6F1A25AB6C00A57DE3 /* LiFE_TimeLine_TabBGSelected.png in Resources */,
+				3CC61F711A25AF2F00A57DE3 /* LiFE_TimeLine_TabBGSelected.png in Resources */,
 				3CCBF9601A19C77B00CD72C1 /* LiFE_Login_LoginBackground.png in Resources */,
 				3CC61F591A24233D00A57DE3 /* LiFE_Running_ReStartButton.png in Resources */,
 				3CC61F4E1A24232100A57DE3 /* LiFE_Photo_ShareButton.png in Resources */,

@@ -127,7 +127,12 @@
         self.motionManager.accelerometerUpdateInterval =  1.0f/5.0f;
         [self startMoving];
         
-        
+        //現在値用タイマー起動(自作ステップカウンター用のタイマー)
+        tm = [NSTimer
+              scheduledTimerWithTimeInterval:1.0
+              target:self
+              selector:@selector(drawNowData:)
+              userInfo:nil repeats:YES];
     }
     /***** 5S以降の場合CMStepCounterを使用ここまで *****/
     
@@ -156,13 +161,6 @@
     TimeGraphView *timeGraphView = [[TimeGraphView alloc] initWithFrame:self.nowActivityView.bounds];
     timeGraphView.date = date;
     [self.nowActivityView addSubview:timeGraphView];
-    
-    //現在値用タイマー起動
-    tm = [NSTimer
-          scheduledTimerWithTimeInterval:1.0
-          target:self
-          selector:@selector(drawNowData:)
-          userInfo:nil repeats:YES];
     
     if (![self.slidingViewController.underLeftViewController isKindOfClass:[MenuDrawerViewController class]]) {
         UIViewController *menu =  [self.storyboard instantiateViewControllerWithIdentifier:@"menu"];
@@ -929,7 +927,6 @@
             NSDate *riseTime = [[NSDate alloc] initWithTimeIntervalSince1970:[[sleepDetail objectForKey:@"end_datetime"] floatValue]];
             
             //睡眠時間
-            
             NSTimeInterval sleepTime = [riseTime timeIntervalSinceDate:bedTime] / 60;
             int sleepHour = sleepTime / 60;
             int sleepMinute = sleepTime - (sleepHour * 60);
@@ -1573,32 +1570,28 @@
     //メニューが出てる時は機能しない
     if ([self.slidingViewController currentTopViewPosition] == ECSlidingViewControllerTopViewPositionAnchoredRight) return;
     
+    NSDate *nextDate = [date initWithTimeInterval:24*60*60 sinceDate:date];
+    
+    NSComparisonResult result = [nextDate compare:[NSDate date]];
+    
+    if(result == NSOrderedDescending) return;
+    
+    //日付の更新
     date = [date initWithTimeInterval:24*60*60 sinceDate:date];
     
-    NSComparisonResult result = [date compare:[NSDate date]];
-    
-    if(result == NSOrderedDescending){
-        date = [NSDate date];
-    }else{
-        /***** ページングアニメーション *****/
+    /***** ページングアニメーション *****/
         [UIView beginAnimations:nil context:nil];
-        //[UIView setAnimationDuration:0.5];
-        [UIView setAnimationRepeatCount:1];
-        
-        self.nowActivityView.center = CGPointMake(480, 284);
-        
-        self.nowActivityView.center = CGPointMake(160, 284);
-        [UIView commitAnimations];
-        /***** ページングアニメーションここまで *****/
-        
-        for(UIView *subview in [self.nowActivityView subviews]){
-            [subview removeFromSuperview];
-        }
-        
-        //時計表示
-        TimeGraphView *timeGraphView = [[TimeGraphView alloc] initWithFrame:self.nowActivityView.bounds];
-        timeGraphView.date = date;
-        [self.nowActivityView addSubview:timeGraphView];
+    //[UIView setAnimationDuration:0.5];
+    [UIView setAnimationRepeatCount:1];
+    
+    self.nowActivityView.center = CGPointMake(480, 284);
+    
+    self.nowActivityView.center = CGPointMake(160, 284);
+    [UIView commitAnimations];
+    /***** ページングアニメーションここまで *****/
+    
+    for(UIView *subview in [self.nowActivityView subviews]){
+        [subview removeFromSuperview];
     }
     
     //データベースからデータ更新
@@ -1720,19 +1713,19 @@
 
 //CMStepCounter処理
 -(void)startCMStepCounter:(int)dayCount :(int)minCount{
+    //今日の0時0分を取得
+    NSCalendar *calender = [NSCalendar currentCalendar];
+    NSUInteger flags = NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit;
+    NSDateComponents *components = [calender components:flags fromDate:[NSDate date]];
+    NSDate *startDate = [calender dateFromComponents:components];
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    
     if(dayCount < 8){
-        //今日の0時0分を取得
-        NSCalendar *calender = [NSCalendar currentCalendar];
-        NSUInteger flags = NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit;
-        NSDateComponents *components = [calender components:flags fromDate:[NSDate date]];
-        NSDate *startDate = [calender dateFromComponents:components];
-        
         NSDate *fromDate = [startDate initWithTimeInterval:-dayCount * 24 * 60 *60 sinceDate:startDate];
         
-        NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-        NSDate *LastUpdateDate = [ud objectForKey:@"LastUpdateDate"];
+        NSDate *lastUpdateDate = [ud objectForKey:@"LastUpdateDate"];
         
-        NSComparisonResult result = [LastUpdateDate compare:fromDate];
+        NSComparisonResult result = [lastUpdateDate compare:fromDate];
         if(result == NSOrderedAscending || result == NSOrderedSame){
             /***** 日にちフォーマット *****/
             NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -1771,6 +1764,7 @@
                                                         NSString *stepValue = [saveStepArray componentsJoinedByString:@","];
                                                         [dbHelper updateStep:dayString value:stepValue];
                                                     }
+                                                    
                                                 }else{
                                                     int arrayIndex = (hour * 6 + (min/10)) - 1;
                                                     
@@ -1788,12 +1782,19 @@
                 
                 [self startCMStepCounter:(dayCount + 1) :0];
             }
-        }else{
-            [ud setObject:startDate forKey:@"LastUpdateDate"];
-            [ud synchronize];
-            
-            [SVProgressHUD dismiss];
         }
+    }else{
+        [ud setObject:startDate forKey:@"LastUpdateDate"];
+        [ud synchronize];
+        
+        [SVProgressHUD dismiss];
+        
+        //現在値用タイマー起動（過去のデータを読み込んでから、毎秒の処理を開始）
+        tm = [NSTimer
+              scheduledTimerWithTimeInterval:1.0
+              target:self
+              selector:@selector(drawNowData:)
+              userInfo:nil repeats:YES];
     }
 }
 
@@ -1826,6 +1827,20 @@
         NSString *stepValue = [steps objectForKey:@"step_value"];
         saveStepArray = [stepValue componentsSeparatedByString:@","];
     }
+    
+    //最終起動時間からタイムラインを更新
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];  // 取得
+    NSDate *lastBootDate = [ud objectForKey:@"LastBootDate"];
+    NSString *lastBootStr = [formatter stringFromDate:lastBootDate];
+    NSString *nowStr = [formatter stringFromDate:[NSDate date]];
+    
+    if(![lastBootStr isEqualToString:nowStr]) {
+        //タイムライン保存処理
+        [self saveTimeLineData:lastBootStr];
+        //最終起動日を更新
+        [ud setObject:[NSDate date] forKey:@"LastBootDate"];
+    }
+    
     
     //今日の0時0分を取得
     NSCalendar *calendar = [NSCalendar currentCalendar];
@@ -1955,6 +1970,19 @@
                 stepCount = [[saveStepArray objectAtIndex:143] intValue];
                 /***** 歩数配列ここまで *****/
                 
+                //最終起動時間からタイムラインを更新
+                NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];  // 取得
+                NSDate *lastBootDate = [ud objectForKey:@"LastBootDate"];
+                NSString *lastBootStr = [formatter stringFromDate:lastBootDate];
+                NSString *nowStr = [formatter stringFromDate:[NSDate date]];
+                
+                if(![lastBootStr isEqualToString:nowStr]) {
+                    //タイムライン保存処理
+                    [self saveTimeLineData:lastBootStr];
+                    //最終起動日を更新
+                    [ud setObject:[NSDate date] forKey:@"LastBootDate"];
+                }
+                
                 pastTime = CFAbsoluteTimeGetCurrent();
             }
         }
@@ -1992,6 +2020,58 @@
         [self.avatarView startAnimating];
     }
     return nil;
+}
+
+
+/***** タイムラインへのデータ保存処理 *****/
+-(void)saveTimeLineData:(NSString *)saveDate{
+    //日付から歩数を取得
+    DatabaseHelper *dbHelper = [[DatabaseHelper alloc] init];
+    NSMutableDictionary *stepData = [dbHelper selectDayStep:saveDate];
+    
+    if(stepData != nil){
+        NSString *stepValue = [stepData objectForKey:@"step_value"];
+        NSArray *getStepArray = [stepValue componentsSeparatedByString:@","];
+        
+        int totalStep = [[getStepArray objectAtIndex:143] intValue];//合計歩数を取得
+        
+        // 数値を3桁ごとカンマ区切りにするように設定
+        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+        [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+        [formatter setGroupingSeparator:@","];
+        [formatter setGroupingSize:3];
+        
+        NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+        
+        //step
+        // 数値を3桁ごとカンマ区切り形式で文字列に変換する
+        NSString *valueForStep = [formatter stringFromNumber:[NSNumber numberWithInt:totalStep]];
+        //目標値から達成度を設定
+        int goalSteps = [ud integerForKey:@"GoalSteps"];
+        int percentForStep = totalStep * 100 / goalSteps;
+        
+        [dbHelper insertTimeline:saveDate value:valueForStep percent:percentForStep type:TIMELINE_TYPE_STEP];
+        
+        //distance
+        // 数値を3桁ごとカンマ区切り形式で文字列に変換する
+        float totalDist = [self calcuDist:totalStep];
+        NSString *valueForDist = [NSString stringWithFormat:@"%.1fkm", totalDist];
+        //目標値から達成度を設定
+        float goalDistance = [ud floatForKey:@"GoalDistance"];
+        int percentForDist = totalDist * 100 / goalDistance;
+        
+        [dbHelper insertTimeline:saveDate value:valueForDist percent:percentForDist type:TIMELINE_TYPE_DIST];
+        
+        //calory
+        // 数値を3桁ごとカンマ区切り形式で文字列に変換する
+        int totalCal = [self calcuCalory:totalStep];
+        NSString *valueForCal = [formatter stringFromNumber:[NSNumber numberWithInt:totalCal]];
+        //目標値から達成度を設定
+        float goalCalory = [ud floatForKey:@"GoalCalory"];
+        int percentForCal = totalCal * 100 / goalCalory;
+        
+        [dbHelper insertTimeline:saveDate value:valueForCal percent:percentForCal type:TIMELINE_TYPE_CALORY];
+    }
 }
 
 @end

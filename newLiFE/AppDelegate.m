@@ -55,6 +55,11 @@ void uncaughtExceptionHandler(NSException *exception){
     
     //ユーザー情報の初期化
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];  // 取得
+    
+    //最終起動時間を保存
+    NSDate *lastBootDate = [ud objectForKey:@"LastBootDate"];
+    if(!lastBootDate) [ud setObject:[NSDate date] forKey:@"LastBootDate"];
+    //ユーザー情報
     NSString *userImage = [ud objectForKey:@"UserImage"];
     if(!userImage || [userImage isEqual:@""]) {
         [ud setObject:@"profile.png" forKey:@"UserImage"];
@@ -125,7 +130,6 @@ void uncaughtExceptionHandler(NSException *exception){
     if(!goalRunning)  [ud setFloat:5.0 forKey:@"GoalRunning"];
     float goalWeight = [ud floatForKey:@"GoalWeight"];
     if(!goalWeight)  [ud setFloat:60.0 forKey:@"GoalWeight"];
-    NSDate *FormatDate = [dateFormatter dateFromString:@"1980/01/01 00:00:00"];
     NSDate *date = [ud objectForKey:@"LastUpdateDate"];
     if(!date)  [ud setObject:fromFormatDate forKey:@"LastUpdateDate"];
     [ud synchronize];
