@@ -180,6 +180,8 @@
 		3CC61F6D1A24235900A57DE3 /* LiFE_Common_StartStopButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC61F681A24235900A57DE3 /* LiFE_Common_StartStopButton.png */; };
 		3CC61F711A25AF2F00A57DE3 /* LiFE_TimeLine_TabBGSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC61F701A25AF2F00A57DE3 /* LiFE_TimeLine_TabBGSelected.png */; };
 		3CC61F731A25BB0C00A57DE3 /* libVitalConnectLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC61F721A25BB0C00A57DE3 /* libVitalConnectLibrary.a */; };
+		3CC66EF11A2C3BC6008E23A5 /* LiFE_Common_AddFriendButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC66EF01A2C3BC6008E23A5 /* LiFE_Common_AddFriendButton@2x.png */; };
+		3CC66EF31A2C3BF1008E23A5 /* LiFE_Common_BackButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC66EF21A2C3BF1008E23A5 /* LiFE_Common_BackButton@2x.png */; };
 		3CC66F0E1A1D7F3B0094997A /* LiFE_TimeLine_CellBackgroundBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC66F0A1A1D7F3B0094997A /* LiFE_TimeLine_CellBackgroundBlue.png */; };
 		3CC66F0F1A1D7F3B0094997A /* LiFE_TimeLine_CellBackgroundGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC66F0B1A1D7F3B0094997A /* LiFE_TimeLine_CellBackgroundGreen.png */; };
 		3CC66F101A1D7F3B0094997A /* LiFE_TimeLine_CellBackgroundRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC66F0C1A1D7F3B0094997A /* LiFE_TimeLine_CellBackgroundRed.png */; };
@@ -530,6 +532,8 @@
 		3CC61F681A24235900A57DE3 /* LiFE_Common_StartStopButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_Common_StartStopButton.png; sourceTree = "<group>"; };
 		3CC61F701A25AF2F00A57DE3 /* LiFE_TimeLine_TabBGSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_TimeLine_TabBGSelected.png; sourceTree = "<group>"; };
 		3CC61F721A25BB0C00A57DE3 /* libVitalConnectLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libVitalConnectLibrary.a; sourceTree = "<group>"; };
+		3CC66EF01A2C3BC6008E23A5 /* LiFE_Common_AddFriendButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LiFE_Common_AddFriendButton@2x.png"; sourceTree = "<group>"; };
+		3CC66EF21A2C3BF1008E23A5 /* LiFE_Common_BackButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LiFE_Common_BackButton@2x.png"; sourceTree = "<group>"; };
 		3CC66F0A1A1D7F3B0094997A /* LiFE_TimeLine_CellBackgroundBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_TimeLine_CellBackgroundBlue.png; sourceTree = "<group>"; };
 		3CC66F0B1A1D7F3B0094997A /* LiFE_TimeLine_CellBackgroundGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_TimeLine_CellBackgroundGreen.png; sourceTree = "<group>"; };
 		3CC66F0C1A1D7F3B0094997A /* LiFE_TimeLine_CellBackgroundRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_TimeLine_CellBackgroundRed.png; sourceTree = "<group>"; };
@@ -1773,52 +1777,54 @@
 		53DD7F291974EBE800CB7B11 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				53A31B0F19E52D650018C519 /* AddDrawer */,
+				53A3B82319EDF92600FE03C1 /* Avatar */,
+				53A6CD5E19FDE1BF00501C90 /* Day */,
+				3C82C86819D5494900B2A2BE /* LiFE_Avatar001.png */,
+				3CC66EF01A2C3BC6008E23A5 /* LiFE_Common_AddFriendButton@2x.png */,
+				3CC66EF21A2C3BF1008E23A5 /* LiFE_Common_BackButton@2x.png */,
+				5363A4C319FF6CFF00756824 /* LiFE_Common_AddButton@2x.png */,
+				53A6CD6219FDE22B00501C90 /* LiFE_Common_Background.png */,
+				5363A4C419FF6CFF00756824 /* LiFE_Common_MenuButton@2x.png */,
+				53A6CD7619FE05B200501C90 /* LiFE_Common_NavigationBarBG.png */,
+				3CCBF96A1A19E26600CD72C1 /* LiFE_Forget_Background.png */,
 				3CC3D16E19F790FA0097AB5C /* LiFE_Friend_SearchByNameIcon.png */,
 				3CC3D16F19F790FA0097AB5C /* LiFE_Friend_SearchFromAddressBookIcon.png */,
 				3CC3D17019F790FA0097AB5C /* LiFE_Friend_SearchFromFacebookIcon.png */,
-				53A3B82319EDF92600FE03C1 /* Avatar */,
-				3CCBF9711A19E9F700CD72C1 /* LiFE_Regiter_Background.png */,
-				3CC804E61A1ADAFF00BE3A5D /* LiFE_Regiter_ImageSelectButton.png */,
-				3CC66F0A1A1D7F3B0094997A /* LiFE_TimeLine_CellBackgroundBlue.png */,
-				3CC66F0B1A1D7F3B0094997A /* LiFE_TimeLine_CellBackgroundGreen.png */,
-				3CC66F0C1A1D7F3B0094997A /* LiFE_TimeLine_CellBackgroundRed.png */,
-				3CC66F0D1A1D7F3B0094997A /* LiFE_TimeLine_CellBackgroundOrange.png */,
-				3CCBF9731A19E9F700CD72C1 /* LiFE_Regiter_UserDefaultImage.png */,
-				53A6CD6219FDE22B00501C90 /* LiFE_Common_Background.png */,
-				5363A4C319FF6CFF00756824 /* LiFE_Common_AddButton@2x.png */,
-				5363A4C419FF6CFF00756824 /* LiFE_Common_MenuButton@2x.png */,
 				5363A4C519FF6CFF00756824 /* LiFE_GoalMark_Day.png */,
-				5363A4C619FF6CFF00756824 /* LiFE_Prev_DateButton.png */,
-				5363A4C719FF6CFF00756824 /* LiFE_Left_PageButton.png */,
-				5363A4C819FF6CFF00756824 /* LiFE_Next_DateButton.png */,
-				5363A4C919FF6CFF00756824 /* LiFE_Right_PageButton.png */,
-				5363A4CA19FF6CFF00756824 /* LiFE_ShareButton.png */,
 				532637F01A09C88600DC2181 /* LiFE_Left_GoalButton_Green.png */,
 				532637F11A09C88600DC2181 /* LiFE_Left_GoalButton_Orange.png */,
 				532637F21A09C88600DC2181 /* LiFE_Left_GoalButton_Red.png */,
-				3CCBF96A1A19E26600CD72C1 /* LiFE_Forget_Background.png */,
-				53A6CD5E19FDE1BF00501C90 /* Day */,
-				5363A4DB1A00C2A000756824 /* Week */,
-				5363A4DC1A00C2B300756824 /* Month */,
-				5363A4DD1A00C2BB00756824 /* Year */,
-				3C82C86819D5494900B2A2BE /* LiFE_Avatar001.png */,
+				5363A4C719FF6CFF00756824 /* LiFE_Left_PageButton.png */,
+				5363A4C819FF6CFF00756824 /* LiFE_Next_DateButton.png */,
+				5363A4C619FF6CFF00756824 /* LiFE_Prev_DateButton.png */,
 				3CC3D17419F791190097AB5C /* LiFE_ProfileImage.png */,
-				53A31B0E19E52D510018C519 /* Login */,
-				53A31B0F19E52D650018C519 /* AddDrawer */,
-				53A8FB6B1A0B56D5006303FC /* Photo */,
-				53A31B1219E530B90018C519 /* MenuDrawer */,
-				3C5B0EEA19D267D900E38485 /* LiFE_Top_LoginButton.png */,
-				53D7A2B819BE86F000CC74F7 /* LiFE_Top_Parts_01.png */,
-				53D7A2B919BE86F000CC74F7 /* LiFE_Top_Parts_02.png */,
-				3C5B0EEB19D267D900E38485 /* LiFE_Top_RegiterButton.png */,
+				3CCBF9711A19E9F700CD72C1 /* LiFE_Regiter_Background.png */,
+				3CC804E61A1ADAFF00BE3A5D /* LiFE_Regiter_ImageSelectButton.png */,
+				3CCBF9731A19E9F700CD72C1 /* LiFE_Regiter_UserDefaultImage.png */,
+				5363A4C919FF6CFF00756824 /* LiFE_Right_PageButton.png */,
+				5363A4CA19FF6CFF00756824 /* LiFE_ShareButton.png */,
 				3CCBF94C1A199C5F00CD72C1 /* LiFE_Start_InstructionImage01.png */,
 				3CCBF94D1A199C6000CD72C1 /* LiFE_Start_InstructionImage02.png */,
 				3CCBF94E1A199C6000CD72C1 /* LiFE_Start_InstructionImage03.png */,
 				3CCBF9581A19B2AA00CD72C1 /* LiFE_Start_LoginButton.png */,
-				3CC61F701A25AF2F00A57DE3 /* LiFE_TimeLine_TabBGSelected.png */,
 				3CCBF9561A19B1D500CD72C1 /* LiFE_Start_RegisterButton.png */,
-				53A6CD7619FE05B200501C90 /* LiFE_Common_NavigationBarBG.png */,
+				3CC66F0A1A1D7F3B0094997A /* LiFE_TimeLine_CellBackgroundBlue.png */,
+				3CC66F0B1A1D7F3B0094997A /* LiFE_TimeLine_CellBackgroundGreen.png */,
+				3CC66F0D1A1D7F3B0094997A /* LiFE_TimeLine_CellBackgroundOrange.png */,
+				3CC66F0C1A1D7F3B0094997A /* LiFE_TimeLine_CellBackgroundRed.png */,
 				53A6CD7819FE05D800501C90 /* LiFE_TimeLine_TabBGNormal.png */,
+				3CC61F701A25AF2F00A57DE3 /* LiFE_TimeLine_TabBGSelected.png */,
+				3C5B0EEA19D267D900E38485 /* LiFE_Top_LoginButton.png */,
+				53D7A2B819BE86F000CC74F7 /* LiFE_Top_Parts_01.png */,
+				53D7A2B919BE86F000CC74F7 /* LiFE_Top_Parts_02.png */,
+				3C5B0EEB19D267D900E38485 /* LiFE_Top_RegiterButton.png */,
+				53A31B0E19E52D510018C519 /* Login */,
+				53A31B1219E530B90018C519 /* MenuDrawer */,
+				5363A4DC1A00C2B300756824 /* Month */,
+				53A8FB6B1A0B56D5006303FC /* Photo */,
+				5363A4DB1A00C2A000756824 /* Week */,
+				5363A4DD1A00C2BB00756824 /* Year */,
 			);
 			name = image;
 			sourceTree = "<group>";
@@ -1937,6 +1943,7 @@
 				3CC66F0F1A1D7F3B0094997A /* LiFE_TimeLine_CellBackgroundGreen.png in Resources */,
 				53A6CD7F19FE071A00501C90 /* SourceHanSansJP-Light.otf in Resources */,
 				53E9AD9C19CFB5AC001A28CC /* default@2x.png in Resources */,
+				3CC66EF11A2C3BC6008E23A5 /* LiFE_Common_AddFriendButton@2x.png in Resources */,
 				3CC61EDA1A24230C00A57DE3 /* LiFE_Avatar_WomanStop_large000.png in Resources */,
 				3CCBF95B1A19C76D00CD72C1 /* LiFE_Login_RegisterBackground.png in Resources */,
 				3CC61EE11A24230C00A57DE3 /* LiFE_Avatar_ManRunning_large004.png in Resources */,
@@ -2065,6 +2072,7 @@
 				53E9AD9B19CFB5AC001A28CC /* default-568@2x.png in Resources */,
 				3CC61F341A24230C00A57DE3 /* LiFE_Avatar_WomanWalking_large009.png in Resources */,
 				3CC61F601A24234F00A57DE3 /* LiFE_Sleep_Avatar.png in Resources */,
+				3CC66EF31A2C3BF1008E23A5 /* LiFE_Common_BackButton@2x.png in Resources */,
 				3CC61F011A24230C00A57DE3 /* LiFE_Avatar_ManWalking_large012.png in Resources */,
 				3CC61EEE1A24230C00A57DE3 /* LiFE_Avatar_ManRunning_small005.png in Resources */,
 				3CC78A891A09BE1A0042DFE3 /* LICENSE in Resources */,

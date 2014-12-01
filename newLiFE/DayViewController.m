@@ -1758,6 +1758,18 @@
                 
                 [self startCMStepCounter:(dayCount + 1) :0];
             }
+        } else {
+            [ud setObject:startDate forKey:@"LastUpdateDate"];
+            [ud synchronize];
+            
+            [SVProgressHUD dismiss];
+            
+            //現在値用タイマー起動（過去のデータを読み込んでから、毎秒の処理を開始）
+            tm = [NSTimer
+                  scheduledTimerWithTimeInterval:1.0
+                  target:self
+                  selector:@selector(drawNowData:)
+                  userInfo:nil repeats:YES];
         }
     }else{
         [ud setObject:startDate forKey:@"LastUpdateDate"];

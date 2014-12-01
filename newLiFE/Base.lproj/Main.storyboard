@@ -3158,7 +3158,7 @@
         <image name="LiFE_Add_SleepButton.png" width="528" height="90"/>
         <image name="LiFE_Background_Bottom.png" width="640" height="316"/>
         <image name="LiFE_Common_AddButton.png" width="44" height="44"/>
-        <image name="LiFE_Common_AddFriendButton.png" width="657" height="1153"/>
+        <image name="LiFE_Common_AddFriendButton.png" width="44" height="44"/>
         <image name="LiFE_Common_BackButton.png" width="88" height="88"/>
         <image name="LiFE_Common_Background.png" width="640" height="512"/>
         <image name="LiFE_Common_GoalButton.png" width="120" height="120"/>
