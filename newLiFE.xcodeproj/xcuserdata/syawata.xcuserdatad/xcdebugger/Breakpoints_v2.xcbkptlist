@@ -216,11 +216,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "newLiFE/DayViewController.m"
-            timestampString = "438766677.456222"
+            timestampString = "438860919.117877"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1143"
-            endingLineNumber = "1143"
+            startingLineNumber = "1119"
+            endingLineNumber = "1119"
             landmarkName = "-changeImageColor:"
             landmarkType = "5">
          </BreakpointContent>
@@ -248,11 +248,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "newLiFE/DayViewController.m"
-            timestampString = "438841929.835985"
+            timestampString = "438860919.117877"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1723"
-            endingLineNumber = "1723"
+            startingLineNumber = "1699"
+            endingLineNumber = "1699"
             landmarkName = "-startCMStepCounter::"
             landmarkType = "5">
          </BreakpointContent>
@@ -600,11 +600,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "newLiFE/DayViewController.m"
-            timestampString = "438766677.456222"
+            timestampString = "438860317.545841"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "926"
-            endingLineNumber = "926"
+            startingLineNumber = "853"
+            endingLineNumber = "853"
             landmarkName = "-drawResult:"
             landmarkType = "5">
          </BreakpointContent>
@@ -712,11 +712,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "newLiFE/DayViewController.m"
-            timestampString = "438767072.628237"
+            timestampString = "438860919.117877"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1806"
-            endingLineNumber = "1806"
+            startingLineNumber = "1782"
+            endingLineNumber = "1782"
             landmarkName = "-startCMStepCounter:"
             landmarkType = "5">
          </BreakpointContent>
@@ -824,11 +824,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "newLiFE/DayViewController.m"
-            timestampString = "438841929.835985"
+            timestampString = "438860919.117877"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1723"
-            endingLineNumber = "1723"
+            startingLineNumber = "1699"
+            endingLineNumber = "1699"
             landmarkName = "-startCMStepCounter::"
             landmarkType = "5">
          </BreakpointContent>
@@ -840,11 +840,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "newLiFE/DayViewController.m"
-            timestampString = "438841527.644385"
+            timestampString = "438860919.117877"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1779"
-            endingLineNumber = "1779"
+            startingLineNumber = "1755"
+            endingLineNumber = "1755"
             landmarkName = "-startCMStepCounter::"
             landmarkType = "5">
          </BreakpointContent>
@@ -856,11 +856,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "newLiFE/DayViewController.m"
-            timestampString = "438841562.574665"
+            timestampString = "438860919.117877"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1783"
-            endingLineNumber = "1783"
+            startingLineNumber = "1759"
+            endingLineNumber = "1759"
             landmarkName = "-startCMStepCounter::"
             landmarkType = "5">
          </BreakpointContent>
@@ -872,12 +872,60 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "newLiFE/DayViewController.m"
-            timestampString = "438841955.204265"
+            timestampString = "438860919.117877"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1793"
-            endingLineNumber = "1793"
+            startingLineNumber = "1769"
+            endingLineNumber = "1769"
             landmarkName = "-startCMStepCounter::"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "newLiFE/DayViewController.m"
+            timestampString = "438860610.580919"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "982"
+            endingLineNumber = "982"
+            landmarkName = "-drawResult:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "newLiFE/DayViewController.m"
+            timestampString = "438860919.117877"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1027"
+            endingLineNumber = "1027"
+            landmarkName = "-drawResult:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "newLiFE/RunningViewController.m"
+            timestampString = "438861222.353769"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
+            landmarkName = "-alarmStartButtonAction:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

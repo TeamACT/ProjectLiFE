@@ -821,86 +821,13 @@
     stepCount = [[stepArray objectAtIndex:index] intValue];
     
     if(dataStateType == DATA_STATE_TYPE_SLEEP){
+        //現在矢印が選んでいるのが睡眠の場合
         if(dataValueType == DATA_VALUE_TYPE_RUN){
-            value = [self calcuDist:[[stepArray objectAtIndex:arrowIndex] floatValue]];
-            goal = [ud floatForKey:@"GoalDistance"];
-            per = (value / goal) * 100;
-            NSNumber *valueNumber = [[NSNumber alloc] initWithFloat:value];
-            NSNumber *goalNumber = [[NSNumber alloc] initWithFloat:goal];
-            NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-            [nf setNumberStyle:NSNumberFormatterDecimalStyle];
-            [nf setGroupingSeparator:@","];
-            [nf setGroupingSize:3];
-            nf.minimumFractionDigits = 2;
-            nf.maximumFractionDigits = 2;
-            NSString *valueString = [nf stringFromNumber:valueNumber];
-            NSString *goalString = [nf stringFromNumber:goalNumber];
-            resultString = [NSString stringWithFormat:@"%@ / %@ km",valueString,goalString];
-            
-            UILabel *timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(110, DATA_RESULT_LABEL_Y + 20, 190, 25)];
-            timeLabel.font = [UIFont boldSystemFontOfSize:14];
-            timeLabel.textColor = [UIColor whiteColor];
-            timeLabel.text = @"81分";
-            timeLabel.textAlignment = NSTextAlignmentLeft;
-            [self.drawResultView addSubview:timeLabel];
-            
-            NSDictionary *stringAttributes1 = @{ NSForegroundColorAttributeName:[UIColor whiteColor],
-                                                 NSFontAttributeName:[UIFont systemFontOfSize:9.0f] };
-            NSDictionary *stringAttributes2 = @{ NSForegroundColorAttributeName:[UIColor whiteColor],
-                                                 NSFontAttributeName:[UIFont systemFontOfSize:14.0f] };
-            NSAttributedString *string1 = [[NSAttributedString alloc] initWithString:@"4.5" attributes:stringAttributes2];
-            NSAttributedString *string2 = [[NSAttributedString alloc] initWithString:@"km/h" attributes:stringAttributes1];
-            
-            NSMutableAttributedString *mutableAttributedString = [[NSMutableAttributedString alloc] init];
-            [mutableAttributedString appendAttributedString:string1];
-            [mutableAttributedString appendAttributedString:string2];
-            
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(160, DATA_RESULT_LABEL_Y + 20, 190, 25)];
-            label.attributedText = mutableAttributedString;
-            label.textAlignment = NSTextAlignmentLeft;
-            [self.drawResultView addSubview:label];
-            
-            
-            UILabel *resultLabel = [[UILabel alloc] initWithFrame:CGRectMake(DATA_RESULT_LABEL_X, DATA_RESULT_LABEL_Y, 190, 25)];
-            resultLabel.font = [UIFont boldSystemFontOfSize:18];
-            resultLabel.textColor = [UIColor whiteColor];
-            resultLabel.text = resultString;
-            resultLabel.textAlignment = NSTextAlignmentCenter;
-            [self.drawResultView addSubview:resultLabel];
-            
-            if(per < 100){
-                UILabel *valueLabel = [[UILabel alloc] initWithFrame:CGRectMake(DATA_RESULT_PER_LABEL_X, DATA_RESULT_PER_LABEL_Y, 36, 60)];
-                valueLabel.font = [UIFont boldSystemFontOfSize:30];
-                valueLabel.textColor = [UIColor whiteColor];
-                valueLabel.text = [NSString stringWithFormat:@"%d",per];
-                valueLabel.textAlignment = NSTextAlignmentCenter;
-                [self.drawResultView addSubview:valueLabel];
-                
-                UILabel *perLabel = [[UILabel alloc] initWithFrame:CGRectMake(DATA_RESULT_PER_MARK_LABEL_X, DATA_RESULT_PER_MARK_LABEL_Y, 20, 25)];
-                perLabel.font = [UIFont boldSystemFontOfSize:12];
-                perLabel.textColor = [UIColor whiteColor];
-                perLabel.text = @"%";
-                perLabel.textAlignment = NSTextAlignmentCenter;
-                [self.drawResultView addSubview:perLabel];
-                
-                ResultGraphView *resultGraphView = [[ResultGraphView alloc] initWithFrame:self.drawResultView.bounds];
-                resultGraphView.value = per;
-                [self.drawResultView addSubview:resultGraphView];
-            }else{
-                UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(65, 475, 190, 25)];
-                label.font = [UIFont boldSystemFontOfSize:12];
-                label.textColor = [UIColor whiteColor];
-                label.text = @"目標達成！";
-                label.textAlignment = NSTextAlignmentCenter;
-                [self.drawResultView addSubview:label];
-                
-                UIImage *image = [UIImage imageNamed:@"LiFE_GoalMark_Day"];
-                UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-                imageView.frame = CGRectMake(125, 411, 70, 64);
-                
-                [self.drawResultView addSubview:imageView];
-            }
+            //表示内容がランニング
+            //なにも表示しない
         }else{
+            //表示内容が歩数、距離、カロリー
+            //睡眠の詳細を表示する
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(65, 424, 190, 25)];
             label.font = [UIFont boldSystemFontOfSize:12];
             label.textColor = [UIColor whiteColor];
@@ -970,7 +897,9 @@
             [self.drawResultView addSubview:endLabel];
         }
     }else{
+        //現在矢印が選んでいるのが通常の活動値、ランニングの場合
         if(dataValueType == DATA_VALUE_TYPE_STEP){
+            //どこを選択していても歩数の情報を表示
             value = [[stepArray objectAtIndex:arrowIndex] floatValue];
             goal = [ud integerForKey:@"GoalSteps"];
             per = (value / goal) * 100;
@@ -982,8 +911,11 @@
             [nf setGroupingSize:3];
             NSString *valueString = [nf stringFromNumber:valueNumber];
             NSString *goalString = [nf stringFromNumber:goalNumber];
-            resultString = [NSString stringWithFormat:@"%@ / %@ 歩",valueString,goalString];
+            resultString = [NSString stringWithFormat:@"%@ / %@ 歩", valueString, goalString];
+            
+            [self showResultGraph:resultString percent:per];
         }else if(dataValueType == DATA_VALUE_TYPE_CALORY){
+            //どこを選択していてもカロリーの情報を表示
             float cal = [self calcuCalory:[[stepArray objectAtIndex:arrowIndex] floatValue]];
             float bee = [self calcuBee:arrowIndex];
             value = cal + bee;
@@ -1021,7 +953,10 @@
             label.attributedText = mutableAttributedString;
             label.textAlignment = NSTextAlignmentCenter;
             [self.drawResultView addSubview:label];
+            
+            [self showResultGraph:resultString percent:per];
         }else if(dataValueType == DATA_VALUE_TYPE_DIST){
+            //どこを選択していても距離の情報を表示
             value = [self calcuDist:[[stepArray objectAtIndex:arrowIndex] floatValue]];
             goal = [ud floatForKey:@"GoalDistance"];
             per = (value / goal) * 100;
@@ -1036,85 +971,126 @@
             NSString *valueString = [nf stringFromNumber:valueNumber];
             NSString *goalString = [nf stringFromNumber:goalNumber];
             resultString = [NSString stringWithFormat:@"%@ / %@ km",valueString,goalString];
+            
+            [self showResultGraph:resultString percent:per];
         }else if(dataValueType == DATA_VALUE_TYPE_RUN){
-            value = [self calcuDist:[[stepArray objectAtIndex:arrowIndex] floatValue]];
-            goal = [ud floatForKey:@"GoalDistance"];
-            per = (value / goal) * 100;
-            NSNumber *valueNumber = [[NSNumber alloc] initWithFloat:value];
-            NSNumber *goalNumber = [[NSNumber alloc] initWithFloat:goal];
-            NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-            [nf setNumberStyle:NSNumberFormatterDecimalStyle];
-            [nf setGroupingSeparator:@","];
-            [nf setGroupingSize:3];
-            nf.minimumFractionDigits = 2;
-            nf.maximumFractionDigits = 2;
-            NSString *valueString = [nf stringFromNumber:valueNumber];
-            NSString *goalString = [nf stringFromNumber:goalNumber];
-            resultString = [NSString stringWithFormat:@"%@ / %@ km",valueString,goalString];
+            //ランニングの詳細を表示する
+            if(dataStateType == DATA_STATE_TYPE_RUN){
+                //ランニングをした時点を選択していたら結果を表示する
+        
+                //選択している時間からランニングの詳細を取得
+                NSDateFormatter *fm = [[NSDateFormatter alloc] init];
+                fm.dateFormat = @"yyyy-MM-dd";
+                NSString *dateString = [fm stringFromDate:date];
+                int hour = arrowIndex / 6;
+                int min = (arrowIndex % 6) * 10;
+                NSString *dateTimeString = [NSString stringWithFormat:@"%@ %d:%d",dateString,hour,min];
+                NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+                [formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+                NSDate *dateTime = [formatter dateFromString:dateTimeString];
+                
+                DatabaseHelper *dbHelper = [[DatabaseHelper alloc] init];
+                NSMutableDictionary *runDetail = [dbHelper selectDayRunDetail:dateTime];
+                
+                //歩数から距離を計算
+                int runStep = [[runDetail objectForKey:@"run_step"] intValue];
+                float runDist = [self calcuDist:runStep];
+                
+                NSDate *startTime = [[NSDate alloc] initWithTimeIntervalSince1970:[[runDetail objectForKey:@"start_datetime"] floatValue]];
+                NSDate *endTime = [[NSDate alloc] initWithTimeIntervalSince1970:[[runDetail objectForKey:@"end_datetime"] floatValue]];
+                
+                goal = [ud floatForKey:@"GoalDistance"];
+                per = (runDist / goal) * 100;
+                NSNumber *valueNumber = [[NSNumber alloc] initWithFloat:runDist];
+                NSNumber *goalNumber = [[NSNumber alloc] initWithFloat:goal];
+                NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+                [nf setNumberStyle:NSNumberFormatterDecimalStyle];
+                [nf setGroupingSeparator:@","];
+                [nf setGroupingSize:3];
+                nf.minimumFractionDigits = 2;
+                nf.maximumFractionDigits = 2;
+                NSString *valueString = [nf stringFromNumber:valueNumber];
+                NSString *goalString = [nf stringFromNumber:goalNumber];
+                resultString = [NSString stringWithFormat:@"%@ / %@ km",valueString,goalString];
+                
+                //ランニング時間
+                NSTimeInterval runSecond = [endTime timeIntervalSinceDate:startTime];
+                int runMinute = runSecond / 60;
+                UILabel *timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(110, DATA_RESULT_LABEL_Y + 20, 190, 25)];
+                timeLabel.font = [UIFont boldSystemFontOfSize:14];
+                timeLabel.textColor = [UIColor whiteColor];
+                timeLabel.text = [NSString stringWithFormat:@"%d分", runMinute];
+                timeLabel.textAlignment = NSTextAlignmentLeft;
+                [self.drawResultView addSubview:timeLabel];
+                
+                //時速
+                float speed = runDist * 60 * 60 / runSecond;
+                NSDictionary *stringAttributes1 = @{ NSForegroundColorAttributeName:[UIColor whiteColor],
+                                                     NSFontAttributeName:[UIFont systemFontOfSize:9.0f] };
+                NSDictionary *stringAttributes2 = @{ NSForegroundColorAttributeName:[UIColor whiteColor],
+                                                     NSFontAttributeName:[UIFont systemFontOfSize:14.0f] };
+                NSAttributedString *string1 = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%.1f", speed] attributes:stringAttributes2];
+                NSAttributedString *string2 = [[NSAttributedString alloc] initWithString:@"km/h" attributes:stringAttributes1];
+                
+                NSMutableAttributedString *mutableAttributedString = [[NSMutableAttributedString alloc] init];
+                [mutableAttributedString appendAttributedString:string1];
+                [mutableAttributedString appendAttributedString:string2];
+                
+                UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(160, DATA_RESULT_LABEL_Y + 20, 190, 25)];
+                label.attributedText = mutableAttributedString;
+                label.textAlignment = NSTextAlignmentLeft;
+                [self.drawResultView addSubview:label];
+                
+                [self showResultGraph:resultString percent:per];
+            } else {
+                //ランニングをしていない時点はなにも表示しない
+            }
             
-            UILabel *timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(110, DATA_RESULT_LABEL_Y + 20, 190, 25)];
-            timeLabel.font = [UIFont boldSystemFontOfSize:14];
-            timeLabel.textColor = [UIColor whiteColor];
-            timeLabel.text = @"81分";
-            timeLabel.textAlignment = NSTextAlignmentLeft;
-            [self.drawResultView addSubview:timeLabel];
-            
-            NSDictionary *stringAttributes1 = @{ NSForegroundColorAttributeName:[UIColor whiteColor],
-                                                 NSFontAttributeName:[UIFont systemFontOfSize:9.0f] };
-            NSDictionary *stringAttributes2 = @{ NSForegroundColorAttributeName:[UIColor whiteColor],
-                                                 NSFontAttributeName:[UIFont systemFontOfSize:14.0f] };
-            NSAttributedString *string1 = [[NSAttributedString alloc] initWithString:@"4.5" attributes:stringAttributes2];
-            NSAttributedString *string2 = [[NSAttributedString alloc] initWithString:@"km/h" attributes:stringAttributes1];
-            
-            NSMutableAttributedString *mutableAttributedString = [[NSMutableAttributedString alloc] init];
-            [mutableAttributedString appendAttributedString:string1];
-            [mutableAttributedString appendAttributedString:string2];
-            
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(160, DATA_RESULT_LABEL_Y + 20, 190, 25)];
-            label.attributedText = mutableAttributedString;
-            label.textAlignment = NSTextAlignmentLeft;
-            [self.drawResultView addSubview:label];
         }
         
-        UILabel *resultLabel = [[UILabel alloc] initWithFrame:CGRectMake(DATA_RESULT_LABEL_X, DATA_RESULT_LABEL_Y, 190, 25)];
-        resultLabel.font = [UIFont boldSystemFontOfSize:18];
-        resultLabel.textColor = [UIColor whiteColor];
-        resultLabel.text = resultString;
-        resultLabel.textAlignment = NSTextAlignmentCenter;
-        [self.drawResultView addSubview:resultLabel];
+    }
+}
+
+-(void)showResultGraph:(NSString *)result percent:(int)percent{
+    
+    UILabel *resultLabel = [[UILabel alloc] initWithFrame:CGRectMake(DATA_RESULT_LABEL_X, DATA_RESULT_LABEL_Y, 190, 25)];
+    resultLabel.font = [UIFont boldSystemFontOfSize:18];
+    resultLabel.textColor = [UIColor whiteColor];
+    resultLabel.text = result;
+    resultLabel.textAlignment = NSTextAlignmentCenter;
+    [self.drawResultView addSubview:resultLabel];
+    
+    if(percent < 100){
+        UILabel *valueLabel = [[UILabel alloc] initWithFrame:CGRectMake(DATA_RESULT_PER_LABEL_X, DATA_RESULT_PER_LABEL_Y, 36, 60)];
+        valueLabel.font = [UIFont boldSystemFontOfSize:30];
+        valueLabel.textColor = [UIColor whiteColor];
+        valueLabel.text = [NSString stringWithFormat:@"%d", percent];
+        valueLabel.textAlignment = NSTextAlignmentCenter;
+        [self.drawResultView addSubview:valueLabel];
         
-        if(per < 100){
-            UILabel *valueLabel = [[UILabel alloc] initWithFrame:CGRectMake(DATA_RESULT_PER_LABEL_X, DATA_RESULT_PER_LABEL_Y, 36, 60)];
-            valueLabel.font = [UIFont boldSystemFontOfSize:30];
-            valueLabel.textColor = [UIColor whiteColor];
-            valueLabel.text = [NSString stringWithFormat:@"%d",per];
-            valueLabel.textAlignment = NSTextAlignmentCenter;
-            [self.drawResultView addSubview:valueLabel];
-            
-            UILabel *perLabel = [[UILabel alloc] initWithFrame:CGRectMake(DATA_RESULT_PER_MARK_LABEL_X, DATA_RESULT_PER_MARK_LABEL_Y, 20, 25)];
-            perLabel.font = [UIFont boldSystemFontOfSize:12];
-            perLabel.textColor = [UIColor whiteColor];
-            perLabel.text = @"%";
-            perLabel.textAlignment = NSTextAlignmentCenter;
-            [self.drawResultView addSubview:perLabel];
-            
-            ResultGraphView *resultGraphView = [[ResultGraphView alloc] initWithFrame:self.drawResultView.bounds];
-            resultGraphView.value = per;
-            [self.drawResultView addSubview:resultGraphView];
-        }else{
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(65, 475, 190, 25)];
-            label.font = [UIFont boldSystemFontOfSize:12];
-            label.textColor = [UIColor whiteColor];
-            label.text = @"目標達成！";
-            label.textAlignment = NSTextAlignmentCenter;
-            [self.drawResultView addSubview:label];
-            
-            UIImage *image = [UIImage imageNamed:@"LiFE_GoalMark_Day"];
-            UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-            imageView.frame = CGRectMake(125, 411, 70, 64);
-            
-            [self.drawResultView addSubview:imageView];
-        }
+        UILabel *perLabel = [[UILabel alloc] initWithFrame:CGRectMake(DATA_RESULT_PER_MARK_LABEL_X, DATA_RESULT_PER_MARK_LABEL_Y, 20, 25)];
+        perLabel.font = [UIFont boldSystemFontOfSize:12];
+        perLabel.textColor = [UIColor whiteColor];
+        perLabel.text = @"%";
+        perLabel.textAlignment = NSTextAlignmentCenter;
+        [self.drawResultView addSubview:perLabel];
+        
+        ResultGraphView *resultGraphView = [[ResultGraphView alloc] initWithFrame:self.drawResultView.bounds];
+        resultGraphView.value = percent;
+        [self.drawResultView addSubview:resultGraphView];
+    }else{
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(65, 475, 190, 25)];
+        label.font = [UIFont boldSystemFontOfSize:12];
+        label.textColor = [UIColor whiteColor];
+        label.text = @"目標達成！";
+        label.textAlignment = NSTextAlignmentCenter;
+        [self.drawResultView addSubview:label];
+        
+        UIImage *image = [UIImage imageNamed:@"LiFE_GoalMark_Day"];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+        imageView.frame = CGRectMake(125, 411, 70, 64);
+        
+        [self.drawResultView addSubview:imageView];
     }
 }
 
