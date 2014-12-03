@@ -2085,6 +2085,7 @@
         [request setPostValue:[NSNumber numberWithInt:percentForStep] forKey:@"TimeLineAttainment0"];
         [request setPostValue:[NSNumber numberWithInt:TIMELINE_TYPE_STEP] forKey:@"TimeLineType0"];
         [request setPostValue:[NSNumber numberWithInt:SHARE_CLOSED] forKey:@"TimeLineShareStatus0"];
+        [request setPostValue:[NSNumber numberWithInt:TIMELINE_ACHIEVE_ONCE] forKey:@"TimeLineAchieveKind0"];
         //distance
         [request setPostValue:[phpFormatter stringFromDate:saveDate] forKey:@"TimeLineStartDateTime1"];
         [request setPostValue:[phpFormatter stringFromDate:saveDate] forKey:@"TimeLineEndDateTime1"];
@@ -2092,6 +2093,7 @@
         [request setPostValue:[NSNumber numberWithInt:percentForDist] forKey:@"TimeLineAttainment1"];
         [request setPostValue:[NSNumber numberWithInt:TIMELINE_TYPE_DIST] forKey:@"TimeLineType1"];
         [request setPostValue:[NSNumber numberWithInt:SHARE_CLOSED] forKey:@"TimeLineShareStatus1"];
+        [request setPostValue:[NSNumber numberWithInt:TIMELINE_ACHIEVE_ONCE] forKey:@"TimeLineAchieveKind1"];
         //calory
         [request setPostValue:[phpFormatter stringFromDate:saveDate] forKey:@"TimeLineStartDateTime2"];
         [request setPostValue:[phpFormatter stringFromDate:saveDate] forKey:@"TimeLineEndDateTime2"];
@@ -2099,6 +2101,7 @@
         [request setPostValue:[NSNumber numberWithInt:percentForCal] forKey:@"TimeLineAttainment2"];
         [request setPostValue:[NSNumber numberWithInt:TIMELINE_TYPE_CALORY] forKey:@"TimeLineType2"];
         [request setPostValue:[NSNumber numberWithInt:SHARE_CLOSED] forKey:@"TimeLineShareStatus2"];
+        [request setPostValue:[NSNumber numberWithInt:TIMELINE_ACHIEVE_ONCE] forKey:@"TimeLineAchieveKind2"];
         [request startAsynchronous];
     }
 }

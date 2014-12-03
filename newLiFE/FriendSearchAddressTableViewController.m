@@ -7,6 +7,7 @@
 //
 
 #import "FriendSearchAddressTableViewController.h"
+#import "FriendDetailViewController.h"
 
 #import <Accounts/Accounts.h>
 #import <Social/Social.h>
@@ -42,6 +43,10 @@
     //テーブルビューの背景色を変更
     self.tableView.backgroundView = nil;
     [self.tableView setBackgroundColor:[UIColor colorWithRed:0.949 green:0.949 blue:0.949 alpha:1.0]];
+    
+    //戻るボタンのテキストを消す
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle: @" " style:UIBarButtonItemStylePlain target:nil action:nil];
+    [self.navigationItem setBackBarButtonItem:backButton];
     
     switch (searchFriendType) {
         case SEARCH_FRIEND_ADDRESS_BOOK:
@@ -637,6 +642,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    //facebookのまだLiFEを利用していない友達を探すセルの処理
     if(searchFriendType == SEARCH_FRIEND_FACEBOOK) {
         if(([searchResult count] > 0 && [indexPath section] == 1) || ([searchResult count] == 0 && [indexPath section] == 0)) {
             //メッセンジャーを開く
@@ -649,8 +655,20 @@
             }
             
             [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+            
+            return;
         }
     }
+    
+    //友達の詳細画面へ遷移
+    if([searchResult count] > 0 && [indexPath section] == 0) {
+        NSMutableDictionary *dictionary = [searchResult objectAtIndex:[indexPath row]];
+        
+        FriendDetailViewController *friendDetailVC =  [self.storyboard instantiateViewControllerWithIdentifier:@"friendDetail"];
+        [friendDetailVC setFriendUserID:[dictionary objectForKey:FRIEND_ID]];
+        [self.navigationController pushViewController:friendDetailVC animated:YES];
+    }
+    
 }
 
 

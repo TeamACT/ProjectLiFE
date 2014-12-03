@@ -27,6 +27,8 @@
  #define URL_SEARCH_FRIEND_FROM_ADDRESS_BOOK @"http://gcounter.net/LiFE/SearchFriendFromAddressBook.php"
  #define URL_SEARCH_FRIEND_FROM_FACEBOOK @"http://gcounter.net/LiFE/SearchFriendFromFacebook.php"
  #define URL_INSERT_TIMELINE @"http://gcounter.net/LiFE/InsertTimeLine.php"
+ #define URL_GET_FRIEND_DETAIL @"http://gcounter.net/LiFE/GetFriendDetail.php"
+ #define URL_GET_FRIEND_FRIEND_LIST @"http://gcounter.net/LiFE/GetFriendFriendList.php"
  */
 
 /*テスト用*/
@@ -48,6 +50,8 @@
 #define URL_SEARCH_FRIEND_FROM_ADDRESS_BOOK @"http://gcounter.net/LiFE_Test/SearchFriendFromAddressBook.php"
 #define URL_SEARCH_FRIEND_FROM_FACEBOOK @"http://gcounter.net/LiFE_Test/SearchFriendFromFacebook.php"
 #define URL_INSERT_TIMELINE @"http://gcounter.net/LiFE_Test/InsertTimeLine.php"
+#define URL_GET_FRIEND_DETAIL @"http://gcounter.net/LiFE_Test/GetFriendDetail.php"
+#define URL_GET_FRIEND_FRIEND_LIST @"http://gcounter.net/LiFE_Test/GetFriendFriendList.php"
 
 //開始時のログイン、新規登録分岐
 #define START_REGISTER 0
@@ -192,5 +196,10 @@
 #define TIMELINE_TYPE_CALORY 2
 #define TIMELINE_TYPE_RUN 3
 #define TIMELINE_TYPE_SLEEP 4
+
+//タイムラインの達成パターン
+#define TIMELINE_ACHIEVE_ONCE 0
+#define TIMELINE_ACHIEVE_CONTINUE 1
+#define TIMELINE_ACHIEVE_TOTAL 2
 
 #endif

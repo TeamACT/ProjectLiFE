@@ -7,6 +7,7 @@
 //
 
 #import "FriendSearchNameTableViewController.h"
+#import "FriendDetailViewController.h"
 
 #import "ASIHTTPRequest/ASIFormDataRequest.h"
 #import "XPathQuery.h"
@@ -38,6 +39,10 @@
     //テーブルビューの背景色を変更
     self.tableView.backgroundView = nil;
     [self.tableView setBackgroundColor:[UIColor colorWithRed:0.949 green:0.949 blue:0.949 alpha:1.0]];
+    
+    //戻るボタンのテキストを消す
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle: @" " style:UIBarButtonItemStylePlain target:nil action:nil];
+    [self.navigationItem setBackBarButtonItem:backButton];
     
     self.navigationItem.title = @"名前";
     
@@ -113,6 +118,16 @@
     }
     
     return cell;
+}
+
+//セルを選択した際に友達詳細へ遷移
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSMutableDictionary *dictionary = [searchResult objectAtIndex:[indexPath row]];
+    
+    FriendDetailViewController *friendDetailVC =  [self.storyboard instantiateViewControllerWithIdentifier:@"friendDetail"];
+    [friendDetailVC setFriendUserID:[dictionary objectForKey:FRIEND_ID]];
+    [self.navigationController pushViewController:friendDetailVC animated:YES];
+    
 }
 
 -(void)searchBarSearchButtonClicked: (UISearchBar*)searchBar{

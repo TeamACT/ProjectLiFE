@@ -131,7 +131,23 @@ void uncaughtExceptionHandler(NSException *exception){
     float goalWeight = [ud floatForKey:@"GoalWeight"];
     if(!goalWeight)  [ud setFloat:60.0 forKey:@"GoalWeight"];
     NSDate *date = [ud objectForKey:@"LastUpdateDate"];
-    if(!date)  [ud setObject:fromFormatDate forKey:@"LastUpdateDate"];
+    if(!date) [ud setObject:fromFormatDate forKey:@"LastUpdateDate"];
+    
+    //目標達成回数を管理する用
+    NSDictionary *achieveDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                 [NSDate date], @"LastAchieveDate",
+                                 [NSNumber numberWithInt:0], @"AchieveContinueCount",
+                                 [NSNumber numberWithInt:0], @"AchieveTotalCount",nil];
+    NSDictionary *stepAchieve = [ud dictionaryForKey:@"StepAchieveDict"];
+    if(!stepAchieve) [ud setObject:achieveDict forKey:@"StepAchieveDict"];
+    NSDictionary *distAchieve = [ud dictionaryForKey:@"DistAchieveDict"];
+    if(!distAchieve) [ud setObject:achieveDict forKey:@"DistAchieveDict"];
+    NSDictionary *caloryAchieve = [ud dictionaryForKey:@"CaloryAchieveDict"];
+    if(!caloryAchieve) [ud setObject:achieveDict forKey:@"CaloryAchieveDict"];
+    NSDictionary *runAchieve = [ud dictionaryForKey:@"RunAchieveDict"];
+    if(!runAchieve) [ud setObject:achieveDict forKey:@"RunAchieveDict"];
+    NSDictionary *sleepAchieve = [ud dictionaryForKey:@"SleepAchieveDict"];
+    if(!sleepAchieve) [ud setObject:achieveDict forKey:@"SleepAchieveDict"];
     [ud synchronize];
     
     //ECSlidingViewControllerオブジェクトを取得

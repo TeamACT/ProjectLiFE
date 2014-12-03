@@ -7,8 +7,15 @@
     <customFonts key="customFonts">
         <mutableArray key="SourceHanSansJP-Light.otf">
             <string>SourceHanSansJP-Light</string>
+            <string>SourceHanSansJP-Light</string>
+            <string>SourceHanSansJP-Light</string>
+            <string>SourceHanSansJP-Light</string>
         </mutableArray>
         <mutableArray key="SourceHanSansJP-Medium.otf">
+            <string>SourceHanSansJP-Medium</string>
+            <string>SourceHanSansJP-Medium</string>
+            <string>SourceHanSansJP-Medium</string>
+            <string>SourceHanSansJP-Medium</string>
             <string>SourceHanSansJP-Medium</string>
             <string>SourceHanSansJP-Medium</string>
             <string>SourceHanSansJP-Medium</string>
@@ -640,14 +647,14 @@
                                     <action selector="finishRegisterProfile:" destination="983-Kb-L48" eventType="touchUpInside" id="3Ib-OS-pBk"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LiFE_Regiter_UserDefaultImage.png" id="n7x-VW-QQI">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LiFE_Register_UserDefaultImage.png" id="n7x-VW-QQI">
                                 <rect key="frame" x="110" y="84" width="100" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8fF-4c-v0b">
                                 <rect key="frame" x="198" y="143" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="LiFE_Regiter_ImageSelectButton.png">
+                                <state key="normal" image="LiFE_Register_ImageSelectButton.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -1313,7 +1320,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zi8-i6-hFC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2716" y="122"/>
+            <point key="canvasLocation" x="1972" y="106"/>
         </scene>
         <!--設定-->
         <scene sceneID="Nwz-zm-dhr">
@@ -2095,6 +2102,150 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a86-p0-fYO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1977" y="751"/>
+        </scene>
+        <!--Friend Detail View Controller-->
+        <scene sceneID="xkC-Yp-090">
+            <objects>
+                <viewController storyboardIdentifier="friendDetail" id="sxF-MN-Y30" customClass="FriendDetailViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="IwV-bC-iHj">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LiFE_FriendDetail_DefaultCoverImage.png" id="f2g-0Z-6sO">
+                                <rect key="frame" x="0.0" y="64" width="320" height="110"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="oXu-P2-QEv">
+                                <rect key="frame" x="138" y="137" width="45" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hye-uF-Mv1">
+                                <rect key="frame" x="30" y="189" width="260" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="SourceHanSansJP-Medium" family="Source Han Sans JP" pointSize="16"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="V9c-8o-JiB">
+                                <rect key="frame" x="107" y="195" width="106" height="74"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="SourceHanSansJP-Light" family="Source Han Sans JP" pointSize="12"/>
+                                <state key="normal" title="目標達成">
+                                    <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="transferTitleList:" destination="sxF-MN-Y30" eventType="touchUpInside" id="eyn-pd-6u9"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9lW-HE-2f8">
+                                <rect key="frame" x="0.0" y="195" width="107" height="74"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="SourceHanSansJP-Light" family="Source Han Sans JP" pointSize="12"/>
+                                <state key="normal" title="友達">
+                                    <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="transferFriendList:" destination="sxF-MN-Y30" eventType="touchUpInside" id="ouw-xf-3RT"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Pat-qN-8O4">
+                                <rect key="frame" x="213" y="195" width="107" height="74"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="SourceHanSansJP-Light" family="Source Han Sans JP" pointSize="12"/>
+                                <state key="normal" title="チャレンジ">
+                                    <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="transferChallengeList:" destination="sxF-MN-Y30" eventType="touchUpInside" id="Dkh-5i-GSY"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LqV-NH-ZIe">
+                                <rect key="frame" x="12" y="236" width="82" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="SourceHanSansJP-Medium" family="Source Han Sans JP" pointSize="16"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aqB-bK-jaF">
+                                <rect key="frame" x="119" y="236" width="82" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="SourceHanSansJP-Medium" family="Source Han Sans JP" pointSize="16"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YuO-e7-MAd">
+                                <rect key="frame" x="225" y="236" width="82" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="SourceHanSansJP-Medium" family="Source Han Sans JP" pointSize="16"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="challengeCountLabel" destination="YuO-e7-MAd" id="8ds-wA-bJU"/>
+                        <outlet property="coverImageView" destination="f2g-0Z-6sO" id="JqH-e3-Bw7"/>
+                        <outlet property="friendCountLabel" destination="LqV-NH-ZIe" id="lmh-Er-mz9"/>
+                        <outlet property="nameLabel" destination="hye-uF-Mv1" id="bB7-Wq-KQo"/>
+                        <outlet property="profileImageView" destination="oXu-P2-QEv" id="LKW-d1-DSI"/>
+                        <outlet property="titleCountLabel" destination="aqB-bK-jaF" id="ed9-Es-YK4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XwU-mA-eQ3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2361" y="101"/>
+        </scene>
+        <!--Friend Friend List Table View Controller-->
+        <scene sceneID="bOu-gh-0Zp">
+            <objects>
+                <tableViewController storyboardIdentifier="friendFriendList" id="sxv-NJ-NPh" customClass="FriendFriendListTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="65" sectionHeaderHeight="10" sectionFooterHeight="10" id="p9Y-JZ-zHZ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CellFriendList" id="JX9-xs-ARo">
+                                <rect key="frame" x="0.0" y="119" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JX9-xs-ARo" id="h09-kb-LYV">
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LiFE_ProfileImage.png" id="jfv-0y-zO1">
+                                            <rect key="frame" x="9" y="9" width="46" height="46"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="フレンド名" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5yc-1N-rOg">
+                                            <rect key="frame" x="70" y="12" width="227" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="共通の友達1人" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gGF-cv-ZtY">
+                                            <rect key="frame" x="70" y="34" width="227" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="sxv-NJ-NPh" id="7gp-U1-PiZ"/>
+                            <outlet property="delegate" destination="sxv-NJ-NPh" id="hHX-hq-pYR"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="G3O-r3-v4V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2744" y="101"/>
         </scene>
         <!--友達-->
         <scene sceneID="ADq-eK-0q8">
@@ -3168,6 +3319,7 @@
         <image name="LiFE_Day_Arrow.png" width="640" height="640"/>
         <image name="LiFE_Day_CircleScale.png" width="640" height="1136"/>
         <image name="LiFE_Forget_Background.png" width="640" height="1136"/>
+        <image name="LiFE_FriendDetail_DefaultCoverImage.png" width="640" height="220"/>
         <image name="LiFE_Left_PageButton.png" width="110" height="90"/>
         <image name="LiFE_Login_FacebookButton.png" width="560" height="90"/>
         <image name="LiFE_Login_NormalButton.png" width="560" height="90"/>
@@ -3183,9 +3335,9 @@
         <image name="LiFE_Month_CircleScale.png" width="640" height="1136"/>
         <image name="LiFE_Next_DateButton.png" width="88" height="88"/>
         <image name="LiFE_Prev_DateButton.png" width="88" height="88"/>
-        <image name="LiFE_ProfileImage.png" width="92" height="92"/>
-        <image name="LiFE_Regiter_ImageSelectButton.png" width="100" height="100"/>
-        <image name="LiFE_Regiter_UserDefaultImage.png" width="200" height="200"/>
+        <image name="LiFE_ProfileImage.png" width="200" height="200"/>
+        <image name="LiFE_Register_ImageSelectButton.png" width="100" height="100"/>
+        <image name="LiFE_Register_UserDefaultImage.png" width="200" height="200"/>
         <image name="LiFE_Right_PageButton.png" width="110" height="90"/>
         <image name="LiFE_Running_Avatar.png" width="640" height="394"/>
         <image name="LiFE_Running_Avatar_Background.png" width="520" height="520"/>

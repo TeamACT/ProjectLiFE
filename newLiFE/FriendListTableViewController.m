@@ -8,6 +8,7 @@
 
 #import "FriendListTableViewController.h"
 #import "MenuDrawerViewController.h"
+#import "FriendDetailViewController.h"
 
 #import "ASIHTTPRequest/ASIFormDataRequest.h"
 #import "XPathQuery.h"
@@ -337,6 +338,29 @@
     }
     
     return cell;
+}
+
+//セルを選択した際に友達詳細へ遷移
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSMutableDictionary *dictionary;
+    
+    if([requestList count] > 0) {
+        switch ([indexPath section]) {
+            case 0:
+                dictionary = [requestList objectAtIndex:[indexPath row]];
+                break;
+            case 1:
+                dictionary = [friendList objectAtIndex:[indexPath row]];
+                break;
+        }
+    } else {
+        dictionary = [friendList objectAtIndex:[indexPath row]];
+    }
+    
+    FriendDetailViewController *friendDetailVC =  [self.storyboard instantiateViewControllerWithIdentifier:@"friendDetail"];
+    [friendDetailVC setFriendUserID:[dictionary objectForKey:FRIEND_ID]];
+    [self.navigationController pushViewController:friendDetailVC animated:YES];
+    
 }
 
 - (void)approveFriend:(UIButton *)sender event:(UIEvent *)event {

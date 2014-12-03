@@ -45,7 +45,6 @@
 		3CC3D17119F790FA0097AB5C /* LiFE_Friend_SearchByNameIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC3D16E19F790FA0097AB5C /* LiFE_Friend_SearchByNameIcon.png */; };
 		3CC3D17219F790FA0097AB5C /* LiFE_Friend_SearchFromAddressBookIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC3D16F19F790FA0097AB5C /* LiFE_Friend_SearchFromAddressBookIcon.png */; };
 		3CC3D17319F790FA0097AB5C /* LiFE_Friend_SearchFromFacebookIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC3D17019F790FA0097AB5C /* LiFE_Friend_SearchFromFacebookIcon.png */; };
-		3CC3D17519F791190097AB5C /* LiFE_ProfileImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC3D17419F791190097AB5C /* LiFE_ProfileImage.png */; };
 		3CC3D17819F795E80097AB5C /* FriendSearchNameTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC3D17719F795E80097AB5C /* FriendSearchNameTableViewController.m */; };
 		3CC48F9D19F4EA7800BA2B03 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC48F9C19F4EA7800BA2B03 /* MessageUI.framework */; };
 		3CC61ED91A24230C00A57DE3 /* LiFE_Avatar_ManStop_large000.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC61E5F1A24230C00A57DE3 /* LiFE_Avatar_ManStop_large000.png */; };
@@ -180,6 +179,10 @@
 		3CC61F6D1A24235900A57DE3 /* LiFE_Common_StartStopButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC61F681A24235900A57DE3 /* LiFE_Common_StartStopButton.png */; };
 		3CC61F711A25AF2F00A57DE3 /* LiFE_TimeLine_TabBGSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC61F701A25AF2F00A57DE3 /* LiFE_TimeLine_TabBGSelected.png */; };
 		3CC61F731A25BB0C00A57DE3 /* libVitalConnectLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC61F721A25BB0C00A57DE3 /* libVitalConnectLibrary.a */; };
+		3CC668EF1A2EFBC500A99703 /* FriendDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC668EE1A2EFBC500A99703 /* FriendDetailViewController.m */; };
+		3CC668F11A2F048800A99703 /* LiFE_FriendDetail_DefaultCoverImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC668F01A2F048800A99703 /* LiFE_FriendDetail_DefaultCoverImage.png */; };
+		3CC668F31A2F1C3D00A99703 /* LiFE_ProfileImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC668F21A2F1C3D00A99703 /* LiFE_ProfileImage.png */; };
+		3CC668F61A2F1D8200A99703 /* FriendFriendListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC668F51A2F1D8200A99703 /* FriendFriendListTableViewController.m */; };
 		3CC66EF11A2C3BC6008E23A5 /* LiFE_Common_AddFriendButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC66EF01A2C3BC6008E23A5 /* LiFE_Common_AddFriendButton@2x.png */; };
 		3CC66EF31A2C3BF1008E23A5 /* LiFE_Common_BackButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC66EF21A2C3BF1008E23A5 /* LiFE_Common_BackButton@2x.png */; };
 		3CC66F0E1A1D7F3B0094997A /* LiFE_TimeLine_CellBackgroundBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC66F0A1A1D7F3B0094997A /* LiFE_TimeLine_CellBackgroundBlue.png */; };
@@ -192,7 +195,7 @@
 		3CC78A8A1A09BE1A0042DFE3 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC78A871A09BE1A0042DFE3 /* libcrypto.a */; };
 		3CC78A8B1A09BE1A0042DFE3 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC78A881A09BE1A0042DFE3 /* libssl.a */; };
 		3CC78AD71A09BE950042DFE3 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC78AD61A09BE950042DFE3 /* libCorePlot-CocoaTouch.a */; };
-		3CC804E71A1ADAFF00BE3A5D /* LiFE_Regiter_ImageSelectButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC804E61A1ADAFF00BE3A5D /* LiFE_Regiter_ImageSelectButton.png */; };
+		3CC804E71A1ADAFF00BE3A5D /* LiFE_Register_ImageSelectButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC804E61A1ADAFF00BE3A5D /* LiFE_Register_ImageSelectButton.png */; };
 		3CCBF9511A199C6000CD72C1 /* LiFE_Start_InstructionImage01.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CCBF94C1A199C5F00CD72C1 /* LiFE_Start_InstructionImage01.png */; };
 		3CCBF9521A199C6000CD72C1 /* LiFE_Start_InstructionImage02.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CCBF94D1A199C6000CD72C1 /* LiFE_Start_InstructionImage02.png */; };
 		3CCBF9531A199C6000CD72C1 /* LiFE_Start_InstructionImage03.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CCBF94E1A199C6000CD72C1 /* LiFE_Start_InstructionImage03.png */; };
@@ -204,8 +207,8 @@
 		3CCBF9691A19CA4800CD72C1 /* LiFE_Login_NormalButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CCBF9671A19CA4800CD72C1 /* LiFE_Login_NormalButton.png */; };
 		3CCBF96C1A19E26600CD72C1 /* LiFE_Forget_Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CCBF96A1A19E26600CD72C1 /* LiFE_Forget_Background.png */; };
 		3CCBF9701A19E34200CD72C1 /* ForgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CCBF96F1A19E34200CD72C1 /* ForgetPasswordViewController.m */; };
-		3CCBF9741A19E9F700CD72C1 /* LiFE_Regiter_Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CCBF9711A19E9F700CD72C1 /* LiFE_Regiter_Background.png */; };
-		3CCBF9761A19E9F700CD72C1 /* LiFE_Regiter_UserDefaultImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CCBF9731A19E9F700CD72C1 /* LiFE_Regiter_UserDefaultImage.png */; };
+		3CCBF9741A19E9F700CD72C1 /* LiFE_Register_Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CCBF9711A19E9F700CD72C1 /* LiFE_Register_Background.png */; };
+		3CCBF9761A19E9F700CD72C1 /* LiFE_Register_UserDefaultImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CCBF9731A19E9F700CD72C1 /* LiFE_Register_UserDefaultImage.png */; };
 		3CCBF9791A19ED1100CD72C1 /* RegisterProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CCBF9781A19ED1100CD72C1 /* RegisterProfileViewController.m */; };
 		3CF836D319D3F5F800A2AA0A /* LiFE_Login_Parts_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CF836C819D3F5F800A2AA0A /* LiFE_Login_Parts_01.png */; };
 		3CF836D419D3F5F800A2AA0A /* LiFE_Login_Parts_02.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CF836C919D3F5F800A2AA0A /* LiFE_Login_Parts_02.png */; };
@@ -396,7 +399,6 @@
 		3CC3D16E19F790FA0097AB5C /* LiFE_Friend_SearchByNameIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_Friend_SearchByNameIcon.png; sourceTree = "<group>"; };
 		3CC3D16F19F790FA0097AB5C /* LiFE_Friend_SearchFromAddressBookIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_Friend_SearchFromAddressBookIcon.png; sourceTree = "<group>"; };
 		3CC3D17019F790FA0097AB5C /* LiFE_Friend_SearchFromFacebookIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_Friend_SearchFromFacebookIcon.png; sourceTree = "<group>"; };
-		3CC3D17419F791190097AB5C /* LiFE_ProfileImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_ProfileImage.png; sourceTree = "<group>"; };
 		3CC3D17619F795E80097AB5C /* FriendSearchNameTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendSearchNameTableViewController.h; sourceTree = "<group>"; };
 		3CC3D17719F795E80097AB5C /* FriendSearchNameTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendSearchNameTableViewController.m; sourceTree = "<group>"; };
 		3CC48F9C19F4EA7800BA2B03 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -532,6 +534,12 @@
 		3CC61F681A24235900A57DE3 /* LiFE_Common_StartStopButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_Common_StartStopButton.png; sourceTree = "<group>"; };
 		3CC61F701A25AF2F00A57DE3 /* LiFE_TimeLine_TabBGSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_TimeLine_TabBGSelected.png; sourceTree = "<group>"; };
 		3CC61F721A25BB0C00A57DE3 /* libVitalConnectLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libVitalConnectLibrary.a; sourceTree = "<group>"; };
+		3CC668ED1A2EFBC500A99703 /* FriendDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendDetailViewController.h; sourceTree = "<group>"; };
+		3CC668EE1A2EFBC500A99703 /* FriendDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendDetailViewController.m; sourceTree = "<group>"; };
+		3CC668F01A2F048800A99703 /* LiFE_FriendDetail_DefaultCoverImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_FriendDetail_DefaultCoverImage.png; sourceTree = "<group>"; };
+		3CC668F21A2F1C3D00A99703 /* LiFE_ProfileImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_ProfileImage.png; sourceTree = "<group>"; };
+		3CC668F41A2F1D8200A99703 /* FriendFriendListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendFriendListTableViewController.h; sourceTree = "<group>"; };
+		3CC668F51A2F1D8200A99703 /* FriendFriendListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendFriendListTableViewController.m; sourceTree = "<group>"; };
 		3CC66EF01A2C3BC6008E23A5 /* LiFE_Common_AddFriendButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LiFE_Common_AddFriendButton@2x.png"; sourceTree = "<group>"; };
 		3CC66EF21A2C3BF1008E23A5 /* LiFE_Common_BackButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LiFE_Common_BackButton@2x.png"; sourceTree = "<group>"; };
 		3CC66F0A1A1D7F3B0094997A /* LiFE_TimeLine_CellBackgroundBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_TimeLine_CellBackgroundBlue.png; sourceTree = "<group>"; };
@@ -693,7 +701,7 @@
 		3CC78AD41A09BE950042DFE3 /* CPTXYGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTXYGraph.h; sourceTree = "<group>"; };
 		3CC78AD51A09BE950042DFE3 /* CPTXYPlotSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTXYPlotSpace.h; sourceTree = "<group>"; };
 		3CC78AD61A09BE950042DFE3 /* libCorePlot-CocoaTouch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libCorePlot-CocoaTouch.a"; sourceTree = "<group>"; };
-		3CC804E61A1ADAFF00BE3A5D /* LiFE_Regiter_ImageSelectButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_Regiter_ImageSelectButton.png; sourceTree = "<group>"; };
+		3CC804E61A1ADAFF00BE3A5D /* LiFE_Register_ImageSelectButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_Register_ImageSelectButton.png; sourceTree = "<group>"; };
 		3CCBF94C1A199C5F00CD72C1 /* LiFE_Start_InstructionImage01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_Start_InstructionImage01.png; sourceTree = "<group>"; };
 		3CCBF94D1A199C6000CD72C1 /* LiFE_Start_InstructionImage02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_Start_InstructionImage02.png; sourceTree = "<group>"; };
 		3CCBF94E1A199C6000CD72C1 /* LiFE_Start_InstructionImage03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_Start_InstructionImage03.png; sourceTree = "<group>"; };
@@ -706,8 +714,8 @@
 		3CCBF96A1A19E26600CD72C1 /* LiFE_Forget_Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_Forget_Background.png; sourceTree = "<group>"; };
 		3CCBF96E1A19E34200CD72C1 /* ForgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPasswordViewController.h; sourceTree = "<group>"; };
 		3CCBF96F1A19E34200CD72C1 /* ForgetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPasswordViewController.m; sourceTree = "<group>"; };
-		3CCBF9711A19E9F700CD72C1 /* LiFE_Regiter_Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_Regiter_Background.png; sourceTree = "<group>"; };
-		3CCBF9731A19E9F700CD72C1 /* LiFE_Regiter_UserDefaultImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_Regiter_UserDefaultImage.png; sourceTree = "<group>"; };
+		3CCBF9711A19E9F700CD72C1 /* LiFE_Register_Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_Register_Background.png; sourceTree = "<group>"; };
+		3CCBF9731A19E9F700CD72C1 /* LiFE_Register_UserDefaultImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_Register_UserDefaultImage.png; sourceTree = "<group>"; };
 		3CCBF9771A19ED1100CD72C1 /* RegisterProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterProfileViewController.h; sourceTree = "<group>"; };
 		3CCBF9781A19ED1100CD72C1 /* RegisterProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterProfileViewController.m; sourceTree = "<group>"; };
 		3CF836C819D3F5F800A2AA0A /* LiFE_Login_Parts_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_Login_Parts_01.png; sourceTree = "<group>"; };
@@ -1532,6 +1540,10 @@
 				53A6CD7419FE04E400501C90 /* FriendSearchAddressTableViewController.m */,
 				3CC3D17619F795E80097AB5C /* FriendSearchNameTableViewController.h */,
 				3CC3D17719F795E80097AB5C /* FriendSearchNameTableViewController.m */,
+				3CC668ED1A2EFBC500A99703 /* FriendDetailViewController.h */,
+				3CC668EE1A2EFBC500A99703 /* FriendDetailViewController.m */,
+				3CC668F41A2F1D8200A99703 /* FriendFriendListTableViewController.h */,
+				3CC668F51A2F1D8200A99703 /* FriendFriendListTableViewController.m */,
 				53A3D38919ECA9DF0070CE7D /* ShowImageViewController.h */,
 				53A3D38A19ECA9DF0070CE7D /* ShowImageViewController.m */,
 				53A3903619F4DF77007E9B15 /* InformationTableViewController.h */,
@@ -1791,6 +1803,7 @@
 				3CC3D16E19F790FA0097AB5C /* LiFE_Friend_SearchByNameIcon.png */,
 				3CC3D16F19F790FA0097AB5C /* LiFE_Friend_SearchFromAddressBookIcon.png */,
 				3CC3D17019F790FA0097AB5C /* LiFE_Friend_SearchFromFacebookIcon.png */,
+				3CC668F01A2F048800A99703 /* LiFE_FriendDetail_DefaultCoverImage.png */,
 				5363A4C519FF6CFF00756824 /* LiFE_GoalMark_Day.png */,
 				532637F01A09C88600DC2181 /* LiFE_Left_GoalButton_Green.png */,
 				532637F11A09C88600DC2181 /* LiFE_Left_GoalButton_Orange.png */,
@@ -1798,10 +1811,10 @@
 				5363A4C719FF6CFF00756824 /* LiFE_Left_PageButton.png */,
 				5363A4C819FF6CFF00756824 /* LiFE_Next_DateButton.png */,
 				5363A4C619FF6CFF00756824 /* LiFE_Prev_DateButton.png */,
-				3CC3D17419F791190097AB5C /* LiFE_ProfileImage.png */,
-				3CCBF9711A19E9F700CD72C1 /* LiFE_Regiter_Background.png */,
-				3CC804E61A1ADAFF00BE3A5D /* LiFE_Regiter_ImageSelectButton.png */,
-				3CCBF9731A19E9F700CD72C1 /* LiFE_Regiter_UserDefaultImage.png */,
+				3CCBF9711A19E9F700CD72C1 /* LiFE_Register_Background.png */,
+				3CC804E61A1ADAFF00BE3A5D /* LiFE_Register_ImageSelectButton.png */,
+				3CC668F21A2F1C3D00A99703 /* LiFE_ProfileImage.png */,
+				3CCBF9731A19E9F700CD72C1 /* LiFE_Register_UserDefaultImage.png */,
 				5363A4C919FF6CFF00756824 /* LiFE_Right_PageButton.png */,
 				5363A4CA19FF6CFF00756824 /* LiFE_ShareButton.png */,
 				3CCBF94C1A199C5F00CD72C1 /* LiFE_Start_InstructionImage01.png */,
@@ -1948,7 +1961,7 @@
 				3CCBF95B1A19C76D00CD72C1 /* LiFE_Login_RegisterBackground.png in Resources */,
 				3CC61EE11A24230C00A57DE3 /* LiFE_Avatar_ManRunning_large004.png in Resources */,
 				3CCBF9691A19CA4800CD72C1 /* LiFE_Login_NormalButton.png in Resources */,
-				3CC804E71A1ADAFF00BE3A5D /* LiFE_Regiter_ImageSelectButton.png in Resources */,
+				3CC804E71A1ADAFF00BE3A5D /* LiFE_Register_ImageSelectButton.png in Resources */,
 				3CC61F221A24230C00A57DE3 /* LiFE_Avatar_WomanRunning_small002.png in Resources */,
 				3CC61EF01A24230C00A57DE3 /* LiFE_Avatar_ManRunning_small007.png in Resources */,
 				3CF836DF19D3F73E00A2AA0A /* LiFE_Login_Parts_09.png in Resources */,
@@ -1960,7 +1973,7 @@
 				53DF6AC51A01D74900655CA6 /* LiFE_Menu_ChallengeButton.png in Resources */,
 				3CC61EEC1A24230C00A57DE3 /* LiFE_Avatar_ManRunning_small003.png in Resources */,
 				3CC61F191A24230C00A57DE3 /* LiFE_Avatar_WomanRunning_large004.png in Resources */,
-				3CCBF9741A19E9F700CD72C1 /* LiFE_Regiter_Background.png in Resources */,
+				3CCBF9741A19E9F700CD72C1 /* LiFE_Register_Background.png in Resources */,
 				3CC61EED1A24230C00A57DE3 /* LiFE_Avatar_ManRunning_small004.png in Resources */,
 				3CC61F151A24230C00A57DE3 /* LiFE_Avatar_WomanRunning_large000.png in Resources */,
 				3CC61F1B1A24230C00A57DE3 /* LiFE_Avatar_WomanRunning_large006.png in Resources */,
@@ -2008,6 +2021,7 @@
 				3CC61EE91A24230C00A57DE3 /* LiFE_Avatar_ManRunning_small000.png in Resources */,
 				3CC61F041A24230C00A57DE3 /* LiFE_Avatar_ManWalking_large015.png in Resources */,
 				3CC61F0B1A24230C00A57DE3 /* LiFE_Avatar_ManWalking_small006.png in Resources */,
+				3CC668F11A2F048800A99703 /* LiFE_FriendDetail_DefaultCoverImage.png in Resources */,
 				3CC61EFE1A24230C00A57DE3 /* LiFE_Avatar_ManWalking_large009.png in Resources */,
 				3CC61F3C1A24230C00A57DE3 /* LiFE_Avatar_WomanWalking_small001.png in Resources */,
 				53DF6AC91A01D74900655CA6 /* LiFE_Menu_InformationButton.png in Resources */,
@@ -2042,7 +2056,6 @@
 				53474D7C196CDE4D00C07BB2 /* Images.xcassets in Resources */,
 				3CC61F0C1A24230C00A57DE3 /* LiFE_Avatar_ManWalking_small007.png in Resources */,
 				53A6CD7A19FE05D800501C90 /* LiFE_TimeLine_TabBGNormal.png in Resources */,
-				3CC3D17519F791190097AB5C /* LiFE_ProfileImage.png in Resources */,
 				53DF6ACA1A01D74900655CA6 /* LiFE_Menu_SettingButton.png in Resources */,
 				3CF836DC19D3F5F800A2AA0A /* LiFE_Login_Parts_11.png in Resources */,
 				3CC61F311A24230C00A57DE3 /* LiFE_Avatar_WomanWalking_large006.png in Resources */,
@@ -2053,6 +2066,7 @@
 				3CC61F061A24230C00A57DE3 /* LiFE_Avatar_ManWalking_small001.png in Resources */,
 				3CC61F141A24230C00A57DE3 /* LiFE_Avatar_ManWalking_small015.png in Resources */,
 				3CC61EE41A24230C00A57DE3 /* LiFE_Avatar_ManRunning_large007.png in Resources */,
+				3CC668F31A2F1C3D00A99703 /* LiFE_ProfileImage.png in Resources */,
 				53DF6AD01A01D96E00655CA6 /* LiFE_Add_RunningButton.png in Resources */,
 				3CC61F091A24230C00A57DE3 /* LiFE_Avatar_ManWalking_small004.png in Resources */,
 				3CC61EF81A24230C00A57DE3 /* LiFE_Avatar_ManWalking_large003.png in Resources */,
@@ -2106,7 +2120,7 @@
 				3CC61F211A24230C00A57DE3 /* LiFE_Avatar_WomanRunning_small001.png in Resources */,
 				3CC61EE01A24230C00A57DE3 /* LiFE_Avatar_ManRunning_large003.png in Resources */,
 				3CC61F111A24230C00A57DE3 /* LiFE_Avatar_ManWalking_small012.png in Resources */,
-				3CCBF9761A19E9F700CD72C1 /* LiFE_Regiter_UserDefaultImage.png in Resources */,
+				3CCBF9761A19E9F700CD72C1 /* LiFE_Register_UserDefaultImage.png in Resources */,
 				3CC61F2C1A24230C00A57DE3 /* LiFE_Avatar_WomanWalking_large001.png in Resources */,
 				5363A4E31A00C3E700756824 /* LiFE_Year_CircleScale.png in Resources */,
 				5363A4D019FF6CFF00756824 /* LiFE_Left_PageButton.png in Resources */,
@@ -2168,6 +2182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				53D6E33A19CC4B2500AAF759 /* EditGoalTableViewController.m in Sources */,
+				3CC668EF1A2EFBC500A99703 /* FriendDetailViewController.m in Sources */,
 				3C594E6819B03F7B006415D3 /* DatabaseHelper.m in Sources */,
 				53A6CD7519FE04E400501C90 /* FriendSearchAddressTableViewController.m in Sources */,
 				3CC3D17819F795E80097AB5C /* FriendSearchNameTableViewController.m in Sources */,
@@ -2183,6 +2198,7 @@
 				53D79F5A19C7D166006BB297 /* AlarmViewController.m in Sources */,
 				3C4CEAF819B5B34D00E4F8BE /* ECPercentDrivenInteractiveTransition.m in Sources */,
 				3C6FACEE19CEB683008321FC /* ASIDownloadCache.m in Sources */,
+				3CC668F61A2F1D8200A99703 /* FriendFriendListTableViewController.m in Sources */,
 				53D6E3CB19A1EDE50048FB07 /* WeekActivityMarkView.m in Sources */,
 				53A3FB1D19E7CF140024264E /* PhotoCheckViewController.m in Sources */,
 				53A3D38219ECA7860070CE7D /* AsyncImageView.m in Sources */,

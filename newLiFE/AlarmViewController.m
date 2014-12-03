@@ -267,6 +267,7 @@
         [request setPostValue:[NSNumber numberWithInt:percent] forKey:@"TimeLineAttainment0"];
         [request setPostValue:[NSNumber numberWithInt:TIMELINE_TYPE_SLEEP] forKey:@"TimeLineType0"];
         [request setPostValue:[NSNumber numberWithInt:SHARE_CLOSED] forKey:@"TimeLineShareStatus0"];
+        [request setPostValue:[NSNumber numberWithInt:TIMELINE_ACHIEVE_ONCE] forKey:@"TimeLineAchieveKind0"];
         [request setCompletionBlock:^{
             [tm invalidate];
             

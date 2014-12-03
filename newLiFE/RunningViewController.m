@@ -190,6 +190,7 @@
         [request setPostValue:[NSNumber numberWithInt:percent] forKey:@"TimeLineAttainment0"];
         [request setPostValue:[NSNumber numberWithInt:TIMELINE_TYPE_RUN] forKey:@"TimeLineType0"];
         [request setPostValue:[NSNumber numberWithInt:shareActivity] forKey:@"TimeLineShareStatus0"];
+        [request setPostValue:[NSNumber numberWithInt:TIMELINE_ACHIEVE_ONCE] forKey:@"TimeLineAchieveKind0"];
         [request setCompletionBlock:^{
             
             [self.alarmButton setTitle:@"スタート" forState:UIControlStateNormal];
