@@ -11,7 +11,8 @@
 #import "MenuDrawerViewController.h"
 #import "AddDrawerViewController.h"
 
-#import "FrameByFrameAnimation.h"
+#import "ASIHTTPRequest/ASIFormDataRequest.h"
+#import "XPathQuery.h"
 
 @interface DayViewController ()
 
@@ -1824,7 +1825,7 @@
     
     if(![lastBootStr isEqualToString:nowStr]) {
         //タイムライン保存処理
-        [self saveTimeLineData:lastBootStr];
+        [self saveTimeLineData:lastBootDate];
         //最終起動日を更新
         [ud setObject:[NSDate date] forKey:@"LastBootDate"];
     }
@@ -1966,7 +1967,7 @@
                 
                 if(![lastBootStr isEqualToString:nowStr]) {
                     //タイムライン保存処理
-                    [self saveTimeLineData:lastBootStr];
+                    [self saveTimeLineData:lastBootDate];
                     //最終起動日を更新
                     [ud setObject:[NSDate date] forKey:@"LastBootDate"];
                 }
@@ -2012,10 +2013,13 @@
 
 
 /***** タイムラインへのデータ保存処理 *****/
--(void)saveTimeLineData:(NSString *)saveDate{
+-(void)saveTimeLineData:(NSDate *)saveDate{
     //日付から歩数を取得
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy/MM/dd"];
+    NSString *saveDateStr = [formatter stringFromDate:saveDate];
     DatabaseHelper *dbHelper = [[DatabaseHelper alloc] init];
-    NSMutableDictionary *stepData = [dbHelper selectDayStep:saveDate];
+    NSMutableDictionary *stepData = [dbHelper selectDayStep:saveDateStr];
     
     if(stepData != nil){
         NSString *stepValue = [stepData objectForKey:@"step_value"];
@@ -2038,7 +2042,7 @@
         int goalSteps = [ud integerForKey:@"GoalSteps"];
         int percentForStep = totalStep * 100 / goalSteps;
         
-        [dbHelper insertTimeline:saveDate value:valueForStep percent:percentForStep type:TIMELINE_TYPE_STEP];
+        [dbHelper insertTimeline:saveDateStr value:valueForStep percent:percentForStep type:TIMELINE_TYPE_STEP];
         
         //distance
         // 数値を3桁ごとカンマ区切り形式で文字列に変換する
@@ -2048,17 +2052,54 @@
         float goalDistance = [ud floatForKey:@"GoalDistance"];
         int percentForDist = totalDist * 100 / goalDistance;
         
-        [dbHelper insertTimeline:saveDate value:valueForDist percent:percentForDist type:TIMELINE_TYPE_DIST];
+        [dbHelper insertTimeline:saveDateStr value:valueForDist percent:percentForDist type:TIMELINE_TYPE_DIST];
         
         //calory
         // 数値を3桁ごとカンマ区切り形式で文字列に変換する
-        int totalCal = [self calcuCalory:totalStep];
+        int cal = [self calcuCalory:totalStep];//歩数による消費カロリー
+        float bee = [self calcuBee:143];//基礎代謝による消費カロリー
+        float totalCal = cal + bee;
         NSString *valueForCal = [formatter stringFromNumber:[NSNumber numberWithInt:totalCal]];
         //目標値から達成度を設定
         float goalCalory = [ud floatForKey:@"GoalCalory"];
         int percentForCal = totalCal * 100 / goalCalory;
         
-        [dbHelper insertTimeline:saveDate value:valueForCal percent:percentForCal type:TIMELINE_TYPE_CALORY];
+        [dbHelper insertTimeline:saveDateStr value:valueForCal percent:percentForCal type:TIMELINE_TYPE_CALORY];
+        
+        //サーバにも保存する
+        NSString *userID = [ud objectForKey:@"UserID"];
+        
+        NSDateFormatter *phpFormatter = [[NSDateFormatter alloc] init];
+        [phpFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        
+        NSURL *url = [NSURL URLWithString:URL_INSERT_TIMELINE];
+        ASIFormDataRequest *request = [[ASIFormDataRequest alloc] initWithURL:url];
+        
+        [request setTimeOutSeconds:60];
+        [request setPostValue:userID forKey:@"UserID"];
+        [request setPostValue:[NSNumber numberWithInt:3] forKey:@"InsertCount"];
+        //step
+        [request setPostValue:[phpFormatter stringFromDate:saveDate] forKey:@"TimeLineStartDateTime0"];
+        [request setPostValue:[phpFormatter stringFromDate:saveDate] forKey:@"TimeLineEndDateTime0"];
+        [request setPostValue:valueForStep forKey:@"TimeLineValue0"];
+        [request setPostValue:[NSNumber numberWithInt:percentForStep] forKey:@"TimeLineAttainment0"];
+        [request setPostValue:[NSNumber numberWithInt:TIMELINE_TYPE_STEP] forKey:@"TimeLineType0"];
+        [request setPostValue:[NSNumber numberWithInt:SHARE_CLOSED] forKey:@"TimeLineShareStatus0"];
+        //distance
+        [request setPostValue:[phpFormatter stringFromDate:saveDate] forKey:@"TimeLineStartDateTime1"];
+        [request setPostValue:[phpFormatter stringFromDate:saveDate] forKey:@"TimeLineEndDateTime1"];
+        [request setPostValue:valueForDist forKey:@"TimeLineValue1"];
+        [request setPostValue:[NSNumber numberWithInt:percentForDist] forKey:@"TimeLineAttainment1"];
+        [request setPostValue:[NSNumber numberWithInt:TIMELINE_TYPE_DIST] forKey:@"TimeLineType1"];
+        [request setPostValue:[NSNumber numberWithInt:SHARE_CLOSED] forKey:@"TimeLineShareStatus1"];
+        //calory
+        [request setPostValue:[phpFormatter stringFromDate:saveDate] forKey:@"TimeLineStartDateTime2"];
+        [request setPostValue:[phpFormatter stringFromDate:saveDate] forKey:@"TimeLineEndDateTime2"];
+        [request setPostValue:valueForCal forKey:@"TimeLineValue2"];
+        [request setPostValue:[NSNumber numberWithInt:percentForCal] forKey:@"TimeLineAttainment2"];
+        [request setPostValue:[NSNumber numberWithInt:TIMELINE_TYPE_CALORY] forKey:@"TimeLineType2"];
+        [request setPostValue:[NSNumber numberWithInt:SHARE_CLOSED] forKey:@"TimeLineShareStatus2"];
+        [request startAsynchronous];
     }
 }
 

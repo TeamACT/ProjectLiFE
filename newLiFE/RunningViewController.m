@@ -11,6 +11,9 @@
 #import "MenuDrawerViewController.h"
 #import "AddDrawerViewController.h"
 
+#import "ASIHTTPRequest/ASIFormDataRequest.h"
+#import "XPathQuery.h"
+
 @interface RunningViewController ()
 
 @end
@@ -153,27 +156,68 @@
         //データの更新
         [dbHelper updateRunDetail:totalStep startDateTime:startTime endDateTime:endTime];
         
-        [self.alarmButton setTitle:@"スタート" forState:UIControlStateNormal];
-        self.alarmButton.titleLabel.textColor = [UIColor colorWithRed:0.164 green:0.674 blue:0.435 alpha:1.0];
-        alarmFlag = TIMER_START;
+        //タイムラインへの保存
+        //日付の設定（日付はランニング開始の日）
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy/MM/dd"];
+        NSString *dateString = [formatter stringFromDate:endTime];
+        //値を設定（走った距離）
+        float totalDist = [self calcuDist:totalStep];
+        NSString *value = [NSString stringWithFormat:@"%.2fkm", totalDist];
+        //目標値から達成度を設定
+        NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+        int goalRunningDist = [ud integerForKey:@"GoalRunning"];
+        int percent = totalDist * 100 / goalRunningDist;
         
-        self.goalValueLabel.hidden = NO;
-        self.goalCaptionLabel.hidden = NO;
-        self.currentValueLabel.hidden = YES;
+        [dbHelper insertTimeline:dateString value:value percent:percent type:TIMELINE_TYPE_RUN];
         
-        if(![CMStepCounter isStepCountingAvailable]){
-            [self.motionManager stopAccelerometerUpdates];
-        }
+        //サーバにも保存する
+        NSString *userID = [ud objectForKey:@"UserID"];
+        int shareActivity = [ud integerForKey:@"ShareActivity"];
         
-        //スリープする
-        [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
+        NSDateFormatter *phpFormatter = [[NSDateFormatter alloc] init];
+        [phpFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
         
-        //日ログ画面に遷移
-        [self dismissViewControllerAnimated:NO completion:^{
-            UIViewController *newTopViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"day"];
-            self.slidingViewController.topViewController = newTopViewController;
-            [self.slidingViewController resetTopViewAnimated:NO];
+        NSURL *url = [NSURL URLWithString:URL_INSERT_TIMELINE];
+        ASIFormDataRequest *request = [[ASIFormDataRequest alloc] initWithURL:url];
+        
+        [request setTimeOutSeconds:60];
+        [request setPostValue:userID forKey:@"UserID"];
+        [request setPostValue:[NSNumber numberWithInt:1] forKey:@"InsertCount"];
+        [request setPostValue:[phpFormatter stringFromDate:startTime] forKey:@"TimeLineStartDateTime0"];
+        [request setPostValue:[phpFormatter stringFromDate:endTime] forKey:@"TimeLineEndDateTime0"];
+        [request setPostValue:value forKey:@"TimeLineValue0"];
+        [request setPostValue:[NSNumber numberWithInt:percent] forKey:@"TimeLineAttainment0"];
+        [request setPostValue:[NSNumber numberWithInt:TIMELINE_TYPE_RUN] forKey:@"TimeLineType0"];
+        [request setPostValue:[NSNumber numberWithInt:shareActivity] forKey:@"TimeLineShareStatus0"];
+        [request setCompletionBlock:^{
+            
+            [self.alarmButton setTitle:@"スタート" forState:UIControlStateNormal];
+            self.alarmButton.titleLabel.textColor = [UIColor colorWithRed:0.164 green:0.674 blue:0.435 alpha:1.0];
+            alarmFlag = TIMER_START;
+            
+            self.goalValueLabel.hidden = NO;
+            self.goalCaptionLabel.hidden = NO;
+            self.currentValueLabel.hidden = YES;
+            
+            if(![CMStepCounter isStepCountingAvailable]){
+                [self.motionManager stopAccelerometerUpdates];
+            }
+            
+            //スリープする
+            [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
+            
+            //日ログ画面に遷移
+            [self dismissViewControllerAnimated:NO completion:^{
+                UIViewController *newTopViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"day"];
+                self.slidingViewController.topViewController = newTopViewController;
+                [self.slidingViewController resetTopViewAnimated:NO];
+            }];
         }];
+        [request setFailedBlock:^{
+            
+        }];
+        [request startAsynchronous];
     }
 }
 
@@ -189,12 +233,21 @@
                                 withHandler:^(NSInteger numberOfSteps, NSError *error) {
                                     steps = numberOfSteps;
                                     NSLog(@"%d",numberOfSteps);
-                                    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-                                    float height = [ud floatForKey:@"UserHeight"];
-                                    float stride = height * 0.45;
-                                    float dist = (steps * stride) / 100000;
+                                    float dist =[self calcuDist:steps];
                                     self.currentValueLabel.text = [NSString stringWithFormat:@"%.2f",dist];
                                 }];
+}
+
+//歩数と身長から歩行距離を計算
+-(float)calcuDist:(int)step{
+    float dist = 0;
+    
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    float height = [ud floatForKey:@"UserHeight"];
+    float stride = height * 0.45;
+    dist = (steps * stride) / 100000;
+    
+    return dist;
 }
 
 -(void)startMoving{

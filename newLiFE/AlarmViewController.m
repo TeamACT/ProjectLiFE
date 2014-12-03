@@ -11,6 +11,9 @@
 #import "MenuDrawerViewController.h"
 #import "AddDrawerViewController.h"
 
+#import "ASIHTTPRequest/ASIFormDataRequest.h"
+#import "XPathQuery.h"
+
 @interface AlarmViewController ()
 
 @end
@@ -233,7 +236,7 @@
         //日付の設定（日付は睡眠開始の日）
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat:@"yyyy/MM/dd"];
-        NSString *dateString = [formatter stringFromDate:bedTime];
+        NSString *dateString = [formatter stringFromDate:riseTime];
         //値を設定（ひとまず睡眠時間のみ）
         NSTimeInterval sleepTime = [riseTime timeIntervalSinceDate:bedTime];//秒に変換
         int sleepHour = sleepTime / (60 * 60);
@@ -242,34 +245,60 @@
         //目標値から達成度を設定
         NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
         int goalSleepTime = [ud integerForKey:@"GoalSleepTime"];
-        int percent = sleepTime / goalSleepTime * 100;
+        int percent = sleepTime * 100 / goalSleepTime;
         
         [dbHelper insertTimeline:dateString value:value percent:percent type:TIMELINE_TYPE_SLEEP];
         
+        //サーバへも保存
+        NSString *userID = [ud objectForKey:@"UserID"];
         
-        [tm invalidate];
+        NSDateFormatter *phpFormatter = [[NSDateFormatter alloc] init];
+        [phpFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
         
-        [alarmPlayer stop];
-        alarmEnabled = FALSE;
+        NSURL *url = [NSURL URLWithString:URL_INSERT_TIMELINE];
+        ASIFormDataRequest *request = [[ASIFormDataRequest alloc] initWithURL:url];
         
-        [self.alarmButton setTitle:@"スタート" forState:UIControlStateNormal];
-        self.timePicker.hidden = NO;
-        self.backButton.hidden = NO;
-        self.leftButton.hidden = NO;
-        self.rightButton.hidden = NO;
-        self.nowTimeLabel.hidden = YES;
-        
-        alarmFlag = TIMER_START;
-        
-        //スリープする
-        [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
-        
-        //日ログ画面に遷移
-        [self dismissViewControllerAnimated:NO completion:^{
-            UIViewController *newTopViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"day"];
-            self.slidingViewController.topViewController = newTopViewController;
-            [self.slidingViewController resetTopViewAnimated:NO];
+        [request setTimeOutSeconds:60];
+        [request setPostValue:userID forKey:@"UserID"];
+        [request setPostValue:[NSNumber numberWithInt:1] forKey:@"InsertCount"];
+        [request setPostValue:[phpFormatter stringFromDate:bedTime] forKey:@"TimeLineStartDateTime0"];
+        [request setPostValue:[phpFormatter stringFromDate:riseTime] forKey:@"TimeLineEndDateTime0"];
+        [request setPostValue:value forKey:@"TimeLineValue0"];
+        [request setPostValue:[NSNumber numberWithInt:percent] forKey:@"TimeLineAttainment0"];
+        [request setPostValue:[NSNumber numberWithInt:TIMELINE_TYPE_SLEEP] forKey:@"TimeLineType0"];
+        [request setPostValue:[NSNumber numberWithInt:SHARE_CLOSED] forKey:@"TimeLineShareStatus0"];
+        [request setCompletionBlock:^{
+            [tm invalidate];
+            
+            [alarmPlayer stop];
+            alarmEnabled = FALSE;
+            
+            [self.alarmButton setTitle:@"スタート" forState:UIControlStateNormal];
+            self.timePicker.hidden = NO;
+            self.backButton.hidden = NO;
+            self.leftButton.hidden = NO;
+            self.rightButton.hidden = NO;
+            self.nowTimeLabel.hidden = YES;
+            
+            alarmFlag = TIMER_START;
+            
+            //スリープする
+            [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
+            
+            //日ログ画面に遷移
+            [self dismissViewControllerAnimated:NO completion:^{
+                UIViewController *newTopViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"day"];
+                self.slidingViewController.topViewController = newTopViewController;
+                [self.slidingViewController resetTopViewAnimated:NO];
+            }];
         }];
+        [request setFailedBlock:^{
+            
+        }];
+        [request startAsynchronous];
+        
+        
+        
     }
 }
 

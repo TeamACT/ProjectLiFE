@@ -67,17 +67,17 @@
     
     NSDate *result = [calendar dateByAddingComponents:components toDate:date options:0];
     /***** 日曜日の取得ここまで *****/
-
+    
     /***** 第何週目かを取得する *****/
     /*
-    NSInteger todayWeekNo = [calendar ordinalityOfUnit:NSWeekCalendarUnit inUnit:NSMonthCalendarUnit forDate:result];
-    NSString *formattedMonthString = [monthFormatter stringFromDate:result];
-    UILabel *weekNoLabel = [[UILabel alloc] initWithFrame:CGRectMake(85, 20, 150, 25)];
-    weekNoLabel.textAlignment = NSTextAlignmentCenter;
-    weekNoLabel.font = [UIFont systemFontOfSize:17];
-    weekNoLabel.text = [NSString stringWithFormat:@"%@月 %d週",formattedMonthString,todayWeekNo];
-    [self addSubview:weekNoLabel];
-    */
+     NSInteger todayWeekNo = [calendar ordinalityOfUnit:NSWeekCalendarUnit inUnit:NSMonthCalendarUnit forDate:result];
+     NSString *formattedMonthString = [monthFormatter stringFromDate:result];
+     UILabel *weekNoLabel = [[UILabel alloc] initWithFrame:CGRectMake(85, 20, 150, 25)];
+     weekNoLabel.textAlignment = NSTextAlignmentCenter;
+     weekNoLabel.font = [UIFont systemFontOfSize:17];
+     weekNoLabel.text = [NSString stringWithFormat:@"%@月 %d週",formattedMonthString,todayWeekNo];
+     [self addSubview:weekNoLabel];
+     */
     /***** 第何週目かを取得するここまで *****/
     
     /***** 日にちフォーマット *****/
@@ -109,12 +109,12 @@
         
         /***** stress配列 ※仮ver *****/
         /*
-        NSMutableArray *stressArray = [NSMutableArray array];
-        
-        for (int array = 0; array < 144; array++) {
-            [stressArray addObject:[NSString stringWithFormat:@"%d",arc4random_uniform(60)]];
-        }
-        */
+         NSMutableArray *stressArray = [NSMutableArray array];
+         
+         for (int array = 0; array < 144; array++) {
+         [stressArray addObject:[NSString stringWithFormat:@"%d",arc4random_uniform(60)]];
+         }
+         */
         /***** stress配列 ※仮ver *****/
         
         components.day = day + weekday;
@@ -328,7 +328,7 @@
         
         bee = bee * ageCoef;
         /***** ステータスここまで　*****/
-
+        
         //週計表示用歩数
         sumSteps = sumSteps + [[stepArray objectAtIndex:143] intValue];
         sumCalory = sumCalory + tCal;
@@ -385,8 +385,10 @@
                 nf.maximumFractionDigits = 2;
                 valueString = [nf stringFromNumber:valueNumber];
             }else if(dataValueType == DATA_VALUE_TYPE_RUN){
-                eachValue = [[stepArray objectAtIndex:143] intValue];
-                goalValue = [ud integerForKey:@"GoalSteps"];
+                tDistance = ([[stepArray objectAtIndex:143] floatValue] * stride) / 100000;
+                
+                eachValue = tDistance;
+                goalValue = [ud floatForKey:@"GoalRunning"];
                 
                 NSNumber *valueNumber = [[NSNumber alloc] initWithInt:eachValue];
                 NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
@@ -405,13 +407,10 @@
             [self addSubview:valueLabel];
             
             /***** 各日背景表示 *****/
-            /*
-             if(eachValue < goalValue){
-             CGContextSetRGBFillColor(context, [[RGB_GREEN_WEAK objectAtIndex:0] floatValue], [[RGB_GREEN_WEAK objectAtIndex:1] floatValue], [[RGB_GREEN_WEAK objectAtIndex:2] floatValue], 0.7);
-             }else{
-             CGContextSetRGBFillColor(context, [[RGB_ORANGE_WEAK objectAtIndex:0] floatValue], [[RGB_ORANGE_WEAK objectAtIndex:1] floatValue], [[RGB_ORANGE_WEAK objectAtIndex:2] floatValue], 0.7);
-             }
-             */
+            if(eachValue < goalValue){
+                CGContextSetRGBFillColor(context, 0.929,0.929,0.929, 0.7);
+            }
+            
             CGContextFillEllipseInRect(context, CGRectMake([[WEEKDAY_SUNDAY_BACKGROUND objectAtIndex:0] intValue], [[WEEKDAY_SUNDAY_BACKGROUND objectAtIndex:1] intValue], WEEKDAY_BACKGROUND_WIDTH, WEEKDAY_BACKGROUND_HEIGHT));
             /***** 各日背景表示ここまで *****/
         }else if (weekday == MONDAY){
@@ -458,8 +457,10 @@
                 nf.maximumFractionDigits = 2;
                 valueString = [nf stringFromNumber:valueNumber];
             }else if(dataValueType == DATA_VALUE_TYPE_RUN){
-                eachValue = [[stepArray objectAtIndex:143] intValue];
-                goalValue = [ud integerForKey:@"GoalSteps"];
+                tDistance = ([[stepArray objectAtIndex:143] floatValue] * stride) / 100000;
+                
+                eachValue = tDistance;
+                goalValue = [ud floatForKey:@"GoalRunning"];
                 
                 NSNumber *valueNumber = [[NSNumber alloc] initWithInt:eachValue];
                 NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
@@ -478,13 +479,10 @@
             [self addSubview:valueLabel];
             
             /***** 各日背景表示 *****/
-            /*
-             if(eachValue < goalValue){
-             CGContextSetRGBFillColor(context, [[RGB_GREEN_WEAK objectAtIndex:0] floatValue], [[RGB_GREEN_WEAK objectAtIndex:1] floatValue], [[RGB_GREEN_WEAK objectAtIndex:2] floatValue], 0.7);
-             }else{
-             CGContextSetRGBFillColor(context, [[RGB_ORANGE_WEAK objectAtIndex:0] floatValue], [[RGB_ORANGE_WEAK objectAtIndex:1] floatValue], [[RGB_ORANGE_WEAK objectAtIndex:2] floatValue], 0.7);
-             }
-             */
+            if(eachValue < goalValue){
+                CGContextSetRGBFillColor(context, 0.929,0.929,0.929, 0.7);
+            }
+            
             CGContextFillEllipseInRect(context, CGRectMake([[WEEKDAY_MONDAY_BACKGROUND objectAtIndex:0] intValue], [[WEEKDAY_MONDAY_BACKGROUND objectAtIndex:1] intValue], WEEKDAY_BACKGROUND_WIDTH, WEEKDAY_BACKGROUND_HEIGHT));
             /***** 各日背景表示ここまで *****/
         }else if (weekday == TUESDAY){
@@ -531,8 +529,10 @@
                 nf.maximumFractionDigits = 2;
                 valueString = [nf stringFromNumber:valueNumber];
             }else if(dataValueType == DATA_VALUE_TYPE_RUN){
-                eachValue = [[stepArray objectAtIndex:143] intValue];
-                goalValue = [ud integerForKey:@"GoalSteps"];
+                tDistance = ([[stepArray objectAtIndex:143] floatValue] * stride) / 100000;
+                
+                eachValue = tDistance;
+                goalValue = [ud floatForKey:@"GoalRunning"];
                 
                 NSNumber *valueNumber = [[NSNumber alloc] initWithInt:eachValue];
                 NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
@@ -551,13 +551,10 @@
             [self addSubview:valueLabel];
             
             /***** 各日背景表示 *****/
-            /*
-             if(eachValue < goalValue){
-             CGContextSetRGBFillColor(context, [[RGB_GREEN_WEAK objectAtIndex:0] floatValue], [[RGB_GREEN_WEAK objectAtIndex:1] floatValue], [[RGB_GREEN_WEAK objectAtIndex:2] floatValue], 0.7);
-             }else{
-             CGContextSetRGBFillColor(context, [[RGB_ORANGE_WEAK objectAtIndex:0] floatValue], [[RGB_ORANGE_WEAK objectAtIndex:1] floatValue], [[RGB_ORANGE_WEAK objectAtIndex:2] floatValue], 0.7);
-             }
-             */
+            if(eachValue < goalValue){
+                CGContextSetRGBFillColor(context, 0.929,0.929,0.929, 0.7);
+            }
+            
             CGContextFillEllipseInRect(context, CGRectMake([[WEEKDAY_TUESDAY_BACKGROUND objectAtIndex:0] intValue], [[WEEKDAY_TUESDAY_BACKGROUND objectAtIndex:1] intValue], WEEKDAY_BACKGROUND_WIDTH, WEEKDAY_BACKGROUND_HEIGHT));
             /***** 各日背景表示ここまで *****/
         }else if (weekday == WEDNESDAY){
@@ -604,8 +601,10 @@
                 nf.maximumFractionDigits = 2;
                 valueString = [nf stringFromNumber:valueNumber];
             }else if(dataValueType == DATA_VALUE_TYPE_RUN){
-                eachValue = [[stepArray objectAtIndex:143] intValue];
-                goalValue = [ud integerForKey:@"GoalSteps"];
+                tDistance = ([[stepArray objectAtIndex:143] floatValue] * stride) / 100000;
+                
+                eachValue = tDistance;
+                goalValue = [ud floatForKey:@"GoalRunning"];
                 
                 NSNumber *valueNumber = [[NSNumber alloc] initWithInt:eachValue];
                 NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
@@ -624,13 +623,10 @@
             [self addSubview:valueLabel];
             
             /***** 各日背景表示 *****/
-            /*
-             if(eachValue < goalValue){
-             CGContextSetRGBFillColor(context, [[RGB_GREEN_WEAK objectAtIndex:0] floatValue], [[RGB_GREEN_WEAK objectAtIndex:1] floatValue], [[RGB_GREEN_WEAK objectAtIndex:2] floatValue], 0.7);
-             }else{
-             CGContextSetRGBFillColor(context, [[RGB_ORANGE_WEAK objectAtIndex:0] floatValue], [[RGB_ORANGE_WEAK objectAtIndex:1] floatValue], [[RGB_ORANGE_WEAK objectAtIndex:2] floatValue], 0.7);
-             }
-             */
+            if(eachValue < goalValue){
+                CGContextSetRGBFillColor(context, 0.929,0.929,0.929, 0.7);
+            }
+            
             CGContextFillEllipseInRect(context, CGRectMake([[WEEKDAY_WEDNESDAY_BACKGROUND objectAtIndex:0] intValue], [[WEEKDAY_WEDNESDAY_BACKGROUND objectAtIndex:1] intValue], WEEKDAY_BACKGROUND_WIDTH, WEEKDAY_BACKGROUND_HEIGHT));
             /***** 各日背景表示ここまで *****/
         }else if (weekday == THURSDAY){
@@ -677,8 +673,10 @@
                 nf.maximumFractionDigits = 2;
                 valueString = [nf stringFromNumber:valueNumber];
             }else if(dataValueType == DATA_VALUE_TYPE_RUN){
-                eachValue = [[stepArray objectAtIndex:143] intValue];
-                goalValue = [ud integerForKey:@"GoalSteps"];
+                tDistance = ([[stepArray objectAtIndex:143] floatValue] * stride) / 100000;
+                
+                eachValue = tDistance;
+                goalValue = [ud floatForKey:@"GoalRunning"];
                 
                 NSNumber *valueNumber = [[NSNumber alloc] initWithInt:eachValue];
                 NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
@@ -697,13 +695,10 @@
             [self addSubview:valueLabel];
             
             /***** 各日背景表示 *****/
-            /*
-             if(eachValue < goalValue){
-             CGContextSetRGBFillColor(context, [[RGB_GREEN_WEAK objectAtIndex:0] floatValue], [[RGB_GREEN_WEAK objectAtIndex:1] floatValue], [[RGB_GREEN_WEAK objectAtIndex:2] floatValue], 0.7);
-             }else{
-             CGContextSetRGBFillColor(context, [[RGB_ORANGE_WEAK objectAtIndex:0] floatValue], [[RGB_ORANGE_WEAK objectAtIndex:1] floatValue], [[RGB_ORANGE_WEAK objectAtIndex:2] floatValue], 0.7);
-             }
-             */
+            if(eachValue < goalValue){
+                CGContextSetRGBFillColor(context, 0.929,0.929,0.929, 0.7);
+            }
+            
             CGContextFillEllipseInRect(context, CGRectMake([[WEEKDAY_THURSDAY_BACKGROUND objectAtIndex:0] intValue], [[WEEKDAY_THURSDAY_BACKGROUND objectAtIndex:1] intValue], WEEKDAY_BACKGROUND_WIDTH, WEEKDAY_BACKGROUND_HEIGHT));
             /***** 各日背景表示ここまで *****/
         }else if (weekday == FRIDAY){
@@ -750,8 +745,10 @@
                 nf.maximumFractionDigits = 2;
                 valueString = [nf stringFromNumber:valueNumber];
             }else if(dataValueType == DATA_VALUE_TYPE_RUN){
-                eachValue = [[stepArray objectAtIndex:143] intValue];
-                goalValue = [ud integerForKey:@"GoalSteps"];
+                tDistance = ([[stepArray objectAtIndex:143] floatValue] * stride) / 100000;
+                
+                eachValue = tDistance;
+                goalValue = [ud floatForKey:@"GoalRunning"];
                 
                 NSNumber *valueNumber = [[NSNumber alloc] initWithInt:eachValue];
                 NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
@@ -770,13 +767,10 @@
             [self addSubview:valueLabel];
             
             /***** 各日背景表示 *****/
-            /*
-             if(eachValue < goalValue){
-             CGContextSetRGBFillColor(context, [[RGB_GREEN_WEAK objectAtIndex:0] floatValue], [[RGB_GREEN_WEAK objectAtIndex:1] floatValue], [[RGB_GREEN_WEAK objectAtIndex:2] floatValue], 0.7);
-             }else{
-             CGContextSetRGBFillColor(context, [[RGB_ORANGE_WEAK objectAtIndex:0] floatValue], [[RGB_ORANGE_WEAK objectAtIndex:1] floatValue], [[RGB_ORANGE_WEAK objectAtIndex:2] floatValue], 0.7);
-             }
-             */
+            if(eachValue < goalValue){
+                CGContextSetRGBFillColor(context, 0.929,0.929,0.929, 0.7);
+            }
+            
             CGContextFillEllipseInRect(context, CGRectMake([[WEEKDAY_FRIDAY_BACKGROUND objectAtIndex:0] intValue], [[WEEKDAY_FRIDAY_BACKGROUND objectAtIndex:1] intValue], WEEKDAY_BACKGROUND_WIDTH, WEEKDAY_BACKGROUND_HEIGHT));
             /***** 各日背景表示ここまで *****/
         }else if (weekday == SATURDAY){
@@ -823,8 +817,10 @@
                 nf.maximumFractionDigits = 2;
                 valueString = [nf stringFromNumber:valueNumber];
             }else if(dataValueType == DATA_VALUE_TYPE_RUN){
-                eachValue = [[stepArray objectAtIndex:143] intValue];
-                goalValue = [ud integerForKey:@"GoalSteps"];
+                tDistance = ([[stepArray objectAtIndex:143] floatValue] * stride) / 100000;
+                
+                eachValue = tDistance;
+                goalValue = [ud floatForKey:@"GoalRunning"];
                 
                 NSNumber *valueNumber = [[NSNumber alloc] initWithInt:eachValue];
                 NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
@@ -843,13 +839,10 @@
             [self addSubview:valueLabel];
             
             /***** 各日背景表示 *****/
-            /*
-             if(eachValue < goalValue){
-             CGContextSetRGBFillColor(context, [[RGB_GREEN_WEAK objectAtIndex:0] floatValue], [[RGB_GREEN_WEAK objectAtIndex:1] floatValue], [[RGB_GREEN_WEAK objectAtIndex:2] floatValue], 0.7);
-             }else{
-             CGContextSetRGBFillColor(context, [[RGB_ORANGE_WEAK objectAtIndex:0] floatValue], [[RGB_ORANGE_WEAK objectAtIndex:1] floatValue], [[RGB_ORANGE_WEAK objectAtIndex:2] floatValue], 0.7);
-             }
-             */
+            if(eachValue < goalValue){
+                CGContextSetRGBFillColor(context, 0.929,0.929,0.929, 0.7);
+            }
+            
             CGContextFillEllipseInRect(context, CGRectMake([[WEEKDAY_SATURDAY_BACKGROUND objectAtIndex:0] intValue], [[WEEKDAY_SATURDAY_BACKGROUND objectAtIndex:1] intValue], WEEKDAY_BACKGROUND_WIDTH, WEEKDAY_BACKGROUND_HEIGHT));
             /***** 各日背景表示ここまで *****/
         }
@@ -875,37 +868,37 @@
             
             /***** stress描画 *****/
             /*
-            float stressAngle = 270 + 2.5 * (i + 1);
-            
-            if(stressAngle > 360){
-                stressAngle = 2.5 * (i + 1) - 90;
-            }
-            
-            float stressRadian = stressAngle * M_PI / 180;
-            
-            double endCosX = cos(stressRadian);
-            double stressEndX = coorX + 46 * endCosX;
-            double endSinY = sin(stressRadian);
-            double stressEndY = coorY + 46 * endSinY;
-            
-            double stressStartX = coorX + (46 * cosX);
-            double stressStartY = coorY + (46 * sinY);
-            
-            int scale = [[stressArray objectAtIndex:i] intValue];
-            
-            //色
-            if(scale < 40){
-                CGContextSetRGBStrokeColor(context, 0.0, 0.435, 0.867, 1);
-            }else if(scale > 39 && scale < 46){
-                CGContextSetRGBStrokeColor(context, 1.0, 0.392, 1.0, 1);
-            }else if(scale > 45){
-                CGContextSetRGBStrokeColor(context, 0.957, 0.157, 0.157, 1);
-            }
-            
-            CGContextMoveToPoint(context, stressStartX, stressStartY);
-            CGContextAddLineToPoint(context, stressEndX, stressEndY);
-            CGContextStrokePath(context);
-            */
+             float stressAngle = 270 + 2.5 * (i + 1);
+             
+             if(stressAngle > 360){
+             stressAngle = 2.5 * (i + 1) - 90;
+             }
+             
+             float stressRadian = stressAngle * M_PI / 180;
+             
+             double endCosX = cos(stressRadian);
+             double stressEndX = coorX + 46 * endCosX;
+             double endSinY = sin(stressRadian);
+             double stressEndY = coorY + 46 * endSinY;
+             
+             double stressStartX = coorX + (46 * cosX);
+             double stressStartY = coorY + (46 * sinY);
+             
+             int scale = [[stressArray objectAtIndex:i] intValue];
+             
+             //色
+             if(scale < 40){
+             CGContextSetRGBStrokeColor(context, 0.0, 0.435, 0.867, 1);
+             }else if(scale > 39 && scale < 46){
+             CGContextSetRGBStrokeColor(context, 1.0, 0.392, 1.0, 1);
+             }else if(scale > 45){
+             CGContextSetRGBStrokeColor(context, 0.957, 0.157, 0.157, 1);
+             }
+             
+             CGContextMoveToPoint(context, stressStartX, stressStartY);
+             CGContextAddLineToPoint(context, stressEndX, stressEndY);
+             CGContextStrokePath(context);
+             */
             /***** stress描画ここまで *****/
             
             if(dataValueType == DATA_VALUE_TYPE_RUN){ //歩数表示画面

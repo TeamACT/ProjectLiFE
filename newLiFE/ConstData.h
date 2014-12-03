@@ -26,6 +26,7 @@
  #define URL_DENY_FRIEND @"http://gcounter.net/LiFE/DenyFriend.php"
  #define URL_SEARCH_FRIEND_FROM_ADDRESS_BOOK @"http://gcounter.net/LiFE/SearchFriendFromAddressBook.php"
  #define URL_SEARCH_FRIEND_FROM_FACEBOOK @"http://gcounter.net/LiFE/SearchFriendFromFacebook.php"
+ #define URL_INSERT_TIMELINE @"http://gcounter.net/LiFE/InsertTimeLine.php"
  */
 
 /*テスト用*/
@@ -46,6 +47,7 @@
 #define URL_DENY_FRIEND @"http://gcounter.net/LiFE_Test/DenyFriend.php"
 #define URL_SEARCH_FRIEND_FROM_ADDRESS_BOOK @"http://gcounter.net/LiFE_Test/SearchFriendFromAddressBook.php"
 #define URL_SEARCH_FRIEND_FROM_FACEBOOK @"http://gcounter.net/LiFE_Test/SearchFriendFromFacebook.php"
+#define URL_INSERT_TIMELINE @"http://gcounter.net/LiFE_Test/InsertTimeLine.php"
 
 //開始時のログイン、新規登録分岐
 #define START_REGISTER 0
@@ -64,6 +66,7 @@
 #define SHARE_PUBLIC 0
 #define SHARE_FRIEND 1
 #define SHARE_SELF 2
+#define SHARE_CLOSED 3
 
 //性別
 #define GENDER_MALE 1
