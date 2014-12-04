@@ -57,6 +57,8 @@
     int beforeArrayIndex;
     
     float startDateTimeMS;
+    
+    float brightness;
 }
 
 @property CMMotionManager *motionManager;

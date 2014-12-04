@@ -111,28 +111,28 @@
                 int sleepValue = [[sleepArray objectAtIndex:i] intValue];
                 float scale;
                 
-                //値が大きいほど睡眠の深さは浅い
-                sleepValue = 100 - sleepValue;
                 //色
-                
                 if(dataValueType == DATA_VALUE_TYPE_RUN){
                     CGContextSetRGBFillColor(context, [[RGB_GRAY objectAtIndex:0] floatValue], [[RGB_GRAY objectAtIndex:1] floatValue], [[RGB_GRAY objectAtIndex:2] floatValue], 1);
                 }else{
-                    if(sleepValue > 39 && sleepValue < 80){
-                        CGContextSetRGBFillColor(context, 0.173, 0.882, 1.0, 1);
-                    }else if(sleepValue > 79){
-                        CGContextSetRGBFillColor(context, 0.0, 0.435, 0.867, 1);
+                    
+                    if(sleepValue > 80){
+                        CGContextSetRGBFillColor(context, [[RGB_PURPLE_LIGHT objectAtIndex:0] floatValue], [[RGB_PURPLE_LIGHT objectAtIndex:1] floatValue], [[RGB_PURPLE_LIGHT objectAtIndex:2] floatValue], 1);
+                    }else if(sleepValue < 38){
+                        CGContextSetRGBFillColor(context, [[RGB_BLUE_LIGHT objectAtIndex:0] floatValue], [[RGB_BLUE_LIGHT objectAtIndex:1] floatValue], [[RGB_BLUE_LIGHT objectAtIndex:2] floatValue], 1);
                     }else{
-                        CGContextSetRGBFillColor(context, 1.0, 0.392, 1.0, 1);
+                        CGContextSetRGBFillColor(context, [[RGB_AQUA_LIGHT objectAtIndex:0] floatValue], [[RGB_AQUA_LIGHT objectAtIndex:1] floatValue], [[RGB_AQUA_LIGHT objectAtIndex:2] floatValue], 1);
                     }
                 }
                 
+                //値が大きいほど睡眠の深さは浅い
+                int sleepSizeValue = 100 - sleepValue;
                 //サイズ
                 for(int i = 10; i > 0; i--){
-                    if(sleepValue >= i * 10) {
+                    if(sleepSizeValue >= i * 10) {
                         scale = i * 1.5;
                         break;
-                    }else if(sleepValue < 1){
+                    }else if(sleepSizeValue < 1){
                         scale = 1.5;
                         break;
                     }

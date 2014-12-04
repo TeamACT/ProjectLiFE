@@ -219,6 +219,12 @@
         
         //スリープしない
         [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
+        
+        //画面の輝度を取得
+        brightness = [[UIScreen mainScreen] brightness];
+        //睡眠開始時に輝度を低くする
+        [[UIScreen mainScreen] setBrightness:0.1f];
+        
     }else{
         if(self.motionManager.accelerometerActive){
             [self.motionManager stopAccelerometerUpdates];
@@ -285,6 +291,9 @@
             
             //スリープする
             [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
+            
+            //睡眠終了時に輝度をもとに戻す
+            [[UIScreen mainScreen] setBrightness:brightness];
             
             //日ログ画面に遷移
             [self dismissViewControllerAnimated:NO completion:^{

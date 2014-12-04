@@ -101,5 +101,6 @@
 - (IBAction)leftPagingButtonAction:(id)sender;
 - (IBAction)rightPagingButtonAction:(id)sender;
 - (IBAction)deviceChoiceButtonAction:(id)sender;
+- (IBAction)transferGoalVC:(id)sender;
 
 @end

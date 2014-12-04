@@ -195,6 +195,13 @@
 		3CC78A8A1A09BE1A0042DFE3 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC78A871A09BE1A0042DFE3 /* libcrypto.a */; };
 		3CC78A8B1A09BE1A0042DFE3 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC78A881A09BE1A0042DFE3 /* libssl.a */; };
 		3CC78AD71A09BE950042DFE3 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC78AD61A09BE950042DFE3 /* libCorePlot-CocoaTouch.a */; };
+		3CC796D11A30300B00CFC902 /* LiFE_Common_CloseButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC796D01A30300B00CFC902 /* LiFE_Common_CloseButton.png */; };
+		3CC796D81A3037F800CFC902 /* LiFE_Left_GoalButton_Aqua.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC796D21A3037F800CFC902 /* LiFE_Left_GoalButton_Aqua.png */; };
+		3CC796D91A3037F800CFC902 /* LiFE_Left_GoalButton_Blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC796D31A3037F800CFC902 /* LiFE_Left_GoalButton_Blue.png */; };
+		3CC796DA1A3037F800CFC902 /* LiFE_Left_GoalButton_Green.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC796D41A3037F800CFC902 /* LiFE_Left_GoalButton_Green.png */; };
+		3CC796DB1A3037F800CFC902 /* LiFE_Left_GoalButton_Orange.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC796D51A3037F800CFC902 /* LiFE_Left_GoalButton_Orange.png */; };
+		3CC796DC1A3037F800CFC902 /* LiFE_Left_GoalButton_Purple.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC796D61A3037F800CFC902 /* LiFE_Left_GoalButton_Purple.png */; };
+		3CC796DD1A3037F800CFC902 /* LiFE_Left_GoalButton_Red.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC796D71A3037F800CFC902 /* LiFE_Left_GoalButton_Red.png */; };
 		3CC804E71A1ADAFF00BE3A5D /* LiFE_Register_ImageSelectButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CC804E61A1ADAFF00BE3A5D /* LiFE_Register_ImageSelectButton.png */; };
 		3CCBF9511A199C6000CD72C1 /* LiFE_Start_InstructionImage01.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CCBF94C1A199C5F00CD72C1 /* LiFE_Start_InstructionImage01.png */; };
 		3CCBF9521A199C6000CD72C1 /* LiFE_Start_InstructionImage02.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CCBF94D1A199C6000CD72C1 /* LiFE_Start_InstructionImage02.png */; };
@@ -221,9 +228,6 @@
 		3CF836DC19D3F5F800A2AA0A /* LiFE_Login_Parts_11.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CF836D119D3F5F800A2AA0A /* LiFE_Login_Parts_11.png */; };
 		3CF836DD19D3F5F800A2AA0A /* LiFE_Login_Parts_12.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CF836D219D3F5F800A2AA0A /* LiFE_Login_Parts_12.png */; };
 		3CF836DF19D3F73E00A2AA0A /* LiFE_Login_Parts_09.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CF836DE19D3F73E00A2AA0A /* LiFE_Login_Parts_09.png */; };
-		532637F31A09C88600DC2181 /* LiFE_Left_GoalButton_Green.png in Resources */ = {isa = PBXBuildFile; fileRef = 532637F01A09C88600DC2181 /* LiFE_Left_GoalButton_Green.png */; };
-		532637F41A09C88600DC2181 /* LiFE_Left_GoalButton_Orange.png in Resources */ = {isa = PBXBuildFile; fileRef = 532637F11A09C88600DC2181 /* LiFE_Left_GoalButton_Orange.png */; };
-		532637F51A09C88600DC2181 /* LiFE_Left_GoalButton_Red.png in Resources */ = {isa = PBXBuildFile; fileRef = 532637F21A09C88600DC2181 /* LiFE_Left_GoalButton_Red.png */; };
 		532637F81A09C94F00DC2181 /* VCDayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 532637F71A09C94F00DC2181 /* VCDayViewController.m */; };
 		532866B41999B3020013C30F /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 532866B31999B3020013C30F /* LoginViewController.m */; };
 		53474D66196CDE4D00C07BB2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53474D65196CDE4D00C07BB2 /* CoreGraphics.framework */; };
@@ -701,6 +705,13 @@
 		3CC78AD41A09BE950042DFE3 /* CPTXYGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTXYGraph.h; sourceTree = "<group>"; };
 		3CC78AD51A09BE950042DFE3 /* CPTXYPlotSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTXYPlotSpace.h; sourceTree = "<group>"; };
 		3CC78AD61A09BE950042DFE3 /* libCorePlot-CocoaTouch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libCorePlot-CocoaTouch.a"; sourceTree = "<group>"; };
+		3CC796D01A30300B00CFC902 /* LiFE_Common_CloseButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_Common_CloseButton.png; sourceTree = "<group>"; };
+		3CC796D21A3037F800CFC902 /* LiFE_Left_GoalButton_Aqua.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_Left_GoalButton_Aqua.png; sourceTree = "<group>"; };
+		3CC796D31A3037F800CFC902 /* LiFE_Left_GoalButton_Blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_Left_GoalButton_Blue.png; sourceTree = "<group>"; };
+		3CC796D41A3037F800CFC902 /* LiFE_Left_GoalButton_Green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_Left_GoalButton_Green.png; sourceTree = "<group>"; };
+		3CC796D51A3037F800CFC902 /* LiFE_Left_GoalButton_Orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_Left_GoalButton_Orange.png; sourceTree = "<group>"; };
+		3CC796D61A3037F800CFC902 /* LiFE_Left_GoalButton_Purple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_Left_GoalButton_Purple.png; sourceTree = "<group>"; };
+		3CC796D71A3037F800CFC902 /* LiFE_Left_GoalButton_Red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_Left_GoalButton_Red.png; sourceTree = "<group>"; };
 		3CC804E61A1ADAFF00BE3A5D /* LiFE_Register_ImageSelectButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_Register_ImageSelectButton.png; sourceTree = "<group>"; };
 		3CCBF94C1A199C5F00CD72C1 /* LiFE_Start_InstructionImage01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_Start_InstructionImage01.png; sourceTree = "<group>"; };
 		3CCBF94D1A199C6000CD72C1 /* LiFE_Start_InstructionImage02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_Start_InstructionImage02.png; sourceTree = "<group>"; };
@@ -730,9 +741,6 @@
 		3CF836D219D3F5F800A2AA0A /* LiFE_Login_Parts_12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_Login_Parts_12.png; sourceTree = "<group>"; };
 		3CF836DE19D3F73E00A2AA0A /* LiFE_Login_Parts_09.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_Login_Parts_09.png; sourceTree = "<group>"; };
 		531C49E1196E3423009EB60F /* ActivityMarkView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityMarkView.h; sourceTree = "<group>"; };
-		532637F01A09C88600DC2181 /* LiFE_Left_GoalButton_Green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_Left_GoalButton_Green.png; sourceTree = "<group>"; };
-		532637F11A09C88600DC2181 /* LiFE_Left_GoalButton_Orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_Left_GoalButton_Orange.png; sourceTree = "<group>"; };
-		532637F21A09C88600DC2181 /* LiFE_Left_GoalButton_Red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiFE_Left_GoalButton_Red.png; sourceTree = "<group>"; };
 		532637F61A09C94F00DC2181 /* VCDayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCDayViewController.h; sourceTree = "<group>"; };
 		532637F71A09C94F00DC2181 /* VCDayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCDayViewController.m; sourceTree = "<group>"; };
 		532866B21999B3020013C30F /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -1796,6 +1804,7 @@
 				3CC66EF01A2C3BC6008E23A5 /* LiFE_Common_AddFriendButton@2x.png */,
 				3CC66EF21A2C3BF1008E23A5 /* LiFE_Common_BackButton@2x.png */,
 				5363A4C319FF6CFF00756824 /* LiFE_Common_AddButton@2x.png */,
+				3CC796D01A30300B00CFC902 /* LiFE_Common_CloseButton.png */,
 				53A6CD6219FDE22B00501C90 /* LiFE_Common_Background.png */,
 				5363A4C419FF6CFF00756824 /* LiFE_Common_MenuButton@2x.png */,
 				53A6CD7619FE05B200501C90 /* LiFE_Common_NavigationBarBG.png */,
@@ -1804,10 +1813,13 @@
 				3CC3D16F19F790FA0097AB5C /* LiFE_Friend_SearchFromAddressBookIcon.png */,
 				3CC3D17019F790FA0097AB5C /* LiFE_Friend_SearchFromFacebookIcon.png */,
 				3CC668F01A2F048800A99703 /* LiFE_FriendDetail_DefaultCoverImage.png */,
+				3CC796D21A3037F800CFC902 /* LiFE_Left_GoalButton_Aqua.png */,
+				3CC796D31A3037F800CFC902 /* LiFE_Left_GoalButton_Blue.png */,
+				3CC796D41A3037F800CFC902 /* LiFE_Left_GoalButton_Green.png */,
+				3CC796D51A3037F800CFC902 /* LiFE_Left_GoalButton_Orange.png */,
+				3CC796D61A3037F800CFC902 /* LiFE_Left_GoalButton_Purple.png */,
+				3CC796D71A3037F800CFC902 /* LiFE_Left_GoalButton_Red.png */,
 				5363A4C519FF6CFF00756824 /* LiFE_GoalMark_Day.png */,
-				532637F01A09C88600DC2181 /* LiFE_Left_GoalButton_Green.png */,
-				532637F11A09C88600DC2181 /* LiFE_Left_GoalButton_Orange.png */,
-				532637F21A09C88600DC2181 /* LiFE_Left_GoalButton_Red.png */,
 				5363A4C719FF6CFF00756824 /* LiFE_Left_PageButton.png */,
 				5363A4C819FF6CFF00756824 /* LiFE_Next_DateButton.png */,
 				5363A4C619FF6CFF00756824 /* LiFE_Prev_DateButton.png */,
@@ -1963,6 +1975,7 @@
 				3CCBF9691A19CA4800CD72C1 /* LiFE_Login_NormalButton.png in Resources */,
 				3CC804E71A1ADAFF00BE3A5D /* LiFE_Register_ImageSelectButton.png in Resources */,
 				3CC61F221A24230C00A57DE3 /* LiFE_Avatar_WomanRunning_small002.png in Resources */,
+				3CC796DA1A3037F800CFC902 /* LiFE_Left_GoalButton_Green.png in Resources */,
 				3CC61EF01A24230C00A57DE3 /* LiFE_Avatar_ManRunning_small007.png in Resources */,
 				3CF836DF19D3F73E00A2AA0A /* LiFE_Login_Parts_09.png in Resources */,
 				3CC61F051A24230C00A57DE3 /* LiFE_Avatar_ManWalking_small000.png in Resources */,
@@ -1977,7 +1990,6 @@
 				3CC61EED1A24230C00A57DE3 /* LiFE_Avatar_ManRunning_small004.png in Resources */,
 				3CC61F151A24230C00A57DE3 /* LiFE_Avatar_WomanRunning_large000.png in Resources */,
 				3CC61F1B1A24230C00A57DE3 /* LiFE_Avatar_WomanRunning_large006.png in Resources */,
-				532637F41A09C88600DC2181 /* LiFE_Left_GoalButton_Orange.png in Resources */,
 				3CC61EFA1A24230C00A57DE3 /* LiFE_Avatar_ManWalking_large005.png in Resources */,
 				3CC61F381A24230C00A57DE3 /* LiFE_Avatar_WomanWalking_large013.png in Resources */,
 				53DF6ACB1A01D74900655CA6 /* LiFE_Menu_TimelineButton.png in Resources */,
@@ -2004,6 +2016,7 @@
 				3CC61EF51A24230C00A57DE3 /* LiFE_Avatar_ManWalking_large000.png in Resources */,
 				3CC61EDC1A24230C00A57DE3 /* LiFE_Day_CircleScale.png in Resources */,
 				3CC61EDB1A24230C00A57DE3 /* LiFE_Background_Bottom.png in Resources */,
+				3CC796DB1A3037F800CFC902 /* LiFE_Left_GoalButton_Orange.png in Resources */,
 				3CC61EE61A24230C00A57DE3 /* LiFE_Avatar_ManRunning_large009.png in Resources */,
 				3CC61EF31A24230C00A57DE3 /* LiFE_Avatar_ManRunning_small010.png in Resources */,
 				5363A4CE19FF6CFF00756824 /* LiFE_GoalMark_Day.png in Resources */,
@@ -2011,6 +2024,7 @@
 				3CCBF9591A19B2AA00CD72C1 /* LiFE_Start_LoginButton.png in Resources */,
 				5363A4D319FF6CFF00756824 /* LiFE_ShareButton.png in Resources */,
 				3CC61F0D1A24230C00A57DE3 /* LiFE_Avatar_ManWalking_small008.png in Resources */,
+				3CC796D81A3037F800CFC902 /* LiFE_Left_GoalButton_Aqua.png in Resources */,
 				3CCBF9681A19CA4800CD72C1 /* LiFE_Login_FacebookButton.png in Resources */,
 				3CC61EE81A24230C00A57DE3 /* LiFE_Avatar_ManRunning_large011.png in Resources */,
 				3CC66F111A1D7F3B0094997A /* LiFE_TimeLine_CellBackgroundOrange.png in Resources */,
@@ -2023,12 +2037,14 @@
 				3CC61F0B1A24230C00A57DE3 /* LiFE_Avatar_ManWalking_small006.png in Resources */,
 				3CC668F11A2F048800A99703 /* LiFE_FriendDetail_DefaultCoverImage.png in Resources */,
 				3CC61EFE1A24230C00A57DE3 /* LiFE_Avatar_ManWalking_large009.png in Resources */,
+				3CC796D11A30300B00CFC902 /* LiFE_Common_CloseButton.png in Resources */,
 				3CC61F3C1A24230C00A57DE3 /* LiFE_Avatar_WomanWalking_small001.png in Resources */,
 				53DF6AC91A01D74900655CA6 /* LiFE_Menu_InformationButton.png in Resources */,
 				53DF6AC61A01D74900655CA6 /* LiFE_Menu_CooperationButton.png in Resources */,
 				3CC61EE51A24230C00A57DE3 /* LiFE_Avatar_ManRunning_large008.png in Resources */,
 				3CF836D919D3F5F800A2AA0A /* LiFE_Login_Parts_07.png in Resources */,
 				3CC61F0E1A24230C00A57DE3 /* LiFE_Avatar_ManWalking_small009.png in Resources */,
+				3CC796DD1A3037F800CFC902 /* LiFE_Left_GoalButton_Red.png in Resources */,
 				3CCBF96C1A19E26600CD72C1 /* LiFE_Forget_Background.png in Resources */,
 				5363A4CF19FF6CFF00756824 /* LiFE_Prev_DateButton.png in Resources */,
 				3CC61F481A24230C00A57DE3 /* LiFE_Avatar_WomanWalking_small013.png in Resources */,
@@ -2043,13 +2059,14 @@
 				3CC61F6B1A24235900A57DE3 /* LiFE_Common_GoalButton.png in Resources */,
 				3CC61F281A24230C00A57DE3 /* LiFE_Avatar_WomanRunning_small008.png in Resources */,
 				3CC61F131A24230C00A57DE3 /* LiFE_Avatar_ManWalking_small014.png in Resources */,
+				3CC796DC1A3037F800CFC902 /* LiFE_Left_GoalButton_Purple.png in Resources */,
 				3CC61F6C1A24235900A57DE3 /* LiFE_Common_SettingButton.png in Resources */,
 				3CC61F2D1A24230C00A57DE3 /* LiFE_Avatar_WomanWalking_large002.png in Resources */,
 				53D7A2BB19BE86F000CC74F7 /* LiFE_Top_Parts_02.png in Resources */,
 				3CC61F461A24230C00A57DE3 /* LiFE_Avatar_WomanWalking_small011.png in Resources */,
 				3CC61F321A24230C00A57DE3 /* LiFE_Avatar_WomanWalking_large007.png in Resources */,
 				3CC61EDF1A24230C00A57DE3 /* LiFE_Avatar_ManRunning_large002.png in Resources */,
-				532637F51A09C88600DC2181 /* LiFE_Left_GoalButton_Red.png in Resources */,
+				3CC796D91A3037F800CFC902 /* LiFE_Left_GoalButton_Blue.png in Resources */,
 				3CC61EDE1A24230C00A57DE3 /* LiFE_Avatar_ManRunning_large001.png in Resources */,
 				5363A4CC19FF6CFF00756824 /* LiFE_Common_AddButton@2x.png in Resources */,
 				3CC61EF11A24230C00A57DE3 /* LiFE_Avatar_ManRunning_small008.png in Resources */,
@@ -2153,7 +2170,6 @@
 				3C82C86919D5494900B2A2BE /* LiFE_Avatar001.png in Resources */,
 				5363A4D219FF6CFF00756824 /* LiFE_Right_PageButton.png in Resources */,
 				3CC61F2B1A24230C00A57DE3 /* LiFE_Avatar_WomanWalking_large000.png in Resources */,
-				532637F31A09C88600DC2181 /* LiFE_Left_GoalButton_Green.png in Resources */,
 				3CC61F3A1A24230C00A57DE3 /* LiFE_Avatar_WomanWalking_large015.png in Resources */,
 				3CC61F5F1A24234F00A57DE3 /* _LiFE_Sleep_Avatar.png in Resources */,
 				3CCBF9521A199C6000CD72C1 /* LiFE_Start_InstructionImage02.png in Resources */,

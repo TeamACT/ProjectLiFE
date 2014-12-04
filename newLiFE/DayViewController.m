@@ -622,29 +622,12 @@
             typeLabel.textAlignment = NSTextAlignmentCenter;
             [self.drawView addSubview:typeLabel];
         }else if(dataValueType == DATA_VALUE_TYPE_RUN){
-            float dist = [self calcuDist:stepCount];
-            
             UILabel *valueLabel = [[UILabel alloc] initWithFrame:CGRectMake(DATA_VALUE_LABEL_X, DATA_VALUE_LABEL_Y, 150, 25)];
             valueLabel.font = [UIFont boldSystemFontOfSize:18];
             valueLabel.textColor = [UIColor blackColor];
-            NSNumber *valueNumber = [[NSNumber alloc] initWithFloat:dist];
-            NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-            [nf setNumberStyle:NSNumberFormatterDecimalStyle];
-            [nf setGroupingSeparator:@","];
-            [nf setGroupingSize:3];
-            nf.minimumFractionDigits = 2;
-            nf.maximumFractionDigits = 2;
-            NSString *valueString = [nf stringFromNumber:valueNumber];
-            valueLabel.text = [NSString stringWithFormat:@"%@km",valueString];
+            valueLabel.text = @"ランニング";
             valueLabel.textAlignment = NSTextAlignmentCenter;
             [self.drawView addSubview:valueLabel];
-            
-            UILabel *typeLabel = [[UILabel alloc] initWithFrame:CGRectMake(DATA_TYPE_LABEL_X, DATA_TYPE_LABEL_Y, 150, 25)];
-            typeLabel.font = [UIFont systemFontOfSize:11];
-            typeLabel.textColor = [UIColor blackColor];
-            typeLabel.text = @"ランニング";
-            typeLabel.textAlignment = NSTextAlignmentCenter;
-            [self.drawView addSubview:typeLabel];
         }
     }else if(dataStateType == DATA_STATE_TYPE_RUN){
         //歩数
@@ -725,12 +708,28 @@
             typeLabel.textAlignment = NSTextAlignmentCenter;
             [self.drawView addSubview:typeLabel];
         }else if(dataValueType == DATA_VALUE_TYPE_RUN){
-            float dist = [self calcuDist:stepCount];
+            //選択している時間からランニングの詳細を取得
+            NSDateFormatter *fm = [[NSDateFormatter alloc] init];
+            fm.dateFormat = @"yyyy-MM-dd";
+            NSString *dateString = [fm stringFromDate:date];
+            int hour = arrowIndex / 6;
+            int min = (arrowIndex % 6) * 10;
+            NSString *dateTimeString = [NSString stringWithFormat:@"%@ %d:%d",dateString,hour,min];
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            [formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+            NSDate *dateTime = [formatter dateFromString:dateTimeString];
+            
+            DatabaseHelper *dbHelper = [[DatabaseHelper alloc] init];
+            NSMutableDictionary *runDetail = [dbHelper selectDayRunDetail:dateTime];
+            
+            //歩数から距離を計算
+            int runStep = [[runDetail objectForKey:@"run_step"] intValue];
+            float runDist = [self calcuDist:runStep];
             
             UILabel *valueLabel = [[UILabel alloc] initWithFrame:CGRectMake(DATA_VALUE_LABEL_X, DATA_VALUE_LABEL_Y, 150, 25)];
             valueLabel.font = [UIFont boldSystemFontOfSize:18];
             valueLabel.textColor = [UIColor blackColor];
-            NSNumber *valueNumber = [[NSNumber alloc] initWithFloat:dist];
+            NSNumber *valueNumber = [[NSNumber alloc] initWithFloat:runDist];
             NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
             [nf setNumberStyle:NSNumberFormatterDecimalStyle];
             [nf setGroupingSeparator:@","];
@@ -751,29 +750,12 @@
         }
     }else if(dataStateType == DATA_STATE_TYPE_SLEEP){
         if(dataValueType == DATA_VALUE_TYPE_RUN){
-            float dist = [self calcuDist:stepCount];
-            
             UILabel *valueLabel = [[UILabel alloc] initWithFrame:CGRectMake(DATA_VALUE_LABEL_X, DATA_VALUE_LABEL_Y, 150, 25)];
             valueLabel.font = [UIFont boldSystemFontOfSize:18];
             valueLabel.textColor = [UIColor blackColor];
-            NSNumber *valueNumber = [[NSNumber alloc] initWithFloat:dist];
-            NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-            [nf setNumberStyle:NSNumberFormatterDecimalStyle];
-            [nf setGroupingSeparator:@","];
-            [nf setGroupingSize:3];
-            nf.minimumFractionDigits = 2;
-            nf.maximumFractionDigits = 2;
-            NSString *valueString = [nf stringFromNumber:valueNumber];
-            valueLabel.text = [NSString stringWithFormat:@"%@km",valueString];
+            valueLabel.text = @"ランニング";
             valueLabel.textAlignment = NSTextAlignmentCenter;
             [self.drawView addSubview:valueLabel];
-            
-            UILabel *typeLabel = [[UILabel alloc] initWithFrame:CGRectMake(DATA_TYPE_LABEL_X, DATA_TYPE_LABEL_Y, 150, 25)];
-            typeLabel.font = [UIFont systemFontOfSize:11];
-            typeLabel.textColor = [UIColor blackColor];
-            typeLabel.text = @"ランニング";
-            typeLabel.textAlignment = NSTextAlignmentCenter;
-            [self.drawView addSubview:typeLabel];
         }else{
             //睡眠値
             //int sleepCount = [[sleepArray objectAtIndex:index] intValue];
@@ -855,9 +837,9 @@
             NSDate *riseTime = [[NSDate alloc] initWithTimeIntervalSince1970:[[sleepDetail objectForKey:@"end_datetime"] floatValue]];
             
             //睡眠時間
-            NSTimeInterval sleepTime = [riseTime timeIntervalSinceDate:bedTime] / 60;
-            int sleepHour = sleepTime / 60;
-            int sleepMinute = sleepTime - (sleepHour * 60);
+            NSTimeInterval sleepTime = [riseTime timeIntervalSinceDate:bedTime];//秒に変換
+            int sleepHour = sleepTime / (60 * 60);
+            int sleepMinute = (sleepTime - sleepHour * 60 * 60) / 60;
             UILabel *sleepTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(65, 450, 190, 25)];
             sleepTimeLabel.font = [UIFont boldSystemFontOfSize:30];
             sleepTimeLabel.textColor = [UIColor whiteColor];
@@ -1108,7 +1090,7 @@
     
     if(dataValueType == DATA_VALUE_TYPE_RUN){
         self.leftCommonButton.hidden = NO;
-        [self.leftCommonButton setBackgroundImage:[UIImage imageNamed:@"LiFE_Left_GoalButton_Red"] forState:UIControlStateNormal];
+        [self.leftCommonButton setImage:[UIImage imageNamed:@"LiFE_Left_GoalButton_Red"] forState:UIControlStateNormal];
         //self.leftCommonButton.imageView.image = [UIImage imageNamed:@"LiFE_Left_GoalButton"];
         
         lightColors = RGB_RED_LIGHT;
@@ -1140,7 +1122,7 @@
                 
                 if(value > 300){
                     self.leftCommonButton.hidden = NO;
-                    [self.leftCommonButton setBackgroundImage:[UIImage imageNamed:@"LiFE_Left_GoalButton_Orange"] forState:UIControlStateNormal];
+                    [self.leftCommonButton setImage:[UIImage imageNamed:@"LiFE_Left_GoalButton_Orange"] forState:UIControlStateNormal];
                     
                     lightColors = RGB_ORANGE_LIGHT;
                     darkColors = RGB_ORANGE_DARK;
@@ -1155,7 +1137,7 @@
                     }
                 }else{
                     self.leftCommonButton.hidden = NO;
-                    [self.leftCommonButton setBackgroundImage:[UIImage imageNamed:@"LiFE_Left_GoalButton_Green"] forState:UIControlStateNormal];
+                    [self.leftCommonButton setImage:[UIImage imageNamed:@"LiFE_Left_GoalButton_Green"] forState:UIControlStateNormal];
                     
                     lightColors = RGB_GREEN_LIGHT;
                     darkColors = RGB_GREEN_DARK;
@@ -1174,7 +1156,7 @@
             }
             case DATA_STATE_TYPE_RUN:{
                 self.leftCommonButton.hidden = NO;
-                [self.leftCommonButton setBackgroundImage:[UIImage imageNamed:@"LiFE_Left_GoalButton_Red"] forState:UIControlStateNormal];
+                [self.leftCommonButton setImage:[UIImage imageNamed:@"LiFE_Left_GoalButton_Red"] forState:UIControlStateNormal];
                 
                 lightColors = RGB_RED_LIGHT;
                 darkColors = RGB_RED_DARK;
@@ -1191,17 +1173,23 @@
                 break;
             }
             case DATA_STATE_TYPE_SLEEP:{
-                self.leftCommonButton.hidden = YES;
                 
                 int value = [[sleepArray objectAtIndex:arrowIndex] intValue];
                 
+                self.leftCommonButton.hidden = NO;
                 if(value > 80){
+                    [self.leftCommonButton setImage:[UIImage imageNamed:@"LiFE_Left_GoalButton_Purple"] forState:UIControlStateNormal];
+                    
                     lightColors = RGB_PURPLE_LIGHT;
                     darkColors = RGB_PURPLE_DARK;
                 }else if(value < 38){
+                    [self.leftCommonButton setImage:[UIImage imageNamed:@"LiFE_Left_GoalButton_Blue"] forState:UIControlStateNormal];
+                    
                     lightColors = RGB_BLUE_LIGHT;
                     darkColors = RGB_BLUE_DARK;
                 }else{
+                    [self.leftCommonButton setImage:[UIImage imageNamed:@"LiFE_Left_GoalButton_Aqua"] forState:UIControlStateNormal];
+                    
                     lightColors = RGB_AQUA_LIGHT;
                     darkColors = RGB_AQUA_DARK;
                 }
@@ -1667,6 +1655,11 @@
     
     as.cancelButtonIndex = 1;
     [as showInView:self.view];
+}
+
+- (IBAction)transferGoalVC:(id)sender {    
+    UIViewController *newTopViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"goal"];
+    self.slidingViewController.topViewController = newTopViewController;
 }
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
