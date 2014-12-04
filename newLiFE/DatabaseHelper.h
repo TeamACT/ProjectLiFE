@@ -45,13 +45,17 @@
 -(NSMutableDictionary *)selectDayRunDetail:(NSDate *)searchDateTime;
 -(NSMutableArray *)selectDayPhoto:(NSString *)date;
 
+-(NSMutableArray *)selectWeekRunDetail:(NSDate *)date;
+
 -(NSMutableArray *)selectMonthSteps:(NSString *)year :(NSString *)month;
 -(NSMutableArray *)selectMonthSleeps:(NSString *)year :(NSString *)month;
 -(NSMutableArray *)selectMonthRuns:(NSString *)year :(NSString *)month;
+-(NSMutableArray *)selectMonthRunDetail:(NSDate *)date;
 
 -(NSMutableArray *)selectYearSteps:(NSString *)year;
 -(NSMutableArray *)selectYearSleeps:(NSString *)year;
 -(NSMutableArray *)selectYearRuns:(NSString *)year;
+-(NSMutableArray *)selectYearRunDetail:(NSDate *)date;
 
 -(NSMutableArray *)selectAllStep;
 -(NSMutableArray *)selectAllSleep;

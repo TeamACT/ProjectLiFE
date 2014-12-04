@@ -123,6 +123,9 @@
                                 <state key="normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="transferGoalVC:" destination="OOt-82-txH" eventType="touchUpInside" id="JhW-M9-dKZ"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="YhZ-17-vKB">
                                 <rect key="frame" x="270" y="473" width="50" height="60"/>
@@ -240,6 +243,9 @@
                                 <state key="normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="transferGoalVC:" destination="gm6-Sm-wGs" eventType="touchUpInside" id="drR-VP-RCd"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="edW-Os-sxs">
                                 <rect key="frame" x="270" y="473" width="50" height="60"/>
@@ -366,6 +372,9 @@
                                 <state key="normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="transferGoalVC:" destination="B3E-J7-vlp" eventType="touchUpInside" id="iLd-ue-ksh"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="PdO-M5-Era">
                                 <rect key="frame" x="270" y="473" width="50" height="60"/>
@@ -1179,10 +1188,10 @@
             </objects>
             <point key="canvasLocation" x="259" y="2057"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Common Navigation Controller-->
         <scene sceneID="1Ch-3H-B40">
             <objects>
-                <navigationController storyboardIdentifier="setting" id="mE4-Vl-WZA" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="setting" id="mE4-Vl-WZA" customClass="CommonNavigationController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bKo-gP-gN8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1195,10 +1204,10 @@
             </objects>
             <point key="canvasLocation" x="618" y="1420"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Common Navigation Controller-->
         <scene sceneID="reH-UH-taO">
             <objects>
-                <navigationController storyboardIdentifier="goal" id="hHj-KU-wlb" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="goal" id="hHj-KU-wlb" customClass="CommonNavigationController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="o3Q-g9-pfq">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -2071,10 +2080,10 @@
             </objects>
             <point key="canvasLocation" x="1468" y="2095"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Common Navigation Controller-->
         <scene sceneID="HUi-gF-NjX">
             <objects>
-                <navigationController storyboardIdentifier="startEditProfile" id="TpS-G4-jpN" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="startEditProfile" id="TpS-G4-jpN" customClass="CommonNavigationController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="OWV-iH-dD1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -2087,10 +2096,10 @@
             </objects>
             <point key="canvasLocation" x="1845" y="2057"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Common Navigation Controller-->
         <scene sceneID="emN-qh-afT">
             <objects>
-                <navigationController storyboardIdentifier="friend" id="95l-fn-Hlr" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="friend" id="95l-fn-Hlr" customClass="CommonNavigationController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="SYd-S5-Y4P">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -2685,10 +2694,10 @@
             </objects>
             <point key="canvasLocation" x="2792" y="2042"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Common Navigation Controller-->
         <scene sceneID="MiA-AD-bmz">
             <objects>
-                <navigationController storyboardIdentifier="info" id="WGP-fZ-9kB" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="info" id="WGP-fZ-9kB" customClass="CommonNavigationController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="5De-ML-3vv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -2943,10 +2952,10 @@
             </objects>
             <point key="canvasLocation" x="3217" y="1435"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Common Navigation Controller-->
         <scene sceneID="rMx-bF-ung">
             <objects>
-                <navigationController storyboardIdentifier="device" id="PIy-at-F6x" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="device" id="PIy-at-F6x" customClass="CommonNavigationController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="cKl-H5-0LW">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

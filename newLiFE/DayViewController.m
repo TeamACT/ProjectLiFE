@@ -982,7 +982,7 @@
                 NSDate *startTime = [[NSDate alloc] initWithTimeIntervalSince1970:[[runDetail objectForKey:@"start_datetime"] floatValue]];
                 NSDate *endTime = [[NSDate alloc] initWithTimeIntervalSince1970:[[runDetail objectForKey:@"end_datetime"] floatValue]];
                 
-                goal = [ud floatForKey:@"GoalDistance"];
+                goal = [ud floatForKey:@"GoalRunning"];
                 per = (runDist / goal) * 100;
                 NSNumber *valueNumber = [[NSNumber alloc] initWithFloat:runDist];
                 NSNumber *goalNumber = [[NSNumber alloc] initWithFloat:goal];
@@ -1657,7 +1657,8 @@
     [as showInView:self.view];
 }
 
-- (IBAction)transferGoalVC:(id)sender {    
+- (IBAction)transferGoalVC:(id)sender {
+    
     UIViewController *newTopViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"goal"];
     self.slidingViewController.topViewController = newTopViewController;
 }
@@ -1758,6 +1759,8 @@
             
             [SVProgressHUD dismiss];
             
+            NSLog(@"finish loading cm step counter");
+            
             //現在値用タイマー起動（過去のデータを読み込んでから、毎秒の処理を開始）
             tm = [NSTimer
                   scheduledTimerWithTimeInterval:1.0
@@ -1770,6 +1773,7 @@
         [ud synchronize];
         
         [SVProgressHUD dismiss];
+        NSLog(@"finish loading cm step counter");
         
         //現在値用タイマー起動（過去のデータを読み込んでから、毎秒の処理を開始）
         tm = [NSTimer

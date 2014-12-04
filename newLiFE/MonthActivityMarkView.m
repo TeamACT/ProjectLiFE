@@ -314,13 +314,8 @@
                         
                         float sleepGraphLength = aveSleepValue * SLEEP_MAX_LENGTH / 100;
                         
-                        if(aveSleepValue < LIGHT_SLEEP_COLOR){
-                            CGContextSetRGBStrokeColor(context, [[RGB_BLUE_LIGHT objectAtIndex:0] floatValue], [[RGB_BLUE_LIGHT objectAtIndex:1] floatValue], [[RGB_BLUE_LIGHT objectAtIndex:2] floatValue], 1);
-                        }else if(LIGHT_SLEEP_COLOR <= aveSleepValue && aveSleepValue < DEEP_SLEEP_COLOR){
-                            CGContextSetRGBStrokeColor(context, [[RGB_AQUA_LIGHT objectAtIndex:0] floatValue], [[RGB_AQUA_LIGHT objectAtIndex:1] floatValue], [[RGB_AQUA_LIGHT objectAtIndex:2] floatValue], 1);
-                        }else{
-                            CGContextSetRGBStrokeColor(context, [[RGB_PURPLE_LIGHT objectAtIndex:0] floatValue], [[RGB_PURPLE_LIGHT objectAtIndex:1] floatValue], [[RGB_PURPLE_LIGHT objectAtIndex:2] floatValue], 1);
-                        }
+                        CGContextSetRGBStrokeColor(context, [[RGB_BLUE_LIGHT objectAtIndex:0] floatValue], [[RGB_BLUE_LIGHT objectAtIndex:1] floatValue], [[RGB_BLUE_LIGHT objectAtIndex:2] floatValue], 1);
+
                         CGContextMoveToPoint(context, 0, STEP_MAX_LENGTH + SPACE_TWO_GRAPH);
                         CGContextAddLineToPoint(context, 0, STEP_MAX_LENGTH + SPACE_TWO_GRAPH + sleepGraphLength);
                         CGContextStrokePath(context);

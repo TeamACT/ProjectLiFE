@@ -292,8 +292,43 @@
         NSString *goalString = [nf stringFromNumber:goalNumber];
         resultString = [NSString stringWithFormat:@"%@ / %@ km",valueString,goalString];
     }else if(dataValueType == DATA_VALUE_TYPE_RUN){
-        value = [self calcuDist:sumSteps];
-        goal = [ud floatForKey:@"GoalDistance"] * stepsCount;
+        //選択されている月の１日を取得
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        NSDateComponents *dateComps = [calendar components:NSYearCalendarUnit |
+                                       NSMonthCalendarUnit  |
+                                       NSDayCalendarUnit    |
+                                       NSHourCalendarUnit   |
+                                       NSMinuteCalendarUnit |
+                                       NSSecondCalendarUnit fromDate:date];
+        [dateComps setYear:dateComps.year];
+        [dateComps setMonth:dateComps.month];
+        [dateComps setDay:1];
+        
+        NSDate *firstDayOfMonth = [calendar dateFromComponents:dateComps];
+        
+        DatabaseHelper *dbHelper = [[DatabaseHelper alloc] init];
+        
+        //１ヶ月分のランニングの詳細を取得
+        NSMutableArray *monthRunDetailArray = [dbHelper selectMonthRunDetail:firstDayOfMonth];
+        
+        int sumRunStepValue = 0;
+        int sumRunSeconds = 0;
+        
+        //歩数と時間の合計値を計算
+        for(NSMutableDictionary *runDetail in monthRunDetailArray) {
+            sumRunStepValue += [[runDetail objectForKey:@"run_step"] intValue];
+            
+            NSDate *startTime = [[NSDate alloc] initWithTimeIntervalSince1970:[[runDetail objectForKey:@"start_datetime"] floatValue]];
+            NSDate *endTime = [[NSDate alloc] initWithTimeIntervalSince1970:[[runDetail objectForKey:@"end_datetime"] floatValue]];
+            
+            NSTimeInterval runSecond = [endTime timeIntervalSinceDate:startTime];
+            sumRunSeconds += runSecond;
+        }
+        
+        int runMinute = sumRunSeconds / 60;
+        
+        value = [self calcuDist:sumRunStepValue];
+        goal = [ud floatForKey:@"GoalRunning"] * 7;
         per = (value / goal) * 100;
         NSNumber *valueNumber = [[NSNumber alloc] initWithFloat:value];
         NSNumber *goalNumber = [[NSNumber alloc] initWithFloat:goal];
@@ -310,15 +345,16 @@
         UILabel *timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(110, DATA_RESULT_LABEL_Y + 20, 190, 25)];
         timeLabel.font = [UIFont boldSystemFontOfSize:14];
         timeLabel.textColor = [UIColor whiteColor];
-        timeLabel.text = @"81分";
+        timeLabel.text = [NSString stringWithFormat:@"%d分", runMinute];
         timeLabel.textAlignment = NSTextAlignmentLeft;
         [self.drawResultView addSubview:timeLabel];
         
+        float speed = value * 60 * 60 / sumRunSeconds;
         NSDictionary *stringAttributes1 = @{ NSForegroundColorAttributeName:[UIColor whiteColor],
                                              NSFontAttributeName:[UIFont systemFontOfSize:9.0f] };
         NSDictionary *stringAttributes2 = @{ NSForegroundColorAttributeName:[UIColor whiteColor],
                                              NSFontAttributeName:[UIFont systemFontOfSize:14.0f] };
-        NSAttributedString *string1 = [[NSAttributedString alloc] initWithString:@"4.5" attributes:stringAttributes2];
+        NSAttributedString *string1 = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%.1f", speed] attributes:stringAttributes2];
         NSAttributedString *string2 = [[NSAttributedString alloc] initWithString:@"km/分" attributes:stringAttributes1];
         
         NSMutableAttributedString *mutableAttributedString = [[NSMutableAttributedString alloc] init];
@@ -762,5 +798,10 @@
         
         [self drawResult];
     }
+}
+
+- (IBAction)transferGoalVC:(id)sender {
+    UIViewController *newTopViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"goal"];
+    self.slidingViewController.topViewController = newTopViewController;
 }
 @end

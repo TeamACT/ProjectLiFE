@@ -18,7 +18,7 @@
 
 @interface WeekViewController : UIViewController <UIGestureRecognizerDelegate, ECSlidingViewControllerDelegate>
 {
-    float sumStepValue;
+    int sumStepValue;
 }
 
 @property(nonatomic) NSDate *date;
@@ -41,5 +41,6 @@
 - (IBAction)leftDateButtonAction:(id)sender;
 - (IBAction)rightDateButtonAction:(id)sender;
 
+- (IBAction)transferGoalVC:(id)sender;
 - (IBAction)openDrawerMenu:(id)sender;
 @end

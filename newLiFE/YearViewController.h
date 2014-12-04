@@ -46,5 +46,6 @@
 - (IBAction)rightPagingButtonAction:(id)sender;
 - (IBAction)leftDateButtonAction:(id)sender;
 - (IBAction)rightDateButtonAction:(id)sender;
+- (IBAction)transferGoalVC:(id)sender;
 
 @end

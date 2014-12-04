@@ -141,6 +141,8 @@
     components.day = day;
     /***** 日曜日の取得ここまで *****/
     
+    DatabaseHelper *dbHelper = [[DatabaseHelper alloc] init];
+    
     sumStepValue = 0;
     
     for(int weekday = 0; weekday < 7; weekday++){
@@ -151,8 +153,7 @@
         NSString *formattedDataBaseString = [dataBaseFormatter stringFromDate:result];
         
         /***** DBよりデータ取得 *****/
-        DatabaseHelper *dbHelper = [[DatabaseHelper alloc] init];
-        NSMutableDictionary *steps, *sleeps, *runs;
+        NSMutableDictionary *steps, *runs;
         steps = [dbHelper selectDayStep:formattedDataBaseString];
         runs = [dbHelper selectDayRun:formattedDataBaseString];
         
@@ -255,7 +256,7 @@
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     
     if(dataValueType == DATA_VALUE_TYPE_STEP){
-        value = sumStepValue;
+        value = (float)sumStepValue;
         goal = [ud integerForKey:@"GoalSteps"] * 7;
         per = (value / goal) * 100;
         NSNumber *valueNumber = [[NSNumber alloc] initWithInt:value];
@@ -322,8 +323,47 @@
         NSString *goalString = [nf stringFromNumber:goalNumber];
         resultString = [NSString stringWithFormat:@"%@ / %@ km",valueString,goalString];
     }else if(dataValueType == DATA_VALUE_TYPE_RUN){
-        value = [self calcuDist:sumStepValue];
-        goal = [ud floatForKey:@"GoalDistance"] * 7;
+        
+        /***** 日にち曜日フォーマット *****/
+        NSDateFormatter *dataBaseFormatter = [[NSDateFormatter alloc] init];
+        dataBaseFormatter.dateFormat = @"yyyy/MM/dd";
+        /***** 日にち曜日フォーマットここまで *****/
+        
+        /***** 日曜日の取得 *****/
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        NSDateComponents *baseComponents = [calendar components:NSWeekdayCalendarUnit fromDate:date];
+        NSDateComponents *components = [[NSDateComponents alloc] init];
+        
+        NSInteger day = 1 - baseComponents.weekday;
+        
+        components.day = day;
+        /***** 日曜日の取得ここまで *****/
+        
+        DatabaseHelper *dbHelper = [[DatabaseHelper alloc] init];
+        
+        //日曜日から１週間分のランニングの詳細を取得
+        NSDate *sundayDate = [calendar dateByAddingComponents:components toDate:date options:0];
+        
+        NSMutableArray *weekRunDetailArray = [dbHelper selectWeekRunDetail:sundayDate];
+        
+        int sumRunStepValue = 0;
+        int sumRunSeconds = 0;
+        
+        //歩数と時間の合計値を計算
+        for(NSMutableDictionary *runDetail in weekRunDetailArray) {
+            sumRunStepValue += [[runDetail objectForKey:@"run_step"] intValue];
+            
+            NSDate *startTime = [[NSDate alloc] initWithTimeIntervalSince1970:[[runDetail objectForKey:@"start_datetime"] floatValue]];
+            NSDate *endTime = [[NSDate alloc] initWithTimeIntervalSince1970:[[runDetail objectForKey:@"end_datetime"] floatValue]];
+            
+            NSTimeInterval runSecond = [endTime timeIntervalSinceDate:startTime];
+            sumRunSeconds += runSecond;
+        }
+        
+        int runMinute = sumRunSeconds / 60;
+        
+        value = [self calcuDist:sumRunStepValue];
+        goal = [ud floatForKey:@"GoalRunning"] * 7;
         per = (value / goal) * 100;
         NSNumber *valueNumber = [[NSNumber alloc] initWithFloat:value];
         NSNumber *goalNumber = [[NSNumber alloc] initWithFloat:goal];
@@ -340,15 +380,16 @@
         UILabel *timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(110, DATA_RESULT_LABEL_Y + 20, 190, 25)];
         timeLabel.font = [UIFont boldSystemFontOfSize:14];
         timeLabel.textColor = [UIColor whiteColor];
-        timeLabel.text = @"81分";
+        timeLabel.text = [NSString stringWithFormat:@"%d分", runMinute];
         timeLabel.textAlignment = NSTextAlignmentLeft;
         [self.drawResultView addSubview:timeLabel];
         
+        float speed = value * 60 * 60 / sumRunSeconds;
         NSDictionary *stringAttributes1 = @{ NSForegroundColorAttributeName:[UIColor whiteColor],
                                              NSFontAttributeName:[UIFont systemFontOfSize:9.0f] };
         NSDictionary *stringAttributes2 = @{ NSForegroundColorAttributeName:[UIColor whiteColor],
                                              NSFontAttributeName:[UIFont systemFontOfSize:14.0f] };
-        NSAttributedString *string1 = [[NSAttributedString alloc] initWithString:@"4.5" attributes:stringAttributes2];
+        NSAttributedString *string1 = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%.1f", speed] attributes:stringAttributes2];
         NSAttributedString *string2 = [[NSAttributedString alloc] initWithString:@"km/分" attributes:stringAttributes1];
         
         NSMutableAttributedString *mutableAttributedString = [[NSMutableAttributedString alloc] init];
@@ -715,6 +756,11 @@
         
         [self drawResult];
     }
+}
+
+- (IBAction)transferGoalVC:(id)sender {
+    UIViewController *newTopViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"goal"];
+    self.slidingViewController.topViewController = newTopViewController;
 }
 
 - (IBAction)openDrawerMenu:(id)sender {

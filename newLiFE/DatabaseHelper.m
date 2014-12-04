@@ -132,6 +132,9 @@ NSString *SELECT_TERM_SLEEP =
 NSString *SELECT_TERM_RUN =
 @"SELECT * FROM RUN WHERE run_date like ? ORDER BY run_date";
 
+NSString *SELECT_TERM_RUN_DETAIL =
+@"SELECT * FROM RUN_DETAIL WHERE ? <= end_datetime AND end_datetime < ?";
+
 NSString *SELECT_ALL_STEP =
 @"SELECT * FROM STEP";
 
@@ -632,6 +635,50 @@ NSString *SELECT_TIMELINE_FROM_DATE =
     }
 }
 
+-(NSMutableArray *)selectWeekRunDetail:(NSDate *)date{
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *dateComps = [calendar components:NSYearCalendarUnit |
+                                   NSMonthCalendarUnit  |
+                                   NSDayCalendarUnit    |
+                                   NSHourCalendarUnit   |
+                                   NSMinuteCalendarUnit |
+                                   NSSecondCalendarUnit fromDate:date];
+    [dateComps setDay:dateComps.day];
+    [dateComps setHour:0];
+    [dateComps setMinute:0];
+    [dateComps setSecond:0];
+    
+    NSDate *beginWeekDateTime = [calendar dateFromComponents:dateComps];
+    
+    NSDateComponents *dateCompsEnd = [calendar components:NSYearCalendarUnit |
+                                   NSMonthCalendarUnit  |
+                                   NSDayCalendarUnit    |
+                                   NSHourCalendarUnit   |
+                                   NSMinuteCalendarUnit |
+                                   NSSecondCalendarUnit fromDate:date];
+    [dateCompsEnd setDay:dateComps.day + 7];
+    [dateCompsEnd setHour:0];
+    [dateCompsEnd setMinute:0];
+    [dateCompsEnd setSecond:0];
+    
+    NSDate *endWeekDateTime = [calendar dateFromComponents:dateCompsEnd];
+    
+    FMDatabase* db = [self openDB];
+    
+    FMResultSet *result = [db executeQuery:SELECT_TERM_RUN_DETAIL, beginWeekDateTime, endWeekDateTime];
+    
+    NSMutableArray *array = [self convertToArray:result];
+    
+    if(array.count > 0){
+        [self closeDB:db];
+        return array;
+    }else{
+        [self closeDB:db];
+        return nil;
+    }
+}
+
 -(NSMutableArray *)selectMonthSteps:(NSString *)year :(NSString *)month{
     FMDatabase* db = [self openDB];
     FMResultSet *result = [db executeQuery:SELECT_TERM_STEP, [NSString stringWithFormat:@"%@/%@%%", year, month]];
@@ -662,6 +709,50 @@ NSString *SELECT_TIMELINE_FROM_DATE =
     return array;
 }
 
+-(NSMutableArray *)selectMonthRunDetail:(NSDate *)date{
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *dateComps = [calendar components:NSYearCalendarUnit |
+                                   NSMonthCalendarUnit  |
+                                   NSDayCalendarUnit    |
+                                   NSHourCalendarUnit   |
+                                   NSMinuteCalendarUnit |
+                                   NSSecondCalendarUnit fromDate:date];
+    [dateComps setDay:dateComps.day];
+    [dateComps setHour:0];
+    [dateComps setMinute:0];
+    [dateComps setSecond:0];
+    
+    NSDate *beginWeekDateTime = [calendar dateFromComponents:dateComps];
+    
+    NSDateComponents *dateCompsEnd = [calendar components:NSYearCalendarUnit |
+                                      NSMonthCalendarUnit  |
+                                      NSDayCalendarUnit    |
+                                      NSHourCalendarUnit   |
+                                      NSMinuteCalendarUnit |
+                                      NSSecondCalendarUnit fromDate:date];
+    [dateCompsEnd setMonth:dateComps.month + 1];
+    [dateCompsEnd setHour:0];
+    [dateCompsEnd setMinute:0];
+    [dateCompsEnd setSecond:0];
+    
+    NSDate *endWeekDateTime = [calendar dateFromComponents:dateCompsEnd];
+    
+    FMDatabase* db = [self openDB];
+    
+    FMResultSet *result = [db executeQuery:SELECT_TERM_RUN_DETAIL, beginWeekDateTime, endWeekDateTime];
+    
+    NSMutableArray *array = [self convertToArray:result];
+    
+    if(array.count > 0){
+        [self closeDB:db];
+        return array;
+    }else{
+        [self closeDB:db];
+        return nil;
+    }
+}
+
 -(NSMutableArray *)selectYearSteps:(NSString *)year{
     FMDatabase* db = [self openDB];
     FMResultSet *result = [db executeQuery:SELECT_TERM_STEP, [NSString stringWithFormat:@"%@%%", year]];
@@ -690,6 +781,50 @@ NSString *SELECT_TIMELINE_FROM_DATE =
     
     [self closeDB:db];
     return array;
+}
+
+-(NSMutableArray *)selectYearRunDetail:(NSDate *)date{
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *dateComps = [calendar components:NSYearCalendarUnit |
+                                   NSMonthCalendarUnit  |
+                                   NSDayCalendarUnit    |
+                                   NSHourCalendarUnit   |
+                                   NSMinuteCalendarUnit |
+                                   NSSecondCalendarUnit fromDate:date];
+    [dateComps setDay:dateComps.day];
+    [dateComps setHour:0];
+    [dateComps setMinute:0];
+    [dateComps setSecond:0];
+    
+    NSDate *beginWeekDateTime = [calendar dateFromComponents:dateComps];
+    
+    NSDateComponents *dateCompsEnd = [calendar components:NSYearCalendarUnit |
+                                      NSMonthCalendarUnit  |
+                                      NSDayCalendarUnit    |
+                                      NSHourCalendarUnit   |
+                                      NSMinuteCalendarUnit |
+                                      NSSecondCalendarUnit fromDate:date];
+    [dateCompsEnd setYear:dateComps.year + 1];
+    [dateCompsEnd setHour:0];
+    [dateCompsEnd setMinute:0];
+    [dateCompsEnd setSecond:0];
+    
+    NSDate *endWeekDateTime = [calendar dateFromComponents:dateCompsEnd];
+    
+    FMDatabase* db = [self openDB];
+    
+    FMResultSet *result = [db executeQuery:SELECT_TERM_RUN_DETAIL, beginWeekDateTime, endWeekDateTime];
+    
+    NSMutableArray *array = [self convertToArray:result];
+    
+    if(array.count > 0){
+        [self closeDB:db];
+        return array;
+    }else{
+        [self closeDB:db];
+        return nil;
+    }
 }
 
 //ステップを取得
